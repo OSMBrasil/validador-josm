@@ -1,0 +1,432 @@
+
+meta
+{
+  title: "Brazilian-specific rules";
+  version: "1.20_2014-06-12";
+  description: "Community rules for the most common errors and problems found in Brazil. Messages are in Portuguese only.";
+  author: "naoliv";
+  link: "http://josm.openstreetmap.de/wiki/Rules/Brazilian-Specific";
+  watch-modified: true;
+}
+
+/* rodovia com identificador mas sem o nome real */
+*[name = *ref][highway] {
+	throwWarning: tr("{0} e {1} são iguais; adicionar nome completo da rodovia", "{0.key}", "{0.value}");
+}
+
+/* nome de vias sem logradouro correto */
+*[highway=cycleway][name][name !~ /^(?i)ciclovia .*/],
+*[highway][highway !~ /bridleway|bus_stop|crossing|footway|give_way|motorway_junction|path|raceway|speed_camera|steps|stop/][name][name !~ /^(?i)(aeroporto|alameda|área|avenida|beco|campo|chácara|colônia|condomínio|conjunto|distrito|esplanada|estação|estrada|favela|fazenda|feira|jardim|ladeira|lago|lagoa|largo|loteamento|morro|núcleo|parque|passarela|pátio|praça|quadra|recanto|residencial|rodovia|rotatória|rua|setor|sítio|travessa|trecho|trevo|vale|vereda|via|viadutos?|viela|vila|(complexo|dispositivo) viário) .*/] {
+	throwWarning: tr("{0} com logradouro ausente, errado ou abreviado", "{0.key}");
+}
+
+/* endereços sem logradouro correto */
+*["addr:street"]["addr:street" !~ /^(?i)(aeroporto|alameda|área|avenida|beco|campo|chácara|colônia|condomínio|conjunto|distrito|esplanada|estação|estrada|favela|fazenda|feira|jardim|ladeira|lago|lagoa|largo|loteamento|morro|núcleo|parque|passarela|pátio|praça|quadra|recanto|residencial|rodovia|rotatória|rua|setor|sítio|travessa|trecho|trevo|vale|vereda|via|viadutos?|viela|vila|(complexo|dispositivo) viário) .*/] {
+	throwWarning: tr("{0} com logradouro ausente, errado ou abreviado", "{0.key}");
+}
+
+/* possui nome de rua mas não tem tag de highway */
+*[!highway][name][name =~ /^(?i)(alameda|avenida|beco|estrada|ladeira|passarela|rodovia|rotatória|rua|travessa|trevo|via|viadutos?|viela|(complexo|dispositivo) viário) .*/] {
+	throwWarning: tr("objeto com nome de via mas sem tag de {0}", "{0.key}");
+}
+
+/* palavras abreviadas */
+*[name =~ /(?i)(^|.* )(Cel|Dª|Dr|Eng|Gov|Jr|Marg|Mun|p\/|Pde|Pe|Pst|Pref|Profa|Profª|Prof|s\/|Sta|Sto|Ver)\.? .*/] {
+	throwWarning: tr("palavra abreviada em {0}", "{0.key}");
+}
+
+/* utilização de nomes alternativos mas sem ter um nome definido */
+*[/_name$/][!name] {
+	throwWarning: tr("uso de nome alternativo sem {0}", "{1.key}");
+}
+
+*[highway][name =~ /^(?i)((via de )?acesso|entrada|entroncamento|rampa|retorno|rotat(ó|o)ria|r(ó|o)tula|sa(í|i)da|trevo|estrada( municipal| de terra)?|rua|rodovia|via)( (de acesso|sem nome|projetad(a|o)))?$/] {
+	throwWarning: tr("{0} com nome supérfluo/incompleto", "{0.key}");
+	suggestAlternative: "destination";
+	suggestAlternative: "description";
+}
+
+*[leisure][name =~ /^(?i)(campo|quadra|est(á|a)dio|gin(á|a)sio)( de (futebol|esportes?))?$/] {
+	throwWarning: tr("nome supérfluo/incompleto de local de lazer");
+}
+
+*[name =~ /^(?i)(aldeia|rodovi(á|a)ria|estacionamento|igreja|capela|cemit(é|e)rio|fazenda|lago|lagoa|praça|parque|vila)$/] {
+	throwWarning: tr("nome supérfluo/incompleto de local");
+}
+
+/*
+	refs podem possuir o formato:
+	XXX-NNNN (até 3 letras com até 4 números) (estadual/nacional)
+	SPM NNN (D|E) (específico de SP)
+	SP(A|D|I) NNN/NNN (específico de SP)
+	XXX-NNN/NNN (municipal)
+*/
+
+*[highway][highway !~ /motorway_junction|bus_stop/][ref][ref !~ /(([A-Z]{2,3}-[0-9]{2,4}|SPM(-| )[0-9]{3} ?(D|E)?|SP(A|D|I)(-| )[0-9]{3}\/[0-9]{3}|[A-Z]{3}-[0-9]{3}\/[0-9]{3});?)+$/] {
+	throwWarning: tr("{0} fora do padrão ''sigla-numeração'' ou separador de múltiplos valores diferente de '';''", "{2.key}");
+}
+
+*[highway][!ref][name =~ /.*([A-Z]{2,3}-[0-9]{2,4}|SPM(-| )[0-9]{3} ?(D|E)?|SP(A|D|I)(-| )[0-9]{3}\/[0-9]{3}|[A-Z]{3}-[0-9]{3}\/[0-9]{3}).*/] {
+	throwWarning: tr("utilizar o identificador de rodovia na tag {0} e não na {1}", "{1.key}", "{2.key}");
+}
+
+/* nomes desnecessários */
+*[designation = *"addr:housename"],
+*[ref = *designation],
+*[name = *"addr:housename"],
+*[name = *designation],
+*[name = *alt_name],
+*[name = *int_name],
+*[name = *loc_name],
+*[name = *nat_name],
+*[name = *official_name],
+*[name = *old_name],
+*[name = *reg_name],
+*[name = *short_name],
+*[name = *sorting_name] {
+	throwWarning: tr("{0} e {1} são iguais; remover chave {1} desnecessária", "{0.key}", "{0.value}");
+	fixRemove: "{0.value}";
+}
+
+/* designation é uma chave utilizada apenas no Reino Unido, sem uso no Brasil */
+*[designation] {
+	throwWarning: tr("{0} é uma chave utilizada apenas no Reino Unido", "{0.key}");
+	suggestAlternative: "description";
+	suggestAlternative: "name";
+}
+
+/* operador da rodovia; DER (Departamento de Estradas de Rodagem) ou concessionárias */
+*[highway = motorway][!operator],
+*[highway = trunk][!operator] {
+	throwWarning: tr("ausência de \"{0}\" na {1}", "{1.key}", "{0.key}");
+}
+
+/* provalvemente o tipo dessas vias não deve ser link */
+*[highway $= _link][name =~ /(Alameda|Avenida|Rua|Travessa|Viela) .*/] {
+	throwWarning: tr("verificar: via possivelmente classificada errada como {0}", tag("highway"));
+}
+
+/* provavelmente estas vias não possuem ref */
+*[highway][name =~ /(Alameda|Avenida|Rua|Travessa|Viela) .*/][ref] {
+	throwWarning: tr("verificar: possível uso desnecessário/errado de ref em {0}={1}", "{0.key}", tag("highway"));
+}
+
+/* saídas de rodovias devem ter nome e/ou referência */
+node[highway = motorway_junction][!name][!ref] {
+	throwWarning: tr("{0} sem pelo menos uma das tags: {1} ou {2}", "{0.value}", "{1.key}", "{2.key}");
+}
+
+/* é útil ter o destino das saídas de rodovias */
+*[highway = motorway_link][!destination] {
+	throwOther: tr("{0} sem tag {1}", "{0.value}", "{1.key}");
+}
+
+*[place =~ /hamlet|isolated_dwelling|town|village/][population >= 100000] {
+	throwWarning: tr("local com 100.000 habitantes ou mais deve ser classificado como city");
+	fixAdd: "place=city";
+}
+
+*[place =~ /city|hamlet|isolated_dwelling|village/][population >= 10000][population < 100000] {
+	throwWarning: tr("local com população entre 10.000 e 100.000 deve ser classificado como town");
+	fixAdd: "place=town";
+}
+
+*[place][place !~ /hamlet|island|isolated_dwelling|neighbourhood|suburb|village/][population < 10000] {
+	throwWarning: tr("local com menos de 10.000 habitantes deve ser classificado como village");
+	fixAdd: "place=village";
+}
+
+*[place = city][!population],
+*[place = town][!population],
+*[place = village][!population] {
+	throwWarning: tr("{0} sem tag de população (population)", "{0.value}");
+}
+
+*[place = city][!name][!place_name],
+*[place = town][!name][!place_name],
+*[place = village][!name][!place_name] {
+	throwWarning: tr("{0} sem nome", "{0.value}");
+}
+
+*[iata = "0"] {
+	throwWarning: tr("{0} com valor = {1}", "{0.key}", "{0.value}");
+}
+
+*[name =~ /^(?i)Subestação .*/][power][power != substation],
+*[name =~ /^(?i)Fórum .*/][amenity][amenity != courthouse],
+*[name =~ /^(?i)((Posto|Unidade (Básica)?) de Saúde|UBS|PSF) .*/][amenity = hospital][amenity != clinic],
+*[name =~ /^(?i)Hospital .*/][building][building != hospital],
+*[name =~ /^(?i)Universidade .*/][building][building != university],
+*[name =~ /^(?i)Escola .*/][building][building != school],
+*[name =~ /^(?i)Hotel .*/][building][building != hotel],
+*[name =~ /^(?i)Capela .*/][building][building != chapel],
+*[name =~ /^(?i)Igreja .*/][building][building != church],
+*[name =~ /^(?i)Catedral .*/][building][building != cathedral],
+*[name =~ /^(?i)Fazenda .*/][building][building != farm],
+*[name =~ /^(?i)Supermercado .*/][building][building != supermarket] {
+	throwWarning: tr("{0} provavelmente deveria ser {1}", "{2.key}", "{2.value}");
+	fixAdd: "{2.key}={2.value}"
+}
+
+/* torres de energia, lombadas, câmeras, semáforos etc que não estão conectados em uma via */
+node:unconnected[power = pole],
+node:unconnected[power = tower],
+node:unconnected[traffic_calming],
+node:unconnected[highway = mini_roundabout],
+node:unconnected[highway = motorway_junction],
+node:unconnected[highway = stop],
+node:unconnected[highway = giveway],
+node:unconnected[highway = turning_circle],
+node:unconnected[highway = crossing],
+node:unconnected[highway = speed_camera],
+node:unconnected[highway = traffic_signals] {
+	throwWarning: tr("{0} deve fazer parte de um caminho e não ficar solto", "{1.tag}");
+}
+
+*[crossing][!highway][!railway] {
+	throwWarning: tr("{0} deve ser utilizado com {1}={0} ou {2}={0}", "{0.key}", "{1.key}", "{2.key}");
+}
+
+*[aeroway][designation =~ /^[A-Z]{4}$/][!icao],
+*[aeroway][ref =~ /^[A-Z]{4}$/][!icao] {
+	throwWarning: tr("{0} provavelmente deve ser utilizado como {1}", "{1.key}", "{2.key}");
+	fixChangeKey: "{1.key} => {2.key}";
+}
+
+*[highway][access = permissive] {
+	throwWarning: tr("verificar: {0} deve ser utilizado apenas em vias privadas com permissão de acesso e não em vias de acesso público", "{1.tag}");
+}
+
+/* nomes e ruas escritos totalmente em maiúsculo */
+*[name =~ /^[A-Z0-9]*[A-Z]+[A-Z0-9]*$/],
+*["addr:street" =~ /^[A-Z0-9]*[A-Z]+[A-Z0-9]*$/] {
+	throwOther: tr("verificar: {0} com letras apenas em maiúsculo", "{0.key}");
+	suggestAlternative: "short_name";
+}
+
+*["addr:postcode"]["addr:postcode" !~ /[0-9]{5}-[0-9]{3}/],
+*[postal_code][postal_code !~ /[0-9]{5}-[0-9]{3}/] {
+	throwWarning: tr("{0} (CEP) em formato diferente de NNNNN-NNN", "{0.key}");
+}
+
+*[highway]["addr:postcode"] {
+	throwWarning: tr("{0} deve ser postal_code para {1}", "{1.key}", "{0.key}");
+	fixChangeKey: "{1.key} => postal_code";
+}
+
+/* vários valores para source devem estar na mesma chave, separados por ';' */
+*[alt_source][source] {
+	throwWarning: tr("{0} deve estar incluído em {1}, separado por '';'' caso necessário", "{0.key}", "{1.key}");
+}
+
+/* landuse deve conter algum valor que não seja yes */
+*[landuse?] {
+	throwWarning: tr("especificar valor correto para {0} ao invés de ''{1}''", "{0.key}", tag("landuse"));
+}
+
+/* deve-se utilizar short_name, name ou official_name ao invés de long_name */
+*[long_name] {
+	throwWarning: tr("chave inválida: {0}", "{0.key}");
+	suggestAlternative: "highway=name";
+	suggestAlternative: "highway=short_name";
+	suggestAlternative: "highway=official_name";
+}
+
+/* a rua já define o seu próprio endereço; não necessita de "addr:street" portanto */
+*[highway]["addr:street"] {
+	throwWarning: tr("não faz sentido ter {0} em {1}", "{1.key}", "{0.key}");
+}
+
+*[building][levels] {
+	throwWarning: tr("o número de andares de um prédio deve ser definido por building:levels ao invés de {0}", "{1.key}");
+	fixChangeKey: "levels => building:levels";
+}
+
+*["building:levels" < 1] {
+	throwWarning: tr("verificar: {0} com valor inválido", "{0.key}");
+}
+
+*["building:levels"][!building] {
+	throwWarning: tr("{0} sem tag {1}", "{0.key}", "{1.key}");
+}
+
+/* hires não deve existir mais no Brasil */
+*[hires?] {
+	throwWarning: tr("não se deve utilizar {0} para demarcar áreas de cobertura de imagem", "{0.key}");
+}
+
+/* é bom especificar o tipo de torre */
+node[man_made = tower][!"tower:type"] {
+	throwOther: tr("ausência do tipo de torre ({0})", "{1.key}");
+}
+
+/* amenity=yes está errado */
+*[amenity?] {
+	throwWarning: tr("tipo de estabelecimento incorreto ({0}={1})", "{0.key}", tag("amenity"));
+}
+
+/* place=yes está errado */
+*[place?] {
+	throwWarning: tr("definição incorreta de local ({0}={1})", "{0.key}", tag("place"));
+}
+
+*[amenity = place_of_worship][!religion] {
+	throwOther: tr("lugar de adoração sem tag de religião ({0})", "{1.key}");
+}
+
+*[aeroway = aerodrome][!icao],
+*[aeroway = helipad][!icao] {
+	throwOther: tr("{0} sem tag {1}", "{0.value}", "{1.key}");
+}
+
+*[aeroway = aerodrome][name =~ /(?i).*airport$/],
+*[aeroway = helipad][name =~ /(?i).*heliport$/] {
+	throwWarning: tr("verificar: {0} com nome em inglês", "{0.tag}");
+}
+
+node[surface] {
+	throwWarning: tr("superfície ({0}) erroneamente definida no nó", "{0.key}");
+	fixRemove: "{0.key}";
+}
+
+/* highway/waterway com layer negativo e sem túnel */
+*[highway][layer < 0][!tunnel],
+*[waterway][layer < 0][!tunnel] {
+	throwWarning: tr("verificar: {0} negativo de {1} com ausência de {2}", "{1.key}", "{0.key}", "{2.key}");
+}
+
+/* highway/waterway com layer positivo e sem ponte */
+*[highway][layer > 0][!bridge],
+*[waterway][layer > 0][!bridge] {
+	throwWarning: tr("verificar: {0} positivo de {1} com ausência de {2}", "{1.key}", "{0.key}", "{2.key}");
+}
+
+/* layer não faz sentido em outros objetos */
+*[layer][!building][!highway][man_made!=pipeline][!railway][!waterway] {
+	throwWarning: tr("verificar: possível uso incorreto de {0} no objeto", "{0.key}");
+}
+
+way[highway = motorway_junction] {
+	throwError: tr("{0} deve ser utilizado apenas no nó de saída da rodovia", "{0.tag}");
+	suggestAlternative: "highway=motorway_link";
+}
+
+/* lugar possui nome que inicia com "Edifício" mas não possui tag de prédio */
+*[name =~ /^(?i)edifício.*/][!building] {
+	throwWarning: tr("possível ausência de tag {0}", "{1.key}");
+	fixAdd: "building=yes";
+}
+
+way[highway][!surface] {
+	throwOther: tr("{0} sem superfície ({1}) definida", "{0.key}", "{1.key}");
+}
+
+/* número de faixas apenas para rodovias maiores e links */
+way[highway =~ /motorway|trunk|primary|secondary|tertiary/][!lanes],
+way[highway $= _link][!lanes] {
+	throwOther: tr("{0} sem número de faixas ({1}) definido", "{0.key}", "{1.key}");
+}
+
+/* velocidade máxima apenas para grandes rodovias, unclassified e residential */
+way[highway =~ /motorway|trunk|primary|secondary|tertiary|unclassified|residential/][!maxspeed],
+way[highway $= _link][!maxspeed] {
+	throwOther: tr("{0} sem velocidade máxima ({1}) definida", "{0.key}", "{1.key}");
+}
+
+*[highway][lanes < 1] {
+	throwError: tr("{0} com valor incorreto de número de faixas ({1})", "{0.key}", "{1.key}");
+}
+
+*[highway = service][!service] {
+	throwOther: tr("ausência do tipo de serviço ({0}) na {1}", "{1.key}", "{0.key}");
+}
+
+*[highway = track][!tracktype] {
+	throwOther: tr("ausência do tipo de track ({0}) na {1}", "{1.key}", "{0.key}");
+}
+
+*[route = ferry][!duration] {
+	throwWarning: tr("ausência do tempo de duração ({0}) da balsa", "{1.key}");
+}
+
+*[highway][highway !~ /construction|give_way|motorway_junction|proposed|raceway|speed_camera|stop/][!wheelchair],
+*[building][!wheelchair] {
+	throwOther: tr("{0} sem tag de acessibilidade ({1})", "{0.key}", "{1.key}");
+}
+
+*[name =~ /^(?i)praça.*/][!leisure][landuse = grass] {
+	throwWarning: tr("possível definição errada de praça: {0}", "{2.tag}");
+	suggestAlternative: "leisure=park";
+}
+
+*[wikipedia ^= "en:"] {
+	throwWarning: tr("utilizar link em português (pt:) para {0}", "{0.key}");
+}
+
+/* rodovias de mão duplas mas apenas com 1 faixa estão provavelmente erradas */
+*[highway][lanes = 1][!oneway?] {
+	throwWarning: tr("{0} provavelmente deveria ter {1} ≥ 2", "{0.key}", "{1.key}");
+}
+
+/* nomes com valores que provavelmente deveriam estar em alt_name, short_name, etc */
+*[name =~ /.*\(.*\).*/] {
+	throwWarning: tr("{0} com parênteses", "{0.key}");
+	suggestAlternative: "alt_name";
+	suggestAlternative: "short_name";
+	suggestAlternative: "description";
+}
+
+*[name =~ /.* - .*/] {
+	throwWarning: tr("{0} com traço", "{0.key}");
+	suggestAlternative: "alt_name";
+	suggestAlternative: "short_name";
+	suggestAlternative: "description";
+}
+
+*[name =~ /.*, .*/] {
+	throwWarning: tr("{0} com vírgula", "{0.key}");
+	suggestAlternative: "alt_name";
+	suggestAlternative: "short_name";
+	suggestAlternative: "description";
+}
+
+*[name =~ /.*: .*/] {
+	throwWarning: tr("{0} com dois pontos", "{0.key}");
+	suggestAlternative: "alt_name";
+	suggestAlternative: "short_name";
+	suggestAlternative: "description";
+}
+
+/* admin_level deve ficar na relação e não no nó do local */
+node[place][admin_level] {
+	throwWarning: tr("{0} deve fazer parte do limite administrativo e não do nó do local", "{1.key}");
+}
+
+/* regras para destination http://wiki.openstreetmap.org/wiki/Key:destination */
+way[destination][!oneway?][!waterway] {
+	throwWarning: tr("{0} incorreto se não tiver {1}", "{0.key}", "{1.key}");
+	suggestAlternative: "destination:forward";
+	suggestAlternative: "destination:backward";
+}
+
+node[destination],
+relation[destination] {
+	throwWarning: tr("{0} deve ser usado apenas em ways", "{0.key}");
+}
+
+/* estabelecimentos sem horário de funcionamento */
+*[amenity][!opening_hours],
+*[shop][!opening_hours] {
+	throwOther: tr("{0} sem {1}", "{0.key}", "{1.key}");
+}
+
+/* número de saída de rodovia */
+*[highway=motorway_junction][ref][ref !~ /^[0-9]+( |-)*([A-Z])?$/] {
+	throwWarning: tr("saída de rodovia ({0}) fora do padrão", "{1.key}");
+}
+
+/* landuse não deve ter layer */
+*[landuse][layer] {
+	throwWarning: tr("verificar: {0} não deve possuir {1}", "{0.key}", "{1.key}");
+}
+
