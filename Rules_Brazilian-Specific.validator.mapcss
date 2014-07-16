@@ -321,6 +321,11 @@ way[highway][!surface] {
 	throwOther: tr("{0} sem superfície ({1}) definida", "{0.key}", "{1.key}");
 }
 
+way[highway=footway][foot?!],
+way[footway][foot?!] {
+	thowOther:	tr("{0} proibido para pedestres", "{0.key}");
+}
+
 /* número de faixas apenas para rodovias maiores e links */
 way[highway =~ /motorway|trunk|primary|secondary|tertiary/][!lanes],
 way[highway $= _link][!lanes] {
