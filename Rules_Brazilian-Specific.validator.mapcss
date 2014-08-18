@@ -323,7 +323,7 @@ way[highway][!surface] {
 
 way[highway=footway][foot?!],
 way[footway][foot?!] {
-	thowWarning:	tr("{0} proibido para pedestres", "{0.key}");
+	throwWarning:	tr("{0} proibido para pedestres", "{0.key}");
 }
 
 /* número de faixas apenas para rodovias maiores e links */
