@@ -218,6 +218,13 @@ node[highway =~ /give_way|mini_roundabout|stop|turning_circle/][name] {
 	throwWarning: tr("objeto não deve possuir {0}", "{1.key}");
 }
 
+node[highway=speed_camera][!maxspeed],
+relation[enforcement=maxspeed][!maxspeed],
+relation[enforcement=maxheight][!maxheight],
+relation[enforcement=maxweight][!maxweight] {
+	throwWarning: tr("adicionar {0} ao {1}", "{1.key}", "{0.tag}");
+}
+
 *[crossing][!highway][!railway] {
 	throwWarning: tr("{0} deve ser utilizado com {1}={0} ou {2}={0}", "{0.key}", "{1.key}", "{2.key}");
 }
