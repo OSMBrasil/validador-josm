@@ -480,3 +480,8 @@ relation[destination] {
 *[name =~ /.* D(a|e|o)s? .*/] {
 	throwWarning: tr("verificar: ''da'', ''de'' e ''do'' são minúsculos nos nomes em português");
 }
+
+*[alt_ref] {
+	throwWarning: tr("o conteúdo de {0} deve fazer parte de ref, separado por ;", "{0.key}");
+	suggestAlternative: "ref";
+}
