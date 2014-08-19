@@ -442,3 +442,6 @@ relation[destination] {
 	throwWarning: tr("verificar: {0} não deve possuir {1}", "{0.key}", "{1.key}");
 }
 
+*[name =~ /.* D(a|e|o)s? .*/] {
+	throwWarning: tr("verificar: ''da'', ''de'' e ''do'' são minúsculos nos nomes em português");
+}
