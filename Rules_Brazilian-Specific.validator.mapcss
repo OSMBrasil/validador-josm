@@ -213,7 +213,7 @@ node:unconnected[highway = traffic_signals] {
 	fixChangeKey: "{1.key} => {2.key}";
 }
 
-*[highway][access = permissive] {
+*[access = permissive] {
 	throwWarning: tr("verificar: {0} deve ser utilizado apenas em vias privadas com permissão de acesso e não em vias de acesso público", "{1.tag}");
 }
 
