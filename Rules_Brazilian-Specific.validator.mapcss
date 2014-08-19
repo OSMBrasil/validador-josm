@@ -214,6 +214,10 @@ relation[highway = turning_circle] {
 	throwWarning: tr("{0} deve ser utilizado apenas em nós", "{0.tag}");
 }
 
+node[highway =~ /give_way|mini_roundabout|stop|turning_circle/][name] {
+	throwWarning: tr("objeto não deve possuir {0}", "{1.key}");
+}
+
 *[crossing][!highway][!railway] {
 	throwWarning: tr("{0} deve ser utilizado com {1}={0} ou {2}={0}", "{0.key}", "{1.key}", "{2.key}");
 }
