@@ -2,7 +2,7 @@
 meta
 {
   title: "Brazilian-specific rules";
-  version: "1.20_2014-06-12";
+  version: "1.[[revision]]_[[date]]";
   description: "Community rules for the most common errors and problems found in Brazil. Messages are in Portuguese only.";
   author: "naoliv";
   link: "http://josm.openstreetmap.de/wiki/Rules/Brazilian-Specific";
