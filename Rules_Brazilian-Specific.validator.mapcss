@@ -50,6 +50,10 @@ meta
 	throwWarning: tr("nome supérfluo/incompleto de local de lazer");
 }
 
+*[name =~ /^(?i)((Posto|Unidade (Básica)?) de Saúde|UBS|PSF|hospital)$/] {
+	throwWarning: tr("nome supérfluo/incompleto de local de saúde");
+}
+
 *[name =~ /^(?i)(aldeia|rodovi(á|a)ria|estacionamento|igreja|capela|cemit(é|e)rio|fazenda|lago|lagoa|praça|parque|vila)$/] {
 	throwWarning: tr("nome supérfluo/incompleto de local");
 }
@@ -154,7 +158,6 @@ node[highway = motorway_junction][!name][!ref] {
 
 *[name =~ /^(?i)Subestação .*/][power][power != substation],
 *[name =~ /^(?i)Fórum .*/][amenity][amenity != courthouse],
-*[name =~ /^(?i)((Posto|Unidade (Básica)?) de Saúde|UBS|PSF) .*/][amenity = hospital][amenity != clinic],
 *[name =~ /^(?i)Hospital .*/][building][building != hospital],
 *[name =~ /^(?i)Universidade .*/][building][building != university],
 *[name =~ /^(?i)Escola .*/][building][building != school],
@@ -166,6 +169,10 @@ node[highway = motorway_junction][!name][!ref] {
 *[name =~ /^(?i)Supermercado .*/][building][building != supermarket] {
 	throwWarning: tr("{0} provavelmente deveria ser {1}", "{2.key}", "{2.value}");
 	fixAdd: "{2.key}={2.value}"
+}
+
+*[name =~ /^(?i)((Posto|Unidade (Básica)?) de Saúde|UBS|PSF) .*/][amenity != clinic] {
+	throwWarning: tr("postos/unidades de saúde devem ser amenity=clinic");
 }
 
 /* torres de energia, lombadas, câmeras, semáforos etc que não estão conectados em uma via */
