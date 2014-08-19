@@ -92,6 +92,19 @@ meta
 	fixRemove: "{0.value}";
 }
 
+*[name =~ /^(i?)(sem (nome|denomina(ç|c)(ã|a)o)|desconhecido|n(ã|a)o conhecido)$/] {
+	throwWarning: tr("objeto com nomenclatura incorreta");
+	suggestAlternative: "noname";
+}
+
+*[noname?][name] {
+	throwWarning: tr("uso contraditório de {0} junto com {1}", "{0.key}", "{1.key}");
+}
+
+node[noname?] {
+	throwWarning: tr("verificar: uso suspeito de {0} em nó", "{0.key}");
+}
+
 /* designation é uma chave utilizada apenas no Reino Unido, sem uso no Brasil */
 *[designation] {
 	throwWarning: tr("{0} é uma chave utilizada apenas no Reino Unido", "{0.key}");
