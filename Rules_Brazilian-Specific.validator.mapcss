@@ -66,7 +66,7 @@ meta
 	XXX-NNN/NNN (municipal)
 */
 
-*[highway][highway !~ /motorway_junction|bus_stop/][ref][ref !~ /(([A-Z]{2,3}-[0-9]{2,4}|SPM(-| )[0-9]{3} ?(D|E)?|SP(A|D|I)(-| )[0-9]{3}\/[0-9]{3}|[A-Z]{3}-[0-9]{3}\/[0-9]{3});?)+$/] {
+*[highway][highway !~ /milestone|motorway_junction|bus_stop/][ref][ref !~ /(([A-Z]{2,3}-[0-9]{2,4}|SPM(-| )[0-9]{3} ?(D|E)?|SP(A|D|I)(-| )[0-9]{3}\/[0-9]{3}|[A-Z]{3}-[0-9]{3}\/[0-9]{3});?)+$/] {
 	throwWarning: tr("{0} fora do padrão ''sigla-numeração'' ou separador de múltiplos valores diferente de '';''", "{2.key}");
 }
 
