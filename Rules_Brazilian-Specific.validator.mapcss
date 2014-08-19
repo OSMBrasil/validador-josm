@@ -406,8 +406,8 @@ way[highway $= _link][!maxspeed] {
 	suggestAlternative: "leisure=park";
 }
 
-*[wikipedia ^= "en:"] {
-	throwWarning: tr("utilizar link em português (pt:) para {0}", "{0.key}");
+*[wikipedia][wikipedia !~ /^pt:/] {
+	throwWarning: tr("utilizar prefixo em português (pt:) para {0}", "{0.key}");
 }
 
 /* rodovias de mão duplas mas apenas com 1 faixa estão provavelmente erradas */
