@@ -203,6 +203,13 @@ node:unconnected[highway = traffic_signals] {
 	throwWarning: tr("{0} deve fazer parte de um caminho e não ficar solto", "{1.tag}");
 }
 
+way[highway = give_way],
+way[highway = stop],
+relation[highway = give_way],
+relation[highway = stop] {
+	throwWarning: tr("{0} deve ser utilizado apenas em nós", "{0.tag}");
+}
+
 *[crossing][!highway][!railway] {
 	throwWarning: tr("{0} deve ser utilizado com {1}={0} ou {2}={0}", "{0.key}", "{1.key}", "{2.key}");
 }
