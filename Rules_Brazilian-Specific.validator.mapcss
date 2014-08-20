@@ -236,7 +236,7 @@ relation[enforcement=maxweight][!maxweight] {
 }
 
 *[access = permissive] {
-	throwWarning: tr("verificar: {0} deve ser utilizado apenas em vias privadas com permissão de acesso e não em vias de acesso público", "{1.tag}");
+	throwWarning: tr("verificar: {0} deve ser utilizado apenas em vias privadas com permissão de acesso e não em vias de acesso público", "{0.tag}");
 }
 
 /* nomes e ruas escritos totalmente em maiúsculo */
