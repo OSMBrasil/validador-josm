@@ -412,7 +412,7 @@ way[highway $= _link][!maxspeed] {
 
 /* rodovias de mão duplas mas apenas com 1 faixa estão provavelmente erradas */
 *[highway][lanes = 1][!oneway?] {
-	throwWarning: tr("{0} provavelmente deveria ter {1} ≥ 2", "{0.key}", "{1.key}");
+	throwWarning: tr("{0} provavelmente deveria ter {1} ≥ 2 ou {2}=yes", "{0.key}", "{1.key}", "{2.key}");
 }
 
 /* nomes com valores que provavelmente deveriam estar em alt_name, short_name, etc */
