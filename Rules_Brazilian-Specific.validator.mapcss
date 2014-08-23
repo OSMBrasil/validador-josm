@@ -16,7 +16,7 @@ meta
 
 /* nome de vias sem logradouro correto */
 *[highway=cycleway][name][name !~ /^(?i)ciclovia .*/],
-*[highway][highway !~ /bridleway|bus_stop|crossing|footway|give_way|motorway_junction|path|raceway|speed_camera|steps|stop/][name][name !~ /^(?i)(aeroporto|alameda|área|avenida|beco|campo|chácara|colônia|condomínio|conjunto|distrito|esplanada|estação|estrada|favela|fazenda|feira|jardim|ladeira|lago|lagoa|largo|loteamento|morro|núcleo|parque|passarela|pátio|praça|quadra|recanto|residencial|rodovia|rotatória|rua|setor|sítio|travessa|trecho|trevo|vale|vereda|via|viadutos?|viela|vila|(complexo|dispositivo) viário) .*/] {
+*[highway][highway !~ /bridleway|bus_stop|cycleway|crossing|footway|give_way|motorway_junction|path|raceway|speed_camera|steps|stop/][name][name !~ /^(?i)(aeroporto|alameda|área|avenida|beco|campo|chácara|colônia|condomínio|conjunto|distrito|esplanada|estação|estrada|favela|fazenda|feira|jardim|ladeira|lago|lagoa|largo|loteamento|morro|núcleo|parque|passarela|pátio|praça|quadra|recanto|residencial|rodovia|rotatória|rua|setor|sítio|travessa|trecho|trevo|vale|vereda|via|viadutos?|viela|vila|(complexo|dispositivo) viário) .*/] {
 	throwWarning: tr("{0} com logradouro ausente, errado ou abreviado", "{0.key}");
 }
 
@@ -26,7 +26,7 @@ meta
 }
 
 /* possui nome de rua mas não tem tag de highway */
-*[!highway][name][name =~ /^(?i)(alameda|avenida|beco|estrada|ladeira|passarela|rodovia|rotatória|rua|travessa|trevo|via|viadutos?|viela|(complexo|dispositivo) viário) .*/] {
+*[!highway][name][name =~ /^(?i)(alameda|avenida|beco|estrada|ladeira|passarela|rodovia|rotatória|rua|travessa|trevo|via|viadutos?|viela|(complexo|dispositivo) viário) .*/][name !~ /^(?i)estrada de ferro/] {
 	throwWarning: tr("objeto com nome de via mas sem tag de {0}", "{0.key}");
 }
 
@@ -184,7 +184,7 @@ node[highway = motorway_junction][!name][!ref] {
 	fixAdd: "{2.key}={2.value}"
 }
 
-*[name =~ /^(?i)((Posto|Unidade (Básica)?) de Saúde|UBS|PSF) .*/][amenity != clinic] {
+*[name =~ /^(?i)((Posto|Unidade (Básica)?) de Saúde|UBS|PSF).*/][amenity != clinic] {
 	throwWarning: tr("postos/unidades de saúde devem ser amenity=clinic");
 }
 
@@ -338,7 +338,7 @@ node[surface] {
 }
 
 /* highway/waterway com layer positivo e sem ponte */
-*[highway][layer > 0][!bridge],
+*[highway][layer > 0][!bridge][highway != bus_stop],
 *[waterway][layer > 0][!bridge] {
 	throwWarning: tr("verificar: {0} positivo de {1} com ausência de {2}", "{1.key}", "{0.key}", "{2.key}");
 }
@@ -359,7 +359,7 @@ way[highway = motorway_junction] {
 	fixAdd: "building=yes";
 }
 
-way[highway][!surface] {
+way[highway][!surface][highway != bus_stop] {
 	throwOther: tr("{0} sem superfície ({1}) definida", "{0.key}", "{1.key}");
 }
 
