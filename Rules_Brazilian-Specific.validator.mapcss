@@ -496,3 +496,14 @@ relation[destination] {
 	throwWarning: tr("o conteúdo de {0} deve fazer parte de ref, separado por ;", "{0.key}");
 	suggestAlternative: "ref";
 }
+
+/* path deve utilizar trail_visibility e não tracktype */
+way[highway = path][tracktype] {
+	throwWarning: tr("uso incorreto de {0}", "{1.key}");
+	suggestAlternative: "trail_visibility";
+}
+
+/* tracktype é uma propriedade de tracks apenas */
+way[highway != track][tracktype] {
+	throwWarning: tr("utilizar {0} apenas em {1}={2}", "{1.key}", "{0.key}", "{0.value}");
+}
