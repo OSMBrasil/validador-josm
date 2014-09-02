@@ -507,3 +507,10 @@ way[highway = path][tracktype] {
 way[highway != track][tracktype] {
 	throwWarning: tr("utilizar {0} apenas em {1}={2}", "{1.key}", "{0.key}", "{0.value}");
 }
+
+/* utilizar ; como separador de valores em source */
+*[source =~ /.*,.*/],
+*["source:ref" =~ /.*,.*/],
+*["source:name" =~ /.*,.*/] {
+	throwOther: tr("utilizar ; como separador de valores em {0}", "{0.key}");
+}
