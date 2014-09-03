@@ -54,7 +54,7 @@ meta
 	throwWarning: tr("nome supérfluo/incompleto de local de saúde");
 }
 
-*[name =~ /^(?i)(aldeia|rodovi(á|a)ria|estacionamento|igreja|capela|cemit(é|e)rio|fazenda|lago|lagoa|praça|parque|vila)$/] {
+*[name =~ /^(?i)(aldeia|rodovi(á|a)ria|estacionamento|igreja|capela|cemit(é|e)rio|c(ó|o)rrego|fazenda|lago|lagoa|praça|parque|riacho|rio|vila)$/] {
 	throwWarning: tr("nome supérfluo/incompleto de local");
 }
 
