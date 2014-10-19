@@ -77,6 +77,7 @@ meta
 /* nomes desnecessários */
 *[designation = *"addr:housename"],
 *[ref = *designation],
+*[ref = *old_ref],
 *[name = *"addr:housename"],
 *[name = *designation],
 *[name = *alt_name],
@@ -90,6 +91,11 @@ meta
 *[name = *sorting_name] {
 	throwWarning: tr("{0} e {1} são iguais; remover chave {1} desnecessária", "{0.key}", "{0.value}");
 	fixRemove: "{0.value}";
+}
+
+/* source estranhamente igual o name */
+*[source = *name] {
+	throwWarning: tr("verificar: {0} e {1} são iguais", "{0.key}", "{0.value}");
 }
 
 *[name =~ /^(i?)(sem (nome|denomina(ç|c)(ã|a)o)|desconhecido|n(ã|a)o conhecido)$/] {
