@@ -78,6 +78,7 @@ meta
 /* nomes desnecessários */
 *[designation = *"addr:housename"],
 *[ref = *designation],
+*[ref = *old_ref],
 *[name = *"addr:housename"],
 *[name = *designation],
 *[name = *alt_name],
@@ -91,6 +92,11 @@ meta
 *[name = *sorting_name] {
 	throwWarning: tr("{0} e {1} são iguais; remover chave {1} desnecessária", "{0.key}", "{0.value}");
 	fixRemove: "{0.value}";
+}
+
+/* source estranhamente igual o name */
+*[source = *name] {
+	throwWarning: tr("verificar: {0} e {1} são iguais", "{0.key}", "{0.value}");
 }
 
 *[name =~ /^(i?)(sem (nome|denomina(ç|c)(ã|a)o)|desconhecido|n(ã|a)o conhecido)$/] {
@@ -423,7 +429,7 @@ way[highway $= _link][!maxspeed] {
 }
 
 /* rodovias de mão duplas mas apenas com 1 faixa estão provavelmente erradas */
-*[highway][lanes = 1][!oneway?] {
+*[highway][lanes = 1][!oneway?][!junction] {
 	throwWarning: tr("{0} provavelmente deveria ter {1} ≥ 2 ou {2}=yes", "{0.key}", "{1.key}", "{2.key}");
 }
 
