@@ -61,9 +61,10 @@ meta
 /*
 	refs podem possuir o formato:
 	XXX-NNNN (até 3 letras com até 4 números) (estadual/nacional)
-	SPM NNN (D|E) (específico de SP)
-	SP(A|D|I) NNN/NNN (específico de SP)
 	XXX-NNN/NNN (municipal)
+	http://www.der.sp.gov.br/arquivos/codificacao.pdf
+		SPM NNN (D|E) (específico de SP)
+		SP(A|D|I) NNN/NNN (específico de SP)
 */
 
 *[highway][highway !~ /milestone|motorway_junction|bus_stop/][ref][ref !~ /^(([A-Z]{2,3}-[0-9]{2,4}|SPM(-| )[0-9]{3} ?(D|E)?|SP(A|D|I)(-| )[0-9]{3}\/[0-9]{3}|[A-Z]{3}-[0-9]{3}\/[0-9]{3});?)+$/] {
