@@ -58,6 +58,14 @@ meta
 	throwWarning: tr("nome supérfluo/incompleto de local");
 }
 
+way[highway][type = route] {
+	throwWarning: tr("{0} não deve possuir {1}", "{0.key}", "{1.tag}");
+}
+
+relation[type = route][highway] {
+	throwWarning: tr("relação não deve possuir {0}", "{1.key}");
+}
+
 /*
 	refs podem possuir o formato:
 	XXX-NNNN (até 3 letras com até 4 números) (estadual/nacional)
