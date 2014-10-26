@@ -483,7 +483,7 @@ way[destination][!oneway?][!waterway] {
 }
 
 node[destination],
-relation[destination] {
+relation[destination][type != waterway] {
 	throwWarning: tr("{0} deve ser usado apenas em ways", "{0.key}");
 }
 
