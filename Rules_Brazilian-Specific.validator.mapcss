@@ -342,6 +342,17 @@ node[man_made = tower][!"tower:type"] {
 	throwOther: tr("lugar de adoração sem tag de religião ({0})", "{1.key}");
 }
 
+/* https://github.com/OSMBrasil/validador-josm/issues/54 */
+*[tourism = motel][amenity != love_hotel],
+*[name =~ /(?i)motel/][amenity != love_hotel] {
+	throwWarning: tr("ausência de tag ''{0}''", "{1.value}");
+	fixAdd: "{1.key}={1.value}";
+}
+
+*[amenity = love_hotel][tourism][tourism != motel] {
+	throwWarning: tr("verificar: provavelmente deve ser ''{0}={1}''", "{2.key}", "{2.value}");
+}
+
 *[aeroway = aerodrome][!icao],
 *[aeroway = helipad][!icao] {
 	throwOther: tr("{0} sem tag {1}", "{0.value}", "{1.key}");
