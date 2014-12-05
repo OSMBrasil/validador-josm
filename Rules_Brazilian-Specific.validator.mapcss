@@ -16,12 +16,12 @@ meta
 
 /* nome de vias sem logradouro correto */
 *[highway=cycleway][name][name !~ /^(?i)ciclovia .*/],
-*[highway][highway !~ /bridleway|bus_stop|cycleway|crossing|footway|give_way|motorway_junction|path|raceway|speed_camera|steps|stop/][name][name !~ /^(?i)(aeroporto|alameda|área|avenida|beco|campo|chácara|colônia|condomínio|conjunto|distrito|esplanada|estação|estrada|favela|fazenda|feira|jardim|ladeira|lago|lagoa|largo|loteamento|morro|núcleo|parque|passarela|pátio|praça|quadra|recanto|residencial|rodovia|rotatória|rua|setor|sítio|travessa|trecho|trevo|vale|vereda|via|viadutos?|viela|vila|(anel|complexo|dispositivo) viário) .*/] {
+*[highway][highway !~ /bridleway|bus_stop|cycleway|crossing|footway|give_way|motorway_junction|path|raceway|speed_camera|steps|stop/][name][name !~ /^(Aeroporto|Alameda|Área|Avenida|Beco|Campo|Chácara|Colônia|Condomínio|Conjunto|Distrito|Esplanada|Estação|Estrada|Favela|Fazenda|Feira|Jardim|Ladeira|Lago|Lagoa|Largo|Loteamento|Morro|Núcleo|Parque|Passarela|Pátio|Praça|Quadra|Recanto|Residencial|Rodovia|Rotatória|Rua|Setor|Sítio|Travessa|Trecho|Trevo|Vale|Vereda|Via|Viadutos?|Viela|Vila|(Anel|Complexo|Dispositivo) (V|v)iário) .*/] {
 	throwWarning: tr("{0} com logradouro ausente, errado ou abreviado", "{0.key}");
 }
 
 /* endereços sem logradouro correto */
-*["addr:street"]["addr:street" !~ /^(?i)(aeroporto|alameda|área|avenida|beco|campo|chácara|colônia|condomínio|conjunto|distrito|esplanada|estação|estrada|favela|fazenda|feira|jardim|ladeira|lago|lagoa|largo|loteamento|morro|núcleo|parque|passarela|pátio|praça|quadra|recanto|residencial|rodovia|rotatória|rua|setor|sítio|travessa|trecho|trevo|vale|vereda|via|viadutos?|viela|vila|(anel|complexo|dispositivo) viário) .*/] {
+*["addr:street"]["addr:street" !~ /^(Aeroporto|Alameda|Área|Avenida|Beco|Campo|Chácara|Colônia|Condomínio|Conjunto|Distrito|Esplanada|Estação|Estrada|Favela|Fazenda|Feira|Jardim|Ladeira|Lago|Lagoa|Largo|Loteamento|Morro|Núcleo|Parque|Passarela|Pátio|Praça|Quadra|Recanto|Residencial|Rodovia|Rotatória|Rua|Setor|Sítio|Travessa|Trecho|Trevo|Vale|Vereda|Via|Viadutos?|Viela|Vila|(Anel|Complexo|Dispositivo) (V|v)iário) .*/] {
 	throwWarning: tr("{0} com logradouro ausente, errado ou abreviado", "{0.key}");
 }
 
