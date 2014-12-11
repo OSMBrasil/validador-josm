@@ -343,8 +343,9 @@ node[man_made = tower][!"tower:type"] {
 }
 
 /* https://github.com/OSMBrasil/validador-josm/issues/54 */
+/* requer JOSM ≥ 7761 */
 *[tourism = motel][amenity != love_hotel],
-*[name =~ /(?i)motel/][amenity != love_hotel] {
+*[name =~ /(?i)\bmotel\b/][amenity != love_hotel] {
 	throwWarning: tr("ausência de tag ''{0}''", "{1.value}");
 	fixAdd: "{1.key}={1.value}";
 }
