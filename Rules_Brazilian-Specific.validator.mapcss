@@ -217,15 +217,9 @@ node[highway = motorway_junction][!name][!ref] {
 /* torres de energia, lombadas, câmeras, semáforos etc que não estão conectados em uma via */
 node:unconnected[power = pole],
 node:unconnected[power = tower],
-node:unconnected[traffic_calming],
-node:unconnected[highway = mini_roundabout],
-node:unconnected[highway = motorway_junction],
 node:unconnected[highway = stop],
 node:unconnected[highway = give_way],
-node:unconnected[highway = turning_circle],
-node:unconnected[highway = crossing],
-node:unconnected[highway = speed_camera],
-node:unconnected[highway = traffic_signals] {
+node:unconnected[highway = speed_camera] {
 	throwWarning: tr("{0} deve fazer parte de um caminho e não ficar solto", "{1.tag}");
 }
 
@@ -418,8 +412,10 @@ way[highway $= _link][!maxspeed] {
 	throwOther: tr("{0} sem velocidade máxima ({1}) definida", "{0.key}", "{1.key}");
 }
 
-*[highway][lanes < 1] {
-	throwError: tr("{0} com valor incorreto de número de faixas ({1})", "{0.key}", "{1.key}");
+way[highway][lanes][lanes !~ /^[1-9]([0-9]*)$/],
+way[highway]["lanes:backward"]["lanes:backward" !~ /^[1-9]([0-9]*)$/],
+way[highway]["lanes:forward"]["lanes:forward" !~ /^[1-9]([0-9]*)$/] {
+	throwError: tr("{0} deve ser um valor inteiro", "{1.key}");
 }
 
 *[highway = service][!service] {
