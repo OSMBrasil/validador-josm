@@ -35,11 +35,6 @@ meta
 	throwWarning: tr("palavra abreviada em {0}", "{0.key}");
 }
 
-/* utilização de nomes alternativos mas sem ter um nome definido */
-*[/_name$/][!name] {
-	throwWarning: tr("uso de nome alternativo sem {0}", "{1.key}");
-}
-
 *[highway][name =~ /^(?i)((via de )?acesso|entrada|entroncamento|rampa|retorno|rotat(ó|o)ria|r(ó|o)tula|sa(í|i)da|trevo|estrada( municipal| de terra)?|rua|rodovia|via)( (de acesso|sem nome|projetad(a|o)))?$/] {
 	throwWarning: tr("{0} com nome supérfluo/incompleto", "{0.key}");
 	suggestAlternative: "destination";
@@ -112,10 +107,6 @@ relation[type = route][highway] {
 	suggestAlternative: "noname";
 }
 
-*[noname?][name] {
-	throwWarning: tr("uso contraditório de {0} junto com {1}", "{0.key}", "{1.key}");
-}
-
 node[noname?] {
 	throwWarning: tr("verificar: uso suspeito de {0} em nó", "{0.key}");
 }
@@ -174,21 +165,10 @@ node[highway = motorway_junction][!name][!ref] {
 	throwWarning: tr("{0} sem tag de população (population)", "{0.value}");
 }
 
-*[place = city][!name][!place_name],
-*[place = town][!name][!place_name],
-*[place = village][!name][!place_name] {
+*[place = city][!name],
+*[place = town][!name],
+*[place = village][!name] {
 	throwWarning: tr("{0} sem nome", "{0.value}");
-}
-
-*[place][place_name = *name] {
-	throwWarning: tr("{0} = {1}; remover {0}", "{1.key}", "{1.value}");
-	fixRemove: "{1.key}";
-}
-
-*[place][place_name][!name] {
-	throwWarning: tr("não utilizar {0}", "{1.key}");
-	suggestAlternative: "name";
-	fixChangeKey: "{1.key} => {2.key}";
 }
 
 *[iata = "0"] {
@@ -217,8 +197,6 @@ node[highway = motorway_junction][!name][!ref] {
 /* torres de energia, lombadas, câmeras, semáforos etc que não estão conectados em uma via */
 node:unconnected[power = pole],
 node:unconnected[power = tower],
-node:unconnected[highway = stop],
-node:unconnected[highway = give_way],
 node:unconnected[highway = speed_camera] {
 	throwWarning: tr("{0} deve fazer parte de um caminho e não ficar solto", "{1.tag}");
 }
@@ -294,16 +272,6 @@ relation[enforcement=maxweight][!maxweight] {
 	suggestAlternative: "highway=official_name";
 }
 
-/* a rua já define o seu próprio endereço; não necessita de "addr:street" portanto */
-*[highway]["addr:street"] {
-	throwWarning: tr("não faz sentido ter {0} em {1}", "{1.key}", "{0.key}");
-}
-
-*[building][levels] {
-	throwWarning: tr("o número de andares de um prédio deve ser definido por building:levels ao invés de {0}", "{1.key}");
-	fixChangeKey: "levels => building:levels";
-}
-
 *["building:levels" < 1] {
 	throwWarning: tr("verificar: {0} com valor inválido", "{0.key}");
 }
@@ -320,16 +288,6 @@ relation[enforcement=maxweight][!maxweight] {
 /* é bom especificar o tipo de torre */
 node[man_made = tower][!"tower:type"] {
 	throwOther: tr("ausência do tipo de torre ({0})", "{1.key}");
-}
-
-/* amenity=yes está errado */
-*[amenity?] {
-	throwWarning: tr("tipo de estabelecimento incorreto ({0}={1})", "{0.key}", tag("amenity"));
-}
-
-/* place=yes está errado */
-*[place?] {
-	throwWarning: tr("definição incorreta de local ({0}={1})", "{0.key}", tag("place"));
 }
 
 *[amenity = place_of_worship][!religion] {
@@ -393,11 +351,6 @@ way[highway = motorway_junction] {
 
 way[highway][!surface][highway != bus_stop] {
 	throwOther: tr("{0} sem superfície ({1}) definida", "{0.key}", "{1.key}");
-}
-
-way[highway=footway][foot?!],
-way[footway][foot?!] {
-	throwWarning:	tr("{0} proibido para pedestres", "{0.key}");
 }
 
 /* número de faixas apenas para rodovias maiores e links */
@@ -481,13 +434,6 @@ way[highway]["lanes:forward"]["lanes:forward" !~ /^[1-9]([0-9]*)$/] {
 /* admin_level deve ficar na relação e não no nó do local */
 node[place][admin_level] {
 	throwWarning: tr("{0} deve fazer parte do limite administrativo e não do nó do local", "{1.key}");
-}
-
-/* regras para destination http://wiki.openstreetmap.org/wiki/Key:destination */
-way[destination][!oneway?][!waterway] {
-	throwWarning: tr("{0} incorreto se não tiver {1}", "{0.key}", "{1.key}");
-	suggestAlternative: "destination:forward";
-	suggestAlternative: "destination:backward";
 }
 
 node[destination],
