@@ -290,10 +290,6 @@ node[man_made = tower][!"tower:type"] {
 	throwOther: tr("ausência do tipo de torre ({0})", "{1.key}");
 }
 
-*[amenity = place_of_worship][!religion] {
-	throwOther: tr("lugar de adoração sem tag de religião ({0})", "{1.key}");
-}
-
 /* https://github.com/OSMBrasil/validador-josm/issues/54 */
 /* requer JOSM ≥ 7761 */
 *[tourism = motel][amenity != love_hotel],
