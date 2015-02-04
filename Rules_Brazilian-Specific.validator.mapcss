@@ -175,6 +175,32 @@ node[highway = motorway_junction][!name][!ref] {
 	throwWarning: tr("{0} com valor = {1}", "{0.key}", "{0.value}");
 }
 
+*[amenity = college][name =~ /^(?i)(Centro Universitário|Faculdades?|FATEC|Instituto Federal|Centro Universitário) .*$/] {
+	throwWarning: tr("estabelecimento de ensino classificado incorretamente");
+	suggestAlternative: "amenity=university";
+	fixAdd: "{0.key}=university";
+}
+
+*[amenity = school][name =~ /^(?i)(SENAC|SENAI|Serviço Nacional de Aprendizagem)/] {
+	throwWarning: tr("estabelecimento de ensino classificado incorretamente");
+	suggestAlternative: "amenity=college";
+	fixAdd: "{0.key}=college";
+}
+
+*[amenity = university] ∈ *[amenity = university],
+*[amenity = university] ∈ *[amenity = college],
+*[amenity = university] ∈ *[amenity = school] {
+	  throwWarning: tr("{0} dentro de {1}", "amenity=university", "{0.tag}");
+}
+
+*[amenity = college] ∈ *[amenity = college] {
+	  throwWarning: tr("{0} dentro de {1}", "amenity=college", "{0.tag}");
+}
+
+*[amenity = school] ∈ *[amenity = school] {
+	  throwWarning: tr("{0} dentro de {1}", "amenity=school", "{0.tag}");
+}
+
 *[name =~ /^(?i)Subestação .*/][power][power != substation],
 *[name =~ /^(?i)Fórum .*/][amenity][amenity != courthouse],
 *[name =~ /^(?i)Hospital .*/][building][building != hospital],
@@ -187,7 +213,7 @@ node[highway = motorway_junction][!name][!ref] {
 *[name =~ /^(?i)Fazenda .*/][building][building != farm],
 *[name =~ /^(?i)Supermercado .*/][building][building != supermarket] {
 	throwWarning: tr("{0} provavelmente deveria ser {1}", "{2.key}", "{2.value}");
-	fixAdd: "{2.key}={2.value}"
+	fixAdd: "{2.key}={2.value}";
 }
 
 *[name =~ /^(?i)((Posto|Unidade (Básica)?) de Saúde|UBS|PSF).*/][amenity != clinic] {
