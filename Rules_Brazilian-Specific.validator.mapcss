@@ -175,12 +175,14 @@ node[highway = motorway_junction][!name][!ref] {
 	throwWarning: tr("{0} com valor = {1}", "{0.key}", "{0.value}");
 }
 
+/* Faculdades, centros universitário e universidades devem ser todas amenity=university */
 *[amenity = college][name =~ /^(?i)(Centro Universitário|Faculdades?|FATEC|Instituto Federal|Centro Universitário) .*$/] {
 	throwWarning: tr("estabelecimento de ensino classificado incorretamente");
 	suggestAlternative: "amenity=university";
 	fixAdd: "{0.key}=university";
 }
 
+/* Escolas técnicas/profissionalizantes devem ser amenity=college */
 *[amenity = school][name =~ /^(?i)(SENAC|SENAI|Serviço Nacional de Aprendizagem)/] {
 	throwWarning: tr("estabelecimento de ensino classificado incorretamente");
 	suggestAlternative: "amenity=college";
