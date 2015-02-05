@@ -183,10 +183,23 @@ node[highway = motorway_junction][!name][!ref] {
 }
 
 /* Escolas técnicas/profissionalizantes devem ser amenity=college */
-*[amenity = school][name =~ /^(?i)(SENAC|SENAI|Serviço Nacional de Aprendizagem)/] {
+*[amenity = school][name =~ /^(?i)(SENAC|SENAI|Serviço Nacional de Aprendizagem)/],
+*[amenity =~ /school|university/][name =~ /(?i)(Centro Paula Souza|Escola Técnica|ETEC) .*$/] {
 	throwWarning: tr("estabelecimento de ensino classificado incorretamente");
 	suggestAlternative: "amenity=college";
 	fixAdd: "{0.key}=college";
+}
+
+*[amenity = school][name =~ /^(?i)(auto(-| )?( moto )?escola|centro de formação de condutores|cfc|moto escola) .*$/] {
+	throwWarning: tr("autoescola classificada incorretamente");
+	suggestAlternative: "amenity=driving_school";
+	fixAdd: "{0.key}=driving_school";
+}
+
+*[amenity = school][name =~ /^(?i)creche\b/] {
+	throwWarning: tr("creche classificada incorretamente");
+	suggestAlternative: "amenity=kindergarten";
+	fixAdd: "{0.key}=kindergarten";
 }
 
 *[amenity = university] ∈ *[amenity = university],
