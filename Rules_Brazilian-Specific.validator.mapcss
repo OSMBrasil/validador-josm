@@ -176,7 +176,7 @@ node[highway = motorway_junction][!name][!ref] {
 }
 
 /* Faculdades, centros universitário e universidades devem ser todas amenity=university */
-*[amenity = college][name =~ /^(?i)(Centro Universitário|Faculdades?|FATEC|Instituto Federal|Centro Universitário) .*$/] {
+*[amenity = college][name =~ /^(?i)(Centro Universitário|Faculdades?|FATEC|Instituto Federal|Centro Universitário)\b$/] {
 	throwWarning: tr("estabelecimento de ensino classificado incorretamente");
 	suggestAlternative: "amenity=university";
 	fixAdd: "{0.key}=university";
@@ -184,13 +184,13 @@ node[highway = motorway_junction][!name][!ref] {
 
 /* Escolas técnicas/profissionalizantes devem ser amenity=college */
 *[amenity = school][name =~ /^(?i)(SENAC|SENAI|Serviço Nacional de Aprendizagem)/],
-*[amenity =~ /school|university/][name =~ /(?i)(Centro Paula Souza|Escola Técnica|ETEC) .*$/] {
+*[amenity =~ /school|university/][name =~ /(?i)\b(Centro Paula Souza|Escola Técnica|ETEC)\b/] {
 	throwWarning: tr("estabelecimento de ensino classificado incorretamente");
 	suggestAlternative: "amenity=college";
 	fixAdd: "{0.key}=college";
 }
 
-*[amenity = school][name =~ /^(?i)(auto(-| )?( moto )?escola|centro de formação de condutores|cfc|moto escola) .*$/] {
+*[amenity = school][name =~ /^(?i)(auto(-| )?( moto )?escola|centro de formação de condutores|cfc|moto escola)\b/] {
 	throwWarning: tr("autoescola classificada incorretamente");
 	suggestAlternative: "amenity=driving_school";
 	fixAdd: "{0.key}=driving_school";
