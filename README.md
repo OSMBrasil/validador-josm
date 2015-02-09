@@ -12,4 +12,4 @@ cd ~/.josm/validator/
 wget https://raw.githubusercontent.com/OSMBrasil/validador-josm/master/Rules_Brazilian-Specific.validator.mapcss
 ```
 
-Abra o JOSM, pressione **F12** para abrir o diálogo de **Preferências**. Na seção de Validação, abra a aba **Regras de verificação tag**, selecione **Brazilian-specific rules** e clique na seta apontada para a direita par incluí-la nas regras ativas.
+Abra o JOSM e pressione **F12** para abrir o diálogo de **Preferências**. Na seção de Validação, clique na aba **Regras de verificação tag**, selecione **Brazilian-specific rules** e clique na seta apontada para a direita para incluí-la nas regras ativas.
