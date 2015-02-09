@@ -477,14 +477,31 @@ node[place][admin_level] {
 	throwWarning: tr("{0} deve fazer parte do limite administrativo e não do nó do local", "{1.key}");
 }
 
-*[admin_level][!boundary],
-*[admin_level][boundary != administrative] {
+relation[admin_level][!boundary],
+relation[admin_level][boundary][boundary != administrative] {
 	throwError: tr("{0} ausência de boundary=administrative", "{0.key}");
 	fixAdd: "boundary=administrative";
 }
 
-*[boundary=administrative][!admin_level] {
+relation[boundary=administrative][!admin_level] {
 	throwError: tr("{0} deve possuir {1}", "{0.tag}", "{1.key}");
+}
+
+relation[boundary=administrative] > way { set way_in_relation; }
+relation[admin_level] > way { set way_in_relation; }
+way[boundary=administrative][!admin_level]!.way_in_relation {
+	throwError: tr("{0} deve possuir {1}", "{0.tag}", "{1.key}");
+}
+
+way[admin_level][!boundary]!.way_in_relation,
+way[admin_level][boundary][boundary != administrative]!.way_in_relation {
+	throwError: tr("{0} ausência de boundary=administrative", "{0.key}");
+	fixAdd: "boundary=administrative";
+}
+
+relation[boundary=administrative][type=multipolygon] {
+	throwError: tr("relação deve ser do tipo ''type=boundary''");
+	fixAdd: "type=boundary";
 }
 
 node[destination],
