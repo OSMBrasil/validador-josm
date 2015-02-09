@@ -477,6 +477,16 @@ node[place][admin_level] {
 	throwWarning: tr("{0} deve fazer parte do limite administrativo e não do nó do local", "{1.key}");
 }
 
+*[admin_level][!boundary],
+*[admin_level][boundary != administrative] {
+	throwError: tr("{0} ausência de boundary=administrative", "{0.key}");
+	fixAdd: "boundary=administrative";
+}
+
+*[boundary=administrative][!admin_level] {
+	throwError: tr("{0} deve possuir {1}", "{0.tag}", "{1.key}");
+}
+
 node[destination],
 relation[destination][type != waterway] {
 	throwWarning: tr("{0} deve ser usado apenas em ways", "{0.key}");
