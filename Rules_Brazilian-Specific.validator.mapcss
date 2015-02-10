@@ -504,6 +504,25 @@ relation[boundary=administrative][type=multipolygon] {
 	fixAdd: "type=boundary";
 }
 
+*[boundary=national_park][!name],
+*[boundary=protected_area][!name],
+*[leisure=nature_reserve][!name] {
+	throwWarning: tr("{0} deve possuir {1}", "{0.tag}", "{1.key}");
+}
+
+*[boundary=protected_area][!protect_class] {
+	throwWarning: tr("{0} deve possuir {1}", "{0.tag}", "{1.key}");
+}
+
+*[protect_class][protect_class !~ /^(1(a|b)?|[1-9][0-9]?)$/] {
+	throwWarning: tr("valor incorreto para {0}", "{0.key}");
+}
+
+*[protect_class][!boundary],
+*[protect_class][boundary][boundary != protected_area] {
+	throwWarning: tr("ausência de boundary=protected_area");
+}
+
 node[destination],
 relation[destination][type != waterway] {
 	throwWarning: tr("{0} deve ser usado apenas em ways", "{0.key}");
