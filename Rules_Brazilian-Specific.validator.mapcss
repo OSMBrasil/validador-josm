@@ -539,11 +539,6 @@ relation[destination][type != waterway] {
 	throwWarning: tr("saída de rodovia ({0}) fora do padrão", "{1.key}");
 }
 
-/* landuse não deve ter layer */
-*[landuse][layer] {
-	throwWarning: tr("verificar: {0} não deve possuir {1}", "{0.key}", "{1.key}");
-}
-
 *[name =~ /.* D(a|e|o)s? .*/] {
 	throwWarning: tr("verificar: ''da'', ''de'' e ''do'' são minúsculos nos nomes em português");
 }
