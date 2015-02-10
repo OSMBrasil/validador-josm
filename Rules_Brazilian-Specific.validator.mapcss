@@ -479,7 +479,7 @@ node[place][admin_level] {
 
 relation[admin_level][!boundary],
 relation[admin_level][boundary][boundary != administrative] {
-	throwError: tr("{0} ausência de boundary=administrative", "{0.key}");
+	throwError: tr("ausência de boundary=administrative");
 	fixAdd: "boundary=administrative";
 }
 
@@ -495,7 +495,7 @@ way[boundary=administrative][!admin_level]!.way_in_relation {
 
 way[admin_level][!boundary]!.way_in_relation,
 way[admin_level][boundary][boundary != administrative]!.way_in_relation {
-	throwError: tr("{0} ausência de boundary=administrative", "{0.key}");
+	throwError: tr("ausência de boundary=administrative");
 	fixAdd: "boundary=administrative";
 }
 
