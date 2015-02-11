@@ -171,6 +171,11 @@ node[highway = motorway_junction][!name][!ref] {
 	throwWarning: tr("{0} sem nome", "{0.value}");
 }
 
+*[name =~ /^(?i)(Faz\.|Fazenda|Sítio|Chácara)/][place][place !~ /city|farm|neighbourhood|suburb|town|village/] {
+	throwError: tr("objeto provavelmente deve ser {0}=farm", "{0.key}");
+	fixAdd: "place=farm";
+}
+
 *[name =~ /^(i?)Bairro\b/][name !~ /^(i?)Bairro d(a|e|o)s?\b/] {
 	throwWarning: tr("verificar: local não deve possuir ''Bairro'' no nome");
 }
