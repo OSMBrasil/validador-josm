@@ -571,3 +571,20 @@ way[highway != track][tracktype] {
 *["source:name" =~ /.*,.*/] {
 	throwOther: tr("utilizar ; como separador de valores em {0}", "{0.key}");
 }
+
+*[area][eval(number_of_tags()) = 1],
+*[lanes][eval(number_of_tags()) = 1],
+*[maxspeed][eval(number_of_tags()) = 1],
+*[name][eval(number_of_tags()) = 1],
+*[oneway][eval(number_of_tags()) = 1],
+*[ref][eval(number_of_tags()) = 1]
+*[surface][eval(number_of_tags()) = 1] {
+	throwWarning: tr("objeto incompleto: possui apenas {0}", "{0.key}");
+}
+
+
+*[name][area][eval(number_of_tags()) = 2],
+*[name][ref][eval(number_of_tags()) = 2],
+*[name][surface][eval(number_of_tags()) = 2] {
+	throwWarning: tr("objeto incompleto: possui apenas {0} e {1}", "{0.key}", "{1.key}");
+}
