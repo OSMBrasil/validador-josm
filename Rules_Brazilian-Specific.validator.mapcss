@@ -445,7 +445,9 @@ way[highway]["lanes:forward"]["lanes:forward" !~ /^[1-9]([0-9]*)$/] {
 
 /* rodovias de mão duplas mas apenas com 1 faixa estão provavelmente erradas */
 *[highway][lanes = 1][!oneway?][!junction] {
-	throwWarning: tr("{0} provavelmente deveria ter {1} ≥ 2 ou {2}=yes", "{0.key}", "{1.key}", "{2.key}");
+	throwWarning: tr("{0} com {1}", "{0.key}", "{1.tag}");
+	suggestAlternative: "lanes=2";
+	suggestAlternative: "narrow=yes";
 }
 
 /* nomes com valores que provavelmente deveriam estar em alt_name, short_name, etc */
