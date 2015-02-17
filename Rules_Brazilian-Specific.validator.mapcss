@@ -444,7 +444,7 @@ way[highway]["lanes:forward"]["lanes:forward" !~ /^[1-9]([0-9]*)$/] {
 }
 
 /* rodovias de mão duplas mas apenas com 1 faixa estão provavelmente erradas */
-*[highway][lanes = 1][!oneway?][!junction] {
+*[highway][lanes = 1][!oneway?][!junction][!narrow] {
 	throwWarning: tr("{0} com {1}", "{0.key}", "{1.tag}");
 	suggestAlternative: "lanes=2";
 	suggestAlternative: "narrow=yes";
@@ -585,7 +585,6 @@ way[highway != track][tracktype] {
 *[surface][eval(number_of_tags()) = 1] {
 	throwWarning: tr("objeto incompleto: possui apenas {0}", "{0.key}");
 }
-
 
 *[name][surface][eval(number_of_tags()) = 2] {
 	throwWarning: tr("objeto incompleto: possui apenas {0} e {1}", "{0.key}", "{1.key}");
