@@ -31,7 +31,7 @@ meta
 }
 
 /* palavras abreviadas */
-*[name =~ /(?i)(^|.* )(Cel|Dª|Dr|Eng|Gov|Jr|Marg|Mun|p\/|Pde|Pe|Pst|Pref|Profa|Profª|Prof|s\/|Sta|Sto|Ver)\.? .*/] {
+*[name =~ /(?i)(^|.* )(Cel|Dª|Dr|Eng|Gov|Jr|Sr.|Sr|Av|Av./|R|R.|Marg|Mun|p\/|Pde|Pe|Pst|Pref|Profa|Profª|Prof|s\/|Sta|Sto|Ver)\.? .*/] {
 	throwWarning: tr("palavra abreviada em {0}", "{0.key}");
 }
 
