@@ -589,3 +589,12 @@ way[highway != track][tracktype] {
 *[name][surface][eval(number_of_tags()) = 2] {
 	throwWarning: tr("objeto incompleto: possui apenas {0} e {1}", "{0.key}", "{1.key}");
 }
+
+/* issue #69 */
+way[man_made=pipeline] > node { set .is_in_pipeline }
+way[waterway] > node.is_in_pipeline,
+way[highway] > node.is_in_pipeline,
+way[railway] > node.is_in_pipeline {
+    throwWarning: tr("{0} cruzando {1}, não deve compartilhar nó", "{0.key}", "pipeline");
+}
+
