@@ -16,12 +16,12 @@ meta
 
 /* nome de vias sem logradouro correto */
 *[highway=cycleway][name][name !~ /^(?i)ciclovia .*/],
-*[highway][highway !~ /bridleway|bus_stop|cycleway|crossing|footway|give_way|motorway_junction|path|raceway|speed_camera|steps|stop/][name][name !~ /^(Aeroporto|Alameda|Área|Avenida|Beco|Campo|Chácara|Colônia|Condomínio|Conjunto|Distrito|Esplanada|Estação|Estrada|Favela|Fazenda|Feira|Jardim|Ladeira|Lago|Lagoa|Largo|Loteamento|Morro|Núcleo|Parque|Passarela|Pátio|Praça|Quadra|Recanto|Residencial|Rodovia|Rotatória|Rua|Setor|Sítio|Travessa|Trecho|Trevo|Vale|Vereda|Via|Viadutos?|Viela|Vila|(Anel|Complexo|Dispositivo) (V|v)iário) .*/] {
+*[highway][highway !~ /bridleway|bus_stop|cycleway|crossing|footway|give_way|motorway_junction|path|raceway|speed_camera|steps|stop/][name][name !~ /^(Aeroporto|Alameda|Área|Avenida|Beco|Campo|Chácara|Colônia|Condomínio|Conjunto|Contorno|Distrito|Esplanada|Estação|Estrada|Favela|Fazenda|Feira|Jardim|Ladeira|Lago|Lagoa|Largo|Loteamento|Morro|Núcleo|Parque|Passarela|Pátio|Praça|Quadra|Recanto|Residencial|Rodovia|Rotatória|Rua|Setor|Sítio|Travessa|Trecho|Trevo|Vale|Vereda|Via|Viadutos?|Viela|Vila|(Anel|Complexo|Dispositivo) (V|v)iário) .*/] {
 	throwWarning: tr("{0} com logradouro ausente, errado ou abreviado", "{0.key}");
 }
 
 /* endereços sem logradouro correto */
-*["addr:street"]["addr:street" !~ /^(Aeroporto|Alameda|Área|Avenida|Beco|Campo|Chácara|Colônia|Condomínio|Conjunto|Distrito|Esplanada|Estação|Estrada|Favela|Fazenda|Feira|Jardim|Ladeira|Lago|Lagoa|Largo|Loteamento|Morro|Núcleo|Parque|Passarela|Pátio|Praça|Quadra|Recanto|Residencial|Rodovia|Rotatória|Rua|Setor|Sítio|Travessa|Trecho|Trevo|Vale|Vereda|Via|Viadutos?|Viela|Vila|(Anel|Complexo|Dispositivo) (V|v)iário) .*/] {
+*["addr:street"]["addr:street" !~ /^(Aeroporto|Alameda|Área|Avenida|Beco|Campo|Chácara|Colônia|Condomínio|Conjunto|Contorno|Distrito|Esplanada|Estação|Estrada|Favela|Fazenda|Feira|Jardim|Ladeira|Lago|Lagoa|Largo|Loteamento|Morro|Núcleo|Parque|Passarela|Pátio|Praça|Quadra|Recanto|Residencial|Rodovia|Rotatória|Rua|Setor|Sítio|Travessa|Trecho|Trevo|Vale|Vereda|Via|Viadutos?|Viela|Vila|(Anel|Complexo|Dispositivo) (V|v)iário) .*/] {
 	throwWarning: tr("{0} com logradouro ausente, errado ou abreviado", "{0.key}");
 }
 
@@ -36,7 +36,7 @@ meta
 }
 
 /* palavras abreviadas */
-*[name =~ /(?i)(^|.* )(Cel|Dª|Dr|Eng|Gov|Jr|Marg|Mun|p\/|Pde|Pe|Pst|Pref|Profa|Profª|Prof|s\/|Sta|Sto|Ver)\.? .*/] {
+*[name =~ /(?i)(^|.* )(Cel|Dª|Dr|Eng|Gov|Jr|Marg|Mun|p\/|Pde|Pe|Pst|Pref|Profa|Profª|Prof|s\/|Sr(a|ª)?|Sta|Sto|Ver)\.? .*/] {
 	throwWarning: tr("palavra abreviada em {0}", "{0.key}");
 }
 
@@ -584,9 +584,6 @@ way[highway != track][tracktype] {
 	throwOther: tr("utilizar ; como separador de valores em {0}", "{0.key}");
 }
 
-*[lanes][eval(number_of_tags()) = 1],
-*[maxspeed][eval(number_of_tags()) = 1],
-*[oneway][eval(number_of_tags()) = 1],
 *[surface][eval(number_of_tags()) = 1] {
 	throwWarning: tr("objeto incompleto: possui apenas {0}", "{0.key}");
 }
@@ -600,6 +597,11 @@ way[man_made=pipeline] > node { set .is_in_pipeline }
 way[waterway] > node.is_in_pipeline,
 way[highway] > node.is_in_pipeline,
 way[railway] > node.is_in_pipeline {
-    throwWarning: tr("{0} cruzando {1}, não deve compartilhar nó", "{0.key}", "pipeline");
+	throwWarning: tr("nó não deve ser compartilhado entre os caminhos");
 }
 
+/* vias com sigla de rodovia mas que usam classe menor que tertiary */
+/* http://overpass-turbo.eu/s/8rp */
+way[highway =~ /^(living_street|pedestrian|residential|road|service|track)$/][ref] {
+	throwWarning: tr("verificar: a via deve ser ao menos tertiary");
+}
