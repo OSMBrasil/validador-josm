@@ -30,6 +30,11 @@ meta
 	throwWarning: tr("objeto com nome de via mas sem tag de {0}", "{0.key}");
 }
 
+/* possível nome com _ ao invés de espaço */
+*[name =~ /^(?i)[a-z0-9]+_([a-z0-9]_?)+$/] {
+	throwWarning: tr("verificar: utilizar espaço ao invés de underscore");
+}
+
 /* palavras abreviadas */
 *[name =~ /(?i)(^|.* )(Cel|Dª|Dr|Eng|Gov|Jr|Marg|Mun|p\/|Pde|Pe|Pst|Pref|Profa|Profª|Prof|s\/|Sta|Sto|Ver)\.? .*/] {
 	throwWarning: tr("palavra abreviada em {0}", "{0.key}");
