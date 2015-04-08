@@ -416,12 +416,6 @@ way[highway $= _link][!maxspeed] {
 	throwOther: tr("{0} sem velocidade máxima ({1}) definida", "{0.key}", "{1.key}");
 }
 
-way[highway][lanes][lanes !~ /^[1-9]([0-9]*)$/],
-way[highway]["lanes:backward"]["lanes:backward" !~ /^[1-9]([0-9]*)$/],
-way[highway]["lanes:forward"]["lanes:forward" !~ /^[1-9]([0-9]*)$/] {
-	throwError: tr("{0} deve ser um valor inteiro", "{1.key}");
-}
-
 *[highway = service][!service] {
 	throwOther: tr("ausência do tipo de serviço ({0}) na {1}", "{1.key}", "{0.key}");
 }
