@@ -1,0 +1,13 @@
+meta
+{
+  title: "Staging rules Brazil";
+  version: "1.[[revision]]_[[date]]";
+  description: "Staging rules for Brazil. Messages are in Portuguese only.";
+  author: "OpenStreetMap Brasil";
+  watch-modified: true;
+}
+
+way[highway][bridge] > node { set .is_in_bridge }
+way[highway][!bridge] > node.is_in_bridge {
+	throwWarning: tr("tarcisio, arruma a ponte");
+}
