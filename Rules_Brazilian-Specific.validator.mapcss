@@ -599,3 +599,14 @@ way[railway] > node.is_in_pipeline {
 way[highway =~ /^(living_street|pedestrian|residential|road|service|track)$/][ref] {
 	throwWarning: tr("verificar: a via deve ser ao menos tertiary");
 }
+
+way[railway =~ /^(abandoned|construction|disused|funicular|light_rail|miniature|monorail|narrow_gauge|preserved|rail|subway|tram)$/] > node { set .is_in_railway }
+way[highway =~ /^(bridleway|cycleway|footway|path|steps)$/] > node[railway != crossing].is_in_railway {
+	throwWarning: tr("deve possuir railway=crossing onde os pedestres cruzam");
+	fixAdd: "railway=crossing";
+}
+
+way[highway =~ /^(bus_guideway|living_street|motorway|pedestrian|primary|raceway|residential|road|secondary|service|tertiary|track|trunk|unclassified)/] > node[railway != level_crossing].is_in_railway {
+	throwWarning: tr("deve possuir railway=level_crossing onde a via cruza");
+	fixAdd: "railway=level_crossing";
+}
