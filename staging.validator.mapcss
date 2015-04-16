@@ -11,3 +11,15 @@ way[highway][bridge] > node { set .is_in_bridge }
 way[highway][!bridge] > node.is_in_bridge {
 	throwWarning: tr("tarcisio, arruma a ponte");
 }
+
+/* acesso à Internet deve fazer parte de algum estabelecimento/local */
+/* http://overpass-turbo.eu/s/8PJ */
+*[internet_access][!leisure][!building][!office][!amenity][!tourism][!shop] {
+	throwWarning: tr("{0} deve estar associado a um local", "{0.key}");
+}
+
+/* wheelchair deve fazer parte de algum estabelecimento/local */
+/* http://overpass-turbo.eu/s/8PL */
+*[wheelchair][!highway][!man_made][!leisure][!building][!office][!amenity][!tourism][!shop] {
+	throwWarning: tr("{0} deve estar associado a um local", "{0.key}");
+}
