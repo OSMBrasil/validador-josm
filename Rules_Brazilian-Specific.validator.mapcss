@@ -331,10 +331,6 @@ relation[enforcement=maxweight][!maxweight] {
 	throwWarning: tr("verificar: {0} com valor inválido", "{0.key}");
 }
 
-*["building:levels"][!building] {
-	throwWarning: tr("{0} sem tag {1}", "{0.key}", "{1.key}");
-}
-
 /* hires não deve existir mais no Brasil */
 *[hires?] {
 	throwWarning: tr("não se deve utilizar {0} para demarcar áreas de cobertura de imagem", "{0.key}");
