@@ -25,3 +25,9 @@ way[highway][!bridge] > node!.is_first_in_bridge!.is_last_in_bridge.is_in_bridge
 *[wheelchair][!highway][!man_made][!leisure][!building][!office][!amenity][!tourism][!shop] {
 	throwWarning: tr("{0} deve estar associado a um local", "{0.key}");
 }
+
+/* bridge e tunnel precisam de layer */
+way[bridge][!layer],
+way[tunnel][!layer] {
+	throwWarning: tr("verificar: {0} sem {1}", "{0.key}", "{1.key}");
+}
