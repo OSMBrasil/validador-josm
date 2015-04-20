@@ -7,8 +7,10 @@ meta
   watch-modified: true;
 }
 
+way[bridge] >[index=1] node { set .is_first_in_bridge }
+way[bridge] >[index=-1] node { set .is_last_in_bridge }
 way[highway][bridge] > node { set .is_in_bridge }
-way[highway][!bridge] > node.is_in_bridge {
+way[highway][!bridge] > node!.is_first_in_bridge!.is_last_in_bridge.is_in_bridge {
 	throwWarning: tr("tarcisio, arruma a ponte");
 }
 
