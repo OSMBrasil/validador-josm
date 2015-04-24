@@ -304,7 +304,7 @@ relation[enforcement=maxweight][!maxweight] {
 	throwWarning: tr("{0} (CEP) em formato diferente de NNNNN-NNN", "{0.key}");
 }
 
-*[highway]["addr:postcode"] {
+*[highway][highway !~ /^(rest_area|services)$/]["addr:postcode"] {
 	throwWarning: tr("{0} deve ser postal_code para {1}", "{1.key}", "{0.key}");
 	fixChangeKey: "{1.key} => postal_code";
 }
