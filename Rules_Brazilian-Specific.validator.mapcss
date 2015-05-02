@@ -6,6 +6,7 @@ meta
   description: "Community rules for the most common errors and problems found in Brazil. Messages are in Portuguese only.";
   author: "OpenStreetMap Brasil";
   link: "http://josm.openstreetmap.de/wiki/Rules/Brazilian-Specific";
+  baselanguage: "pt_BR";
   watch-modified: true;
 }
 
@@ -190,7 +191,7 @@ node[highway = motorway_junction][!name][!ref] {
 }
 
 /* Faculdades, centros universitário e universidades devem ser todas amenity=university */
-*[amenity = college][name =~ /^(?i)(Centro Universitário|Faculdades?|FATEC|Instituto Federal|Centro Universitário)\b$/] {
+*[amenity = college][name =~ /^(?i)(Centro Universitário|Faculdades?|FATEC|Instituto Federal)\b$/] {
 	throwWarning: tr("estabelecimento de ensino classificado incorretamente");
 	suggestAlternative: "amenity=university";
 	fixAdd: "{0.key}=university";
