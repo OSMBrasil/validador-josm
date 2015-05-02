@@ -39,3 +39,10 @@ way[tunnel][!layer] {
 *[name =~ /^[a-z ]+$/] {
 	throwWarning: tr("verificar: {0} totalmente em minúsculo", "{0.key}");
 }
+
+/* quadra de tênis com surface=unpaved provavelmente deve ser surface=clay */
+*[leisure=pitch][sport=tennis][surface=unpaved] {
+	throwWarning: tr("verificar {0}", "{2.key}");
+	suggestAlternative: "surface=clay";
+	fixAdd: "surface=clay";
+}
