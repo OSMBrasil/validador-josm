@@ -27,7 +27,7 @@ meta
 }
 
 /* possui nome de rua mas não tem tag de highway */
-*[!highway][route != road][type !~ /route|street/][name][name =~ /^(?i)(alameda|avenida|beco|estrada|ladeira|passarela|rodovia|rotatória|rua|travessa|trevo|via|viadutos?|viela|(anel|complexo|dispositivo) viário) .*/][name !~ /^(?i)estrada de ferro/] {
+*[!highway][route != road][type !~ /route|street/][name][name =~ /^(?i)(alameda|avenida|beco|estrada|ladeira|passarela|rodovia|rotatória|rua|travessa|trevo|viela|(anel|complexo|dispositivo) viário) .*/][name !~ /^(?i)estrada de ferro/] {
 	throwWarning: tr("objeto com nome de via mas sem tag de {0}", "{0.key}");
 }
 
