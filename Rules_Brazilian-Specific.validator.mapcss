@@ -178,7 +178,7 @@ node[highway = motorway_junction][!name][!ref] {
 }
 
 *[name =~ /^(?i)(Faz\.|Fazenda|Sítio|Chácara)/][place][place !~ /city|farm|neighbourhood|suburb|town|village/] {
-	throwError: tr("objeto provavelmente deve ser {0}=farm", "{0.key}");
+	throwWarning: tr("objeto provavelmente deve ser {0}=farm", "{0.key}");
 	fixAdd: "place=farm";
 }
 
