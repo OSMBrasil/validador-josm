@@ -52,3 +52,15 @@ way[tunnel][!layer] {
 way[landuse=residential][name !~ /(?i)(habitacional|condomínio|residencial)/][eval(areasize()) > 200000] {
 	throwWarning: "verificar: área residencial muito grande";
 }
+
+/* postos de combustível com área muito grande provavelmente deveriam ser highway=services + amenity=fuel apenas na área com as bombas de combustível */
+way[amenity=fuel][eval(areasize()) > 5000],
+relation[amenity=fuel][eval(areasize()) > 5000] {
+	throwWarning: "verificar: posto de combustível com área muito grande";
+	suggestAlternative: "highway=services";
+}
+
+*[amenity=fuel][name =~ /(?i)\b(Ale|BR|Esso|Ipiranga|Petrobras|Shell|Texaco)\b/] {
+	throwWarning: "uso incorreto da bandeira do posto";
+	suggestAlternative: "brand";
+}
