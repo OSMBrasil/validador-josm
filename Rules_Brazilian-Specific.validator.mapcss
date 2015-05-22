@@ -294,9 +294,9 @@ relation[enforcement=maxweight][!maxweight] {
 }
 
 /* nomes e ruas escritos totalmente em maiúsculo */
-*[name =~ /^[A-Z0-9]*[A-Z]+[A-Z0-9]*$/],
-*["addr:street" =~ /^[A-Z0-9]*[A-Z]+[A-Z0-9]*$/] {
-	throwOther: tr("verificar: {0} com letras apenas em maiúsculo", "{0.key}");
+*[name =~ /^[A-Z0-9 ]*[A-Z]+[A-Z0-9 ]*$/],
+*["addr:street" =~ /^[A-Z0-9 ]*[A-Z]+[A-Z0-9 ]*$/] {
+	throwWarning: tr("verificar: {0} totalmente em maiúsculo", "{0.key}");
 	suggestAlternative: "short_name";
 }
 

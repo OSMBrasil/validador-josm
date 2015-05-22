@@ -32,10 +32,6 @@ way[tunnel][!layer] {
 	throwWarning: tr("verificar: {0} sem {1}", "{0.key}", "{1.key}");
 }
 
-*[name =~ /^[A-Z ]+$/] {
-	throwWarning: tr("verificar: {0} totalmente em maiúsculo", "{0.key}");
-}
-
 *[name =~ /^[a-z ]+$/] {
 	throwWarning: tr("verificar: {0} totalmente em minúsculo", "{0.key}");
 }
@@ -54,8 +50,8 @@ way[landuse=residential][name !~ /(?i)(habitacional|condomínio|residencial)/][e
 }
 
 /* postos de combustível com área muito grande provavelmente deveriam ser highway=services + amenity=fuel apenas na área com as bombas de combustível */
-way[amenity=fuel][eval(areasize()) > 5000],
-relation[amenity=fuel][eval(areasize()) > 5000] {
+way[amenity=fuel][eval(areasize()) > 2500],
+relation[amenity=fuel][eval(areasize()) > 2500] {
 	throwWarning: "verificar: posto de combustível com área muito grande";
 	suggestAlternative: "highway=services";
 }
