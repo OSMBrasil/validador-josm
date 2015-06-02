@@ -19,10 +19,6 @@ meta
 	throwWarning: tr("{0} deve estar associado a um local", "{0.key}");
 }
 
-*[name =~ /^[A-Z ]+$/] {
-	throwWarning: tr("verificar: {0} totalmente em maiúsculo", "{0.key}");
-}
-
 *[name =~ /^[a-z ]+$/] {
 	throwWarning: tr("verificar: {0} totalmente em minúsculo", "{0.key}");
 }

@@ -294,9 +294,9 @@ relation[enforcement=maxweight][!maxweight] {
 }
 
 /* nomes e ruas escritos totalmente em maiúsculo */
-*[name =~ /^[A-Z0-9]*[A-Z]+[A-Z0-9]*$/],
-*["addr:street" =~ /^[A-Z0-9]*[A-Z]+[A-Z0-9]*$/] {
-	throwOther: tr("verificar: {0} com letras apenas em maiúsculo", "{0.key}");
+*[name =~ /^[A-Z0-9 ]*[A-Z]+[A-Z0-9 ]*$/],
+*["addr:street" =~ /^[A-Z0-9 ]*[A-Z]+[A-Z0-9 ]*$/] {
+	throwWarning: tr("verificar: {0} totalmente em maiúsculo", "{0.key}");
 	suggestAlternative: "short_name";
 }
 
@@ -634,8 +634,8 @@ way[tunnel][!layer] {
 }
 
 /* postos de combustível com área muito grande provavelmente deveriam ser highway=services + amenity=fuel apenas na área com as bombas de combustível */
-way[amenity=fuel][eval(areasize()) > 5000],
-relation[amenity=fuel][eval(areasize()) > 5000] {
+way[amenity=fuel][eval(areasize()) > 2500],
+relation[amenity=fuel][eval(areasize()) > 2500] {
 	throwWarning: "verificar: posto de combustível com área muito grande";
 	suggestAlternative: "highway=services";
 }
