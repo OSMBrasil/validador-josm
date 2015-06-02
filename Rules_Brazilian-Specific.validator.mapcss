@@ -608,3 +608,7 @@ way[highway =~ /^(bus_guideway|living_street|motorway|pedestrian|primary|raceway
 	throwWarning: tr("deve possuir railway=level_crossing onde a via cruza");
 	fixAdd: "railway=level_crossing";
 }
+
+area[natural=wetland][!wetland] {
+	throwWarning: tr("ausência de wetland=*");
+}
