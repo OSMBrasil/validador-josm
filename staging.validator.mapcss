@@ -30,5 +30,9 @@ meta
 /* áreas residenciais muito grandes que podem indicar uso incorreto como marcador de cidade */
 /* http://overpass-turbo.eu/s/9pM */
 way[landuse=residential][name !~ /(?i)(habitacional|condomínio|residencial)/][eval(areasize()) > 200000] {
-	throwWarning: "verificar: área residencial muito grande";
+	throwWarning: tr("verificar: área residencial muito grande");
+}
+
+way[highway $= _link][eval(waylength()) > 250] {
+	throwWarning: tr("verificar: {0} com comprimento muito grande", tag("highway"));
 }

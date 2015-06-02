@@ -132,7 +132,7 @@ node[noname?] {
 
 /* provalvemente o tipo dessas vias não deve ser link */
 *[highway $= _link][name =~ /(Alameda|Avenida|Rua|Travessa|Viela) .*/] {
-	throwWarning: tr("verificar: via possivelmente classificada errada como {0}", tag("highway"));
+	throwWarning: tr("verificar: {0} classificado incorretamente", tag("highway"));
 }
 
 /* provavelmente estas vias não possuem ref */
