@@ -612,3 +612,35 @@ way[highway =~ /^(bus_guideway|living_street|motorway|pedestrian|primary|raceway
 area[natural=wetland][!wetland] {
 	throwWarning: tr("ausência de wetland=*");
 }
+
+way[bridge] >[index=1] node { set .is_first_in_bridge }
+way[bridge] >[index=-1] node { set .is_last_in_bridge }
+way[highway][bridge] > node { set .is_in_bridge }
+way[highway][!bridge] > node!.is_first_in_bridge!.is_last_in_bridge.is_in_bridge {
+	throwWarning: tr("via não deve se conectar no meio da ponte");
+}
+
+/* bridge e tunnel precisam de layer */
+way[bridge][!layer],
+way[tunnel][!layer] {
+	throwWarning: tr("verificar: {0} sem {1}", "{0.key}", "{1.key}");
+}
+
+/* quadra de tênis com surface=unpaved provavelmente deve ser surface=clay */
+*[leisure=pitch][sport=tennis][surface=unpaved] {
+	throwWarning: tr("verificar {0}", "{2.key}");
+	suggestAlternative: "surface=clay";
+	fixAdd: "surface=clay";
+}
+
+/* postos de combustível com área muito grande provavelmente deveriam ser highway=services + amenity=fuel apenas na área com as bombas de combustível */
+way[amenity=fuel][eval(areasize()) > 5000],
+relation[amenity=fuel][eval(areasize()) > 5000] {
+	throwWarning: "verificar: posto de combustível com área muito grande";
+	suggestAlternative: "highway=services";
+}
+
+*[amenity=fuel][name =~ /(?i)\b(Ale|BR|Esso|Ipiranga|Petrobras|Shell|Texaco)\b/] {
+	throwWarning: "uso incorreto da bandeira do posto";
+	suggestAlternative: "brand";
+}

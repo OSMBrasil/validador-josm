@@ -7,13 +7,6 @@ meta
   watch-modified: true;
 }
 
-way[bridge] >[index=1] node { set .is_first_in_bridge }
-way[bridge] >[index=-1] node { set .is_last_in_bridge }
-way[highway][bridge] > node { set .is_in_bridge }
-way[highway][!bridge] > node!.is_first_in_bridge!.is_last_in_bridge.is_in_bridge {
-	throwWarning: tr("tarcisio, arruma a ponte");
-}
-
 /* acesso à Internet deve fazer parte de algum estabelecimento/local */
 /* http://overpass-turbo.eu/s/8PJ */
 *[internet_access][!leisure][!building][!office][!amenity][!tourism][!shop] {
@@ -26,12 +19,6 @@ way[highway][!bridge] > node!.is_first_in_bridge!.is_last_in_bridge.is_in_bridge
 	throwWarning: tr("{0} deve estar associado a um local", "{0.key}");
 }
 
-/* bridge e tunnel precisam de layer */
-way[bridge][!layer],
-way[tunnel][!layer] {
-	throwWarning: tr("verificar: {0} sem {1}", "{0.key}", "{1.key}");
-}
-
 *[name =~ /^[A-Z ]+$/] {
 	throwWarning: tr("verificar: {0} totalmente em maiúsculo", "{0.key}");
 }
@@ -40,27 +27,8 @@ way[tunnel][!layer] {
 	throwWarning: tr("verificar: {0} totalmente em minúsculo", "{0.key}");
 }
 
-/* quadra de tênis com surface=unpaved provavelmente deve ser surface=clay */
-*[leisure=pitch][sport=tennis][surface=unpaved] {
-	throwWarning: tr("verificar {0}", "{2.key}");
-	suggestAlternative: "surface=clay";
-	fixAdd: "surface=clay";
-}
-
 /* áreas residenciais muito grandes que podem indicar uso incorreto como marcador de cidade */
 /* http://overpass-turbo.eu/s/9pM */
 way[landuse=residential][name !~ /(?i)(habitacional|condomínio|residencial)/][eval(areasize()) > 200000] {
 	throwWarning: "verificar: área residencial muito grande";
-}
-
-/* postos de combustível com área muito grande provavelmente deveriam ser highway=services + amenity=fuel apenas na área com as bombas de combustível */
-way[amenity=fuel][eval(areasize()) > 5000],
-relation[amenity=fuel][eval(areasize()) > 5000] {
-	throwWarning: "verificar: posto de combustível com área muito grande";
-	suggestAlternative: "highway=services";
-}
-
-*[amenity=fuel][name =~ /(?i)\b(Ale|BR|Esso|Ipiranga|Petrobras|Shell|Texaco)\b/] {
-	throwWarning: "uso incorreto da bandeira do posto";
-	suggestAlternative: "brand";
 }
