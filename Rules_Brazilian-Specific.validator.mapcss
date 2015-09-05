@@ -177,6 +177,12 @@ node[highway = motorway_junction][!name][!ref] {
 	throwWarning: tr("{0} sem nome", "{0.value}");
 }
 
+/* cidade não deve possuir addr:city */
+node[place =~ /village|town|city/]["addr:city" = *name] {
+	throwError: tr("não deve possuir addr:city");
+	fixRemove: "addr:city";
+}
+
 *[name =~ /^(?i)(Faz\.|Fazenda|Sítio|Chácara)/][place][place !~ /city|farm|neighbourhood|suburb|town|village/] {
 	throwWarning: tr("objeto provavelmente deve ser {0}=farm", "{0.key}");
 	fixAdd: "place=farm";
@@ -635,8 +641,7 @@ way[tunnel][!layer] {
 }
 
 /* postos de combustível com área muito grande provavelmente deveriam ser highway=services + amenity=fuel apenas na área com as bombas de combustível */
-way[amenity=fuel][eval(areasize()) > 2500],
-relation[amenity=fuel][eval(areasize()) > 2500] {
+area[amenity=fuel][eval(areasize()) > 2500] {
 	throwWarning: "verificar: posto de combustível com área muito grande";
 	suggestAlternative: "highway=services";
 }
