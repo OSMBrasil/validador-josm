@@ -313,7 +313,8 @@ relation[enforcement=maxweight][!maxweight] {
 
 way[highway]["addr:postcode"],
 area[place]["addr:postcode"] {
-	throwWarning: tr("{0} deve ser postal_code para {1}", "{1.key}", "{0.key}");
+	throwWarning: tr("uso incorreto de {0}", "{1.key}", "{0.key}");
+	suggestAlternative: "postal_code";
 	fixChangeKey: "{1.key} => postal_code";
 }
 
@@ -604,7 +605,7 @@ way[highway =~ /^(living_street|pedestrian|residential|road|service|track)$/][re
 	throwWarning: tr("verificar: a via deve ser ao menos tertiary");
 }
 
-way[railway =~ /^(abandoned|construction|disused|funicular|light_rail|miniature|monorail|narrow_gauge|preserved|rail|subway|tram)$/] > node { set .is_in_railway }
+way[railway =~ /^(light_rail|miniature|narrow_gauge|preserved|rail|tram)$/] > node { set .is_in_railway }
 way[highway =~ /^(bridleway|cycleway|footway|path|steps)$/] > node[railway != crossing].is_in_railway {
 	throwWarning: tr("deve possuir railway=crossing onde os pedestres cruzam");
 	fixAdd: "railway=crossing";
