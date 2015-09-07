@@ -179,7 +179,9 @@ node[highway = motorway_junction][!name][!ref] {
 
 /* cidade não deve possuir addr:city, nem suburb deve possuir addr:suburb */
 node[place =~ /village|town|city/]["addr:city" = *name],
-node[place = suburb]["addr:suburb" = *name] {
+area[place =~ /village|town|city/]["addr:city" = *name],
+node[place = suburb]["addr:suburb" = *name],
+area[place = suburb]["addr:suburb" = *name] {
 	throwError: tr("não deve possuir {0}", "{1.key}");
 	fixRemove: "{1.key}";
 }
