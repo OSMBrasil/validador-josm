@@ -187,7 +187,7 @@ area[place = suburb]["addr:suburb" = *name] {
 }
 
 *[name =~ /^(?i)(Faz\.|Fazenda|Sítio|Chácara)/][place][place !~ /city|farm|neighbourhood|suburb|town|village/] {
-	throwWarning: tr("objeto provavelmente deve ser {0}=farm", "{0.key}");
+	throwWarning: tr("objeto provavelmente deve ser {0}=farm", "{1.key}");
 	fixAdd: "place=farm";
 }
 
