@@ -245,7 +245,7 @@ area[place = suburb]["addr:suburb" = *name] {
 }
 
 *[aeroway = helipad] ∈ *[aeroway = helipad] {
-	  throwError: tr("{0} dentro de {1}", "aeroway=helipad", "{0.tag}");
+	  throwWarning: tr("{0} dentro de {1}", "aeroway=helipad", "{0.tag}");
 }
 
 *[name =~ /^(?i)Subestação .*/][power][power != substation],
