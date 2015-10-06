@@ -383,6 +383,11 @@ node[man_made = tower][!"tower:type"] {
 	throwWarning: tr("verificar: {0} com nome em inglês", "{0.tag}");
 }
 
+*[aeroway = aerodrome][name =~ /(?i)^Aeroporto de.*/],
+*[aeroway = helipad][name =~ /(?i)^Helipo(n|r)to.*/] {
+	throwWarning: tr("verificar: nome do {0}", "{0.value}");
+}
+
 node[surface] {
 	throwWarning: tr("superfície ({0}) erroneamente definida no nó", "{0.key}");
 	fixRemove: "{0.key}";
