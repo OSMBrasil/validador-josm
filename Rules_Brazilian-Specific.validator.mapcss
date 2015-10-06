@@ -240,6 +240,14 @@ area[place = suburb]["addr:suburb" = *name] {
 	  throwWarning: tr("{0} dentro de {1}", "amenity=school", "{0.tag}");
 }
 
+*[aeroway = aerodrome] ∈ *[aeroway = aerodrome] {
+	  throwWarning: tr("{0} dentro de {1}", "aeroway=aerodrome", "{0.tag}");
+}
+
+*[aeroway = helipad] ∈ *[aeroway = helipad] {
+	  throwError: tr("{0} dentro de {1}", "aeroway=helipad", "{0.tag}");
+}
+
 *[name =~ /^(?i)Subestação .*/][power][power != substation],
 *[name =~ /^(?i)Fórum .*/][amenity][amenity != courthouse],
 *[name =~ /^(?i)Hospital .*/][building][building != hospital],
