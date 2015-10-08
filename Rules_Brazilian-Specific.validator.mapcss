@@ -411,6 +411,13 @@ node[surface] {
 	fixRemove: "{0.key}";
 }
 
+/* issue #78 */
+way[waterway][tunnel = yes] {
+	throwWarning: tr("uso incorreto de {0}", "{1.tag}");
+	suggestAlternative: "tunnel=culvert";
+	fixAdd: "tunnel=culvert";
+}
+
 /* highway/waterway com layer negativo e sem túnel */
 *[highway][layer < 0][!tunnel],
 *[waterway][layer < 0][!tunnel] {
