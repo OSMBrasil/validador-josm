@@ -226,26 +226,40 @@ area[place = suburb]["addr:suburb" = *name] {
 	fixAdd: "{0.key}=kindergarten";
 }
 
-*[amenity = university] ∈ *[amenity = university],
+/* override de https://josm.openstreetmap.de/browser/trunk/data/validator/geometry.mapcss#L137 */
+*[tag("amenity") = parent_tag("amenity")] ∈ *[amenity][amenity = parking],
+way[tag("amenity") = parent_tag("amenity")] ∈ *[amenity][amenity != parking],
+relation[tag("amenity") = parent_tag("amenity")] ∈ *[amenity][amenity != parking] {
+	throwWarning: tr("{0} dentro de {1}", concat("amenity=", tag("amenity")), concat("amenity=", tag("amenity")));
+}
+
+way[tag("leisure") = parent_tag("leisure")] ∈ *[leisure],
+relation[tag("leisure") = parent_tag("leisure")] ∈ *[leisure] {
+	throwWarning: tr("{0} dentro de {1}", concat("leisure=", tag("leisure")), concat("leisure=", tag("leisure")));
+}
+
+way[tag("tourism") = parent_tag("tourism")] ∈ *[tourism],
+relation[tag("tourism") = parent_tag("tourism")] ∈ *[tourism] {
+	throwWarning: tr("{0} dentro de {1}", concat("tourism=", tag("tourism")), concat("tourism=", tag("tourism")));
+}
+
+way[tag("shop") = parent_tag("shop")] ∈ *[shop],
+relation[tag("shop") = parent_tag("shop")] ∈ *[shop] {
+	throwWarning: tr("{0} dentro de {1}", concat("shop=", tag("shop")), concat("shop=", tag("shop")));
+}
+
+way[tag("power") = parent_tag("power")] ∈ *[power],
+relation[tag("power") = parent_tag("power")] ∈ *[power] {
+	throwWarning: tr("{0} dentro de {1}", concat("power=", tag("power")), concat("power=", tag("power")));
+}
+
+*[tag("aeroway") = parent_tag("aeroway")] ∈ *[aeroway] {
+	throwWarning: tr("{0} dentro de {1}", concat("aeroway=", tag("aeroway")), concat("aeroway=", tag("aeroway")));
+}
+
 *[amenity = university] ∈ *[amenity = college],
 *[amenity = university] ∈ *[amenity = school] {
 	  throwWarning: tr("{0} dentro de {1}", "amenity=university", "{0.tag}");
-}
-
-*[amenity = college] ∈ *[amenity = college] {
-	  throwWarning: tr("{0} dentro de {1}", "amenity=college", "{0.tag}");
-}
-
-*[amenity = school] ∈ *[amenity = school] {
-	  throwWarning: tr("{0} dentro de {1}", "amenity=school", "{0.tag}");
-}
-
-*[aeroway = aerodrome] ∈ *[aeroway = aerodrome] {
-	  throwWarning: tr("{0} dentro de {1}", "aeroway=aerodrome", "{0.tag}");
-}
-
-*[aeroway = helipad] ∈ *[aeroway = helipad] {
-	  throwWarning: tr("{0} dentro de {1}", "aeroway=helipad", "{0.tag}");
 }
 
 *[name =~ /^(?i)Subestação .*/][power][power != substation],
@@ -267,11 +281,15 @@ area[place = suburb]["addr:suburb" = *name] {
 	throwWarning: tr("postos/unidades de saúde devem ser amenity=clinic");
 }
 
-/* torres de energia, lombadas, câmeras, semáforos etc que não estão conectados em uma via */
-node:unconnected[power = pole],
-node:unconnected[power = tower],
-node:unconnected[highway = speed_camera] {
-	throwWarning: tr("{0} deve fazer parte de um caminho e não ficar solto", "{1.tag}");
+node:unconnected:in-downloaded-area[power = pole],
+node:unconnected:in-downloaded-area[power = tower] {
+	throwWarning: tr("{0} deve fazer parte de um caminho e não ficar solto", "{2.tag}");
+}
+
+relation > node { set .is_in_relation }
+
+node:unconnected:in-downloaded-area!.is_in_relation[highway = speed_camera] {
+	throwWarning: tr("{0} deve fazer parte de um caminho e não ficar solto", "{3.tag}");
 }
 
 way[highway = give_way],
