@@ -33,6 +33,21 @@ way[highway $= _link][eval(waylength()) > 250] {
 	throwWarning: tr("verificar: {0} com comprimento muito grande", tag("highway"));
 }
 
-*highway[name =~ /\b[A-Z]{2,3} (- )?[0-9]{3}\b/] {
+*[highway][name =~ /\b[A-Z]{2,3} (- )?[0-9]{3}\b/] {
 	throwError: tr("rodovia com ref no nome");
 }
+
+/* --> issue #77 */
+area[admin_level =~ /^(8|9)$/][place] {
+	throwError: tr("limite não deve possuir {0}", "{1.key}");
+}
+
+area[place =~ /^(neighbourhood|suburb)$/][admin_level][admin_level != 10] {
+	throwError: tr("local com {0} ou {1} errado", "{0.key}", "{1.key}");
+}
+
+relation[admin_level = 10] >[role = admin_centre] node {
+	throwError: tr("bairro não deve possuir admin_centre");
+	suggestAlternative: "label";
+}
+/* issue #77 <-- */
