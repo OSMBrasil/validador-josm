@@ -307,6 +307,16 @@ node[highway =~ /^(give_way|mini_roundabout|stop|turning_circle)$/][name] {
 	throwWarning: tr("objeto não deve possuir {0}", "{1.key}");
 }
 
+/* --> issue #52 */
+node:connection[highway =~ /^(give_way|stop)$/] {
+	throwWarning: tr("{0} não deve estar em cruzamentos", concat("highway=", tag("highway")));
+}
+
+node!:connection[highway = motorway_junction] {
+	throwWarning: tr("highway=motorway_junction deve ligar a saída com a rodovia");
+}
+/* issue #52 <-- */
+
 node[highway=speed_camera][!maxspeed],
 relation[enforcement=maxspeed][!maxspeed],
 relation[enforcement=maxheight][!maxheight],
