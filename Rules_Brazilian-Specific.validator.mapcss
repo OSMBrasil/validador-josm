@@ -282,7 +282,8 @@ relation[tag("power") = parent_tag("power")] ∈ *[power] {
 }
 
 node:unconnected:in-downloaded-area[power = pole],
-node:unconnected:in-downloaded-area[power = tower] {
+node:unconnected:in-downloaded-area[power = tower],
+node:unconnected:in-downloaded-area[highway = milestone] {
 	throwWarning: tr("{0} deve fazer parte de um caminho e não ficar solto", "{2.tag}");
 }
 
