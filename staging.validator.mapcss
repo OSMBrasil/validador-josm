@@ -33,10 +33,6 @@ way[highway $= _link][eval(waylength()) > 250] {
 	throwWarning: tr("verificar: {0} com comprimento muito grande", tag("highway"));
 }
 
-*[highway][name =~ /\b[A-Z]{2,3} (- )?[0-9]{3}\b/] {
-	throwError: tr("rodovia com ref no nome");
-}
-
 /* --> issue #77 */
 area[admin_level =~ /^(8|9)$/][place] {
 	throwError: tr("limite não deve possuir {0}", "{1.key}");
