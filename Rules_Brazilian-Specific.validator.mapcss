@@ -16,7 +16,7 @@ meta
 }
 
 /* issue #17 */
-way[highway][name =~ /\b[A-Z]{2,3} (- )?[0-9]{2,3}\b/],
+way[highway][name =~ /\b[A-Z]{2,4} (- )?[0-9]{2,3}\b/],
 relation[highway][name =~ /\b[A-Z]{2,3} (- )?[0-9]{2,3}\b/] {
 	throwWarning: tr("rodovia com ref no nome");
 }
