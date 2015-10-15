@@ -47,3 +47,9 @@ relation[admin_level = 10] >[role = admin_centre] node {
 	suggestAlternative: "label";
 }
 /* issue #77 <-- */
+
+way[highway] > node { set .is_in_highway; }
+
+area[!highway] > node.is_in_highway {
+	throwWarning: tr("área conectada na rua");
+}
