@@ -1,7 +1,7 @@
 meta
 {
   title: "Brazilian-specific rules";
-  version: "1.[[revision]]_[[date]]";
+  version: "2015-10-16";
   description: "Community rules for the most common errors and problems found in Brazil. Messages are in Portuguese only.";
   icon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAYCAMAAACoeN87AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wUGFhITJtY6OQAAAfhQTFRFABJ5ABx8ABx9AB19AB1+AB5yAB58AB9yACByACB0ACB2ACN0ACN4ACOAACR1ACR4ACV1ACZ1ACZ2ACZ5ACd2ACiEAJc9AJg9AJk7AJk8AJo7AJs6ASh1ASh2ASh3ASh4Aih3Ail4Ayh5Ayl3Ayl4Ayp4BClzBCt4BCyIBJw5BSt5Bit0Bix6Bp05Byx1By16B504B505CC96CJ04CZ04CjB8CzB8CzF8DTJ9DTSKDjN+DzKDEqA2EzeBE6A2FDiFFjqCGj2EJKUyJU2HJaUyJ02JJ6YxKlGJK0+LLFOKMKgwMktfMliNMqgvNE1eOE9dOlFdP1FRQKwrQawrQa0rQq0rRGiXRlpVSFxUSFxVSVxVSW2dUGJYUmNZWHqbWHqhYn6pZbYjZrYjZ5WvZ7cja315bYiub5Sqcrogcrohc7ofdLofdZ6rd6GrfKaugb4dg6izg78diMAbisAai8AajcEaj8Eakb62lb+5nJYmnZktn5osoJstosvAo50rqKItr7+btcsRtswQuMwQucwQ0NMK0dMK0tQK09QK1dQK38gO38gP4MkO4NlK5tkG59kF69oE7NoE8tUB89wD9NcF9dgF9tgF99oD+NsD+d4B/d8A/t8A/98A/+AA/+EA/+IA/+MA/+QA/+UA/+YA/+cA/+gA/+kA////gExgxwAAAAFiS0dEp8C3KwMAAAGISURBVCjPY5AmCBhIVyJpZyeJV4mUeGhTU6i4FG4lUiYl/XPn9hebSOFSIuXbMW/hokUL57X7SmFXYlA4b0qVt4yMd9WUeYUGmEqkDIM753eHM/MLCfEzhXfP7ww2lEJVIuFSNnPepEAGVnYObkEhpsjp82aWuUggKZGSSmmbN3dOb3JebnqCs5KKAFvd/Lnz2lKkpGBKxNxaJs+dPXtharS7T1haQUW8Apf/ktmz505ucRODKNHMnjhrNhAs1ZMTEpJTN/LIKXdVWwYSmTUxSxOiJGMCWMkybTkRKy1FFUFOz9q4hWAlEzI1oRa5NIMsWhxgbyoi4OAoIMJn3TAPZFGzixjCuUmt8+bOr+fVt1Uw11IVcbCsXDB3XmsiwrkgTzuVzpw3PYLFTFlLx8JBI3bGvJmlThJoQacb1DG/J4qRR15BWDSma35HkK4UlgjInze12k9W1q9m2rx8AxzR6NUGicY2LymcicG4qG/u3L4iYyl8SSqksTEEX5ICJUwbG0nKkzcWAABUy60wquZO7gAAAABJRU5ErkJggg==";
   author: "OpenStreetMap Brasil";
@@ -11,7 +11,7 @@ meta
 }
 
 /* rodovia com identificador mas sem o nome real */
-*[name = *ref][highway] {
+way[name = *ref][highway] {
 	throwWarning: tr("{0} e {1} são iguais; adicionar nome completo da rodovia", "{0.key}", "{0.value}");
 }
 
@@ -22,8 +22,8 @@ relation[highway][name =~ /\b[A-Z]{2,3} (- )?[0-9]{2,3}\b/] {
 }
 
 /* nome de vias sem logradouro correto */
-*[highway=cycleway][name][name !~ /^(?i)ciclovia .*/],
-*[highway][highway !~ /bridleway|bus_stop|cycleway|crossing|footway|give_way|motorway_junction|path|raceway|rest_area|services|speed_camera|steps|stop/][name][name !~ /^(Aeroporto|Alameda|Área|Avenida|([1-9][0-9]?º )?Beco|Campo|Chácara|Colônia|Condomínio|Conjunto|Contorno|Distrito|Esplanada|Estação|Estrada|Favela|Fazenda|Feira|Jardim|Ladeira|Lago|Lagoa|Largo|Loteamento|Morro|Núcleo|([1-9][0-9]?ª )?Paralela|Parque|Passarela|Pátio|Ponte|Praça|Quadra|Recanto|Residencial|Rodovia|Rotatória|Rua|Setor|Sítio|([1-9][0-9]?ª )?Subida|([1-9][0-9]?ª )?Travessa|Trecho|Trevo|Vale|Vereda|Via|Viadutos?|Viela|Vila|(Anel|Complexo|Dispositivo) (Rodo)?(V|v)iário) .*/] {
+way[highway=cycleway][name][name !~ /^(?i)ciclovia .*/],
+way[highway][highway !~ /bridleway|bus_stop|cycleway|crossing|footway|give_way|motorway_junction|path|raceway|rest_area|services|speed_camera|steps|stop/][name][name !~ /^(Aeroporto|Alameda|Área|Avenida|([1-9][0-9]?º )?Beco|Campo|Chácara|Colônia|Condomínio|Conjunto|Contorno|Distrito|Esplanada|Estação|Estrada|Favela|Fazenda|Feira|Jardim|Ladeira|Lago|Lagoa|Largo|Loteamento|Morro|Núcleo|([1-9][0-9]?ª )?Paralela|Parque|Passarela|Pátio|Ponte|Praça|Quadra|Recanto|Residencial|Rodovia|Rotatória|Rua|Setor|Sítio|([1-9][0-9]?ª )?Subida|([1-9][0-9]?ª )?Travessa|Trecho|Trevo|Vale|Vereda|Via|Viadutos?|Viela|Vila|(Anel|Complexo|Dispositivo) (Rodo)?(V|v)iário) .*/] {
 	throwWarning: tr("{0} com logradouro ausente, errado ou abreviado", "{0.key}");
 }
 
@@ -47,7 +47,7 @@ relation[highway][name =~ /\b[A-Z]{2,3} (- )?[0-9]{2,3}\b/] {
 	throwWarning: tr("palavra abreviada em {0}", "{0.key}");
 }
 
-*[highway][name =~ /^(?i)((via de )?acesso(( (a|à))? propriedade)?|entrada|entroncamento|rampa|retorno|rotat(ó|o)ria|r(ó|o)tula|sa(í|i)da|trevo|estrada( municipal| de terra)?|rua|rodovia|via)( (de acesso|sem nome|projetad(a|o)))?$/] {
+way[highway][name =~ /^(?i)((via de )?acesso(( (a|à))? propriedade)?|entrada|entroncamento|rampa|retorno|rotat(ó|o)ria|r(ó|o)tula|sa(í|i)da|trevo|estrada( municipal| de terra)?|rua|rodovia|via)( (de acesso|sem nome|projetad(a|o)))?$/] {
 	throwWarning: tr("{0} com nome supérfluo/incompleto", "{0.key}");
 	suggestAlternative: "destination";
 	suggestAlternative: "description";
@@ -82,11 +82,11 @@ relation[type = route][highway] {
 		SP(A|D|I) NNN/NNN (específico de SP)
 */
 
-*[highway][highway !~ /bus_stop|milestone|motorway_junction|traffic_signals/][ref][ref !~ /^(([A-Z]{2,3}-[0-9]{2,4}|SPM(-| )[0-9]{3} ?(D|E)?|SP(A|D|I)(-| )[0-9]{3}\/[0-9]{3}|[A-Z]{3}-[0-9]{3}\/[0-9]{3});?)+$/] {
+way[highway][highway !~ /bus_stop|milestone|motorway_junction|traffic_signals/][ref][ref !~ /^(([A-Z]{2,3}-[0-9]{2,4}|SPM(-| )[0-9]{3} ?(D|E)?|SP(A|D|I)(-| )[0-9]{3}\/[0-9]{3}|[A-Z]{3}-[0-9]{3}\/[0-9]{3});?)+$/] {
 	throwWarning: tr("{0} fora do padrão ''sigla-numeração'' ou separador de múltiplos valores diferente de '';''", "{2.key}");
 }
 
-*[highway][!ref][name =~ /.*([A-Z]{2,3}-[0-9]{2,4}|SPM(-| )[0-9]{3} ?(D|E)?|SP(A|D|I)(-| )[0-9]{3}\/[0-9]{3}|[A-Z]{3}-[0-9]{3}\/[0-9]{3}).*/] {
+way[highway][!ref][name =~ /.*([A-Z]{2,3}-[0-9]{2,4}|SPM(-| )[0-9]{3} ?(D|E)?|SP(A|D|I)(-| )[0-9]{3}\/[0-9]{3}|[A-Z]{3}-[0-9]{3}\/[0-9]{3}).*/] {
 	throwWarning: tr("utilizar o código/sigla da rodovia também na tag {0}", "{1.key}");
 }
 
@@ -131,18 +131,17 @@ node[noname?] {
 }
 
 /* operador da rodovia; DER (Departamento de Estradas de Rodagem) ou concessionárias */
-*[highway = motorway][!operator],
-*[highway = trunk][!operator] {
+way[highway =~ /^(trunk|motorway)$/][!operator] {
 	throwWarning: tr("ausência de \"{0}\" na {1}", "{1.key}", "{0.key}");
 }
 
 /* provalvemente o tipo dessas vias não deve ser link */
-*[highway $= _link][name =~ /(Alameda|Avenida|Rua|Travessa|Viela) .*/] {
+way[highway $= _link][name =~ /(Alameda|Avenida|Rua|Travessa|Viela) .*/] {
 	throwWarning: tr("verificar: {0} classificado incorretamente", tag("highway"));
 }
 
 /* provavelmente estas vias não possuem ref */
-*[highway][name =~ /(Alameda|Avenida|Rua|Travessa|Viela) .*/][ref] {
+way[highway][name =~ /(Alameda|Avenida|Rua|Travessa|Viela) .*/][ref] {
 	throwWarning: tr("verificar: possível uso desnecessário/errado de ref em {0}={1}", "{0.key}", tag("highway"));
 }
 
@@ -152,7 +151,7 @@ node[highway = motorway_junction][!name][!ref] {
 }
 
 /* é útil ter o destino das saídas de rodovias */
-*[highway = motorway_link][!destination] {
+way[highway = motorway_link][!destination] {
 	throwOther: tr("{0} sem tag {1}", "{0.value}", "{1.key}");
 }
 
@@ -436,13 +435,13 @@ way[waterway][tunnel = yes] {
 }
 
 /* highway/waterway com layer negativo e sem túnel */
-*[highway][layer < 0][!tunnel],
+way[highway][layer < 0][!tunnel],
 *[waterway][layer < 0][!tunnel] {
 	throwWarning: tr("verificar: {0} negativo de {1} com ausência de {2}", "{1.key}", "{0.key}", "{2.key}");
 }
 
 /* highway/waterway com layer positivo e sem ponte */
-*[highway][layer > 0][!bridge][highway != bus_stop],
+way[highway][layer > 0][!bridge][highway != bus_stop],
 *[waterway][layer > 0][!bridge] {
 	throwWarning: tr("verificar: {0} positivo de {1} com ausência de {2}", "{1.key}", "{0.key}", "{2.key}");
 }
@@ -479,11 +478,11 @@ way[highway $= _link][!maxspeed] {
 	throwOther: tr("{0} sem velocidade máxima ({1}) definida", "{0.key}", "{1.key}");
 }
 
-*[highway = service][!service] {
+way[highway = service][!service] {
 	throwOther: tr("ausência do tipo de serviço ({0}) na {1}", "{1.key}", "{0.key}");
 }
 
-*[highway = track][!tracktype] {
+way[highway = track][!tracktype] {
 	throwOther: tr("ausência do tipo de track ({0}) na {1}", "{1.key}", "{0.key}");
 }
 
@@ -491,7 +490,7 @@ way[highway $= _link][!maxspeed] {
 	throwWarning: tr("ausência do tempo de duração ({0}) da balsa", "{1.key}");
 }
 
-*[highway][highway !~ /construction|give_way|motorway_junction|proposed|raceway|speed_camera|stop/][!wheelchair],
+way[highway][highway !~ /construction|give_way|motorway_junction|proposed|raceway|speed_camera|stop/][!wheelchair],
 *[building][!wheelchair] {
 	throwOther: tr("{0} sem tag de acessibilidade ({1})", "{0.key}", "{1.key}");
 }
@@ -506,7 +505,7 @@ way[highway $= _link][!maxspeed] {
 }
 
 /* rodovias de mão duplas mas apenas com 1 faixa estão provavelmente erradas */
-*[highway][lanes = 1][!oneway?][!junction][!narrow] {
+way[highway][lanes = 1][!oneway?][!junction][!narrow] {
 	throwWarning: tr("{0} com {1}", "{0.key}", "{1.tag}");
 	suggestAlternative: "lanes=2";
 	suggestAlternative: "narrow=yes";
@@ -616,7 +615,7 @@ node[exit_to] {
 }
 
 /* número de saída de rodovia */
-*[highway=motorway_junction][ref][ref !~ /^[0-9]+( |-)*([A-Z])?$/] {
+node[highway = motorway_junction][ref][ref !~ /^[0-9]+( |-)*([A-Z])?$/] {
 	throwWarning: tr("saída de rodovia ({0}) fora do padrão", "{1.key}");
 }
 
