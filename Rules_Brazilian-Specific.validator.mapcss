@@ -707,6 +707,7 @@ way[highway] > node[amenity],
 way[highway] > node[building],
 way[highway] > node[leisure],
 way[highway] > node[office],
+way[highway] > node[place],
 way[highway] > node[shop],
 way[highway] > node[tourism] {
 	throwWarning: tr("nó ''{0}'' não deve ficar conectado na via", "{0.key}");
