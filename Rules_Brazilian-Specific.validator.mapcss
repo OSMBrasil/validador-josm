@@ -603,6 +603,12 @@ relation[destination][type != waterway] {
 	throwWarning: tr("{0} deve ser usado apenas em ways", "{0.key}");
 }
 
+/* issue #10 */
+/* http://overpass-turbo.eu/s/c55 */
+node[exit_to] {
+	throwWarning: tr("utilize ''destination'' no caminho de saída ao invés de ''exit_to''");
+}
+
 /* estabelecimentos sem horário de funcionamento */
 *[amenity][!opening_hours],
 *[shop][!opening_hours] {
