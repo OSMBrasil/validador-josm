@@ -745,7 +745,7 @@ area[amenity=fuel][eval(areasize()) > 2500] {
 
 /* uso incorreto de "S/N" para locais que não possuem número */
 /* http://overpass-turbo.eu/s/cLU */
-*["addr:housenumber" =~ /(?i)^s(\.|-| )?\/?n\.?º?$/] {
+*["addr:housenumber" =~ /(?i)^s(\.|-| )?\/?n\.?º?$/][!note] {
 	throwWarning: tr("não utilizar ''{0}'' para locais sem número", tag("addr:housenumber"));
 	fixAdd: "note=Local sem número";
 	fixRemove: "addr:housenumber";
