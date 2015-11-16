@@ -737,7 +737,23 @@ area[amenity=fuel][eval(areasize()) > 2500] {
 	suggestAlternative: "brand";
 }
 
+/* chaves terminando em _1, _2, etc, como name_1 por exemplo */
 /* http://overpass-turbo.eu/s/cLQ */
 *[/_[0-9]$/] {
 	throwError: tr("chave inválida: {0}", "{0.key}");
+}
+
+/* uso incorreto de "S/N" para locais que não possuem número */
+/* http://overpass-turbo.eu/s/cLU */
+*["addr:housenumber" =~ /(?i)^s(\.|-| )?\/?n\.?º?$/] {
+	throwWarning: tr("não utilizar ''{0}'' para locais sem número", tag("addr:housenumber"));
+	fixAdd: "note=Local sem número";
+	fixRemove: "addr:housenumber";
+	suggestAlternative: "note";
+}
+
+/* pra garantir que não vai trocar note existente */
+*["addr:housenumber" =~ /(?i)^s(\.|-| )?\/?n\.?º?$/][note] {
+	throwWarning: tr("não utilizar ''{0}'' para locais sem número", tag("addr:housenumber"));
+	suggestAlternative: "note";
 }
