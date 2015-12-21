@@ -1,7 +1,7 @@
 meta
 {
   title: "Brazilian-specific rules";
-  version: "2015-12-04";
+  version: "2015-12-21";
   description: "Community rules for the most common errors and problems found in Brazil. Messages are in Portuguese only.";
   icon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAYCAMAAACoeN87AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wUGFhITJtY6OQAAAfhQTFRFABJ5ABx8ABx9AB19AB1+AB5yAB58AB9yACByACB0ACB2ACN0ACN4ACOAACR1ACR4ACV1ACZ1ACZ2ACZ5ACd2ACiEAJc9AJg9AJk7AJk8AJo7AJs6ASh1ASh2ASh3ASh4Aih3Ail4Ayh5Ayl3Ayl4Ayp4BClzBCt4BCyIBJw5BSt5Bit0Bix6Bp05Byx1By16B504B505CC96CJ04CZ04CjB8CzB8CzF8DTJ9DTSKDjN+DzKDEqA2EzeBE6A2FDiFFjqCGj2EJKUyJU2HJaUyJ02JJ6YxKlGJK0+LLFOKMKgwMktfMliNMqgvNE1eOE9dOlFdP1FRQKwrQawrQa0rQq0rRGiXRlpVSFxUSFxVSVxVSW2dUGJYUmNZWHqbWHqhYn6pZbYjZrYjZ5WvZ7cja315bYiub5Sqcrogcrohc7ofdLofdZ6rd6GrfKaugb4dg6izg78diMAbisAai8AajcEaj8Eakb62lb+5nJYmnZktn5osoJstosvAo50rqKItr7+btcsRtswQuMwQucwQ0NMK0dMK0tQK09QK1dQK38gO38gP4MkO4NlK5tkG59kF69oE7NoE8tUB89wD9NcF9dgF9tgF99oD+NsD+d4B/d8A/t8A/98A/+AA/+EA/+IA/+MA/+QA/+UA/+YA/+cA/+gA/+kA////gExgxwAAAAFiS0dEp8C3KwMAAAGISURBVCjPY5AmCBhIVyJpZyeJV4mUeGhTU6i4FG4lUiYl/XPn9hebSOFSIuXbMW/hokUL57X7SmFXYlA4b0qVt4yMd9WUeYUGmEqkDIM753eHM/MLCfEzhXfP7ww2lEJVIuFSNnPepEAGVnYObkEhpsjp82aWuUggKZGSSmmbN3dOb3JebnqCs5KKAFvd/Lnz2lKkpGBKxNxaJs+dPXtharS7T1haQUW8Apf/ktmz505ucRODKNHMnjhrNhAs1ZMTEpJTN/LIKXdVWwYSmTUxSxOiJGMCWMkybTkRKy1FFUFOz9q4hWAlEzI1oRa5NIMsWhxgbyoi4OAoIMJn3TAPZFGzixjCuUmt8+bOr+fVt1Uw11IVcbCsXDB3XmsiwrkgTzuVzpw3PYLFTFlLx8JBI3bGvJmlThJoQacb1DG/J4qRR15BWDSma35HkK4UlgjInze12k9W1q9m2rx8AxzR6NUGicY2LymcicG4qG/u3L4iYyl8SSqksTEEX5ICJUwbG0nKkzcWAABUy60wquZO7gAAAABJRU5ErkJggg==";
   author: "OpenStreetMap Brasil";
@@ -65,7 +65,7 @@ way[highway][name =~ /^(?i)((via de )?acesso(( (a|à))? propriedade)?|entrada|en
 	throwWarning: tr("nome supérfluo/incompleto de local de lazer");
 }
 
-*[name =~ /^(?i)((Posto|Unidade (Básica)?) de Saúde|UBS|PSF|hospital)$/] {
+*[name =~ /^(?i)((Posto|Unidade (Básica)?) de Sa(u|ú)de|UBS|PSF|hospital)$/] {
 	throwWarning: tr("nome supérfluo/incompleto de local de saúde");
 }
 
@@ -132,6 +132,7 @@ node[noname?] {
 }
 
 /* designation é uma chave utilizada apenas no Reino Unido, sem uso no Brasil */
+/* http://overpass-turbo.eu/s/dlY */
 *[designation] {
 	throwWarning: tr("{0} é uma chave utilizada apenas no Reino Unido", "{0.key}");
 	suggestAlternative: "description";
@@ -213,7 +214,7 @@ area[place = suburb]["addr:suburb" = *name] {
 }
 
 /* Faculdades, centros universitário e universidades devem ser todas amenity=university */
-*[amenity = college][name =~ /^(?i)(Centro Universitário|Faculdades?|FATEC|Instituto Federal)\b$/] {
+*[amenity =~ /college|school/][name =~ /^(?i)(Centro Universitário|Faculdades?|FATEC|Instituto Federal)\b/] {
 	throwWarning: tr("estabelecimento de ensino classificado incorretamente");
 	suggestAlternative: "amenity=university";
 	fixAdd: "{0.key}=university";
@@ -290,7 +291,7 @@ relation[tag("power") = parent_tag("power")] ∈ *[power] {
 	fixAdd: "{2.key}={2.value}";
 }
 
-*[name =~ /^(?i)(AM(A|E)|(Posto|Unidade (Básica)?) de Saúde|UBS|PSF).*/][amenity = hospital] {
+*[name =~ /^(?i)(AM(A|E)|(Posto|Unidade (Básica)?) de Sa(u|ú)de|UBS|PSF).*/][amenity = hospital] {
 	throwWarning: tr("postos/unidades de saúde devem ser amenity=clinic");
 }
 
@@ -761,4 +762,9 @@ area[amenity=fuel][eval(areasize()) > 2500] {
 *["addr:housenumber" =~ /(?i)^s(\.|-| )?\/?n\.?º?$/][note] {
 	throwWarning: tr("não utilizar ''{0}'' para locais sem número", tag("addr:housenumber"));
 	suggestAlternative: "note";
+}
+
+/* http://overpass-turbo.eu/s/dm8 */
+*[source =~ /(?i)google/] {
+	throwError: tr("objeto contém Google como source");
 }
