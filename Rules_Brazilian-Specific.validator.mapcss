@@ -65,7 +65,7 @@ way[highway][name =~ /^(?i)((via de )?acesso(( (a|à))? propriedade)?|entrada|en
 	throwWarning: tr("nome supérfluo/incompleto de local de lazer");
 }
 
-*[name =~ /^(?i)((Posto|Unidade (Básica)?) de Saúde|UBS|PSF|hospital)$/] {
+*[name =~ /^(?i)((Posto|Unidade (Básica)?) de Sa(u|ú)de|UBS|PSF|hospital)$/] {
 	throwWarning: tr("nome supérfluo/incompleto de local de saúde");
 }
 
@@ -132,6 +132,7 @@ node[noname?] {
 }
 
 /* designation é uma chave utilizada apenas no Reino Unido, sem uso no Brasil */
+/* http://overpass-turbo.eu/s/dlY */
 *[designation] {
 	throwWarning: tr("{0} é uma chave utilizada apenas no Reino Unido", "{0.key}");
 	suggestAlternative: "description";
@@ -213,7 +214,7 @@ area[place = suburb]["addr:suburb" = *name] {
 }
 
 /* Faculdades, centros universitário e universidades devem ser todas amenity=university */
-*[amenity = college][name =~ /^(?i)(Centro Universitário|Faculdades?|FATEC|Instituto Federal)\b$/] {
+*[amenity =~ /college|school/][name =~ /^(?i)(Centro Universitário|Faculdades?|FATEC|Instituto Federal)\b/] {
 	throwWarning: tr("estabelecimento de ensino classificado incorretamente");
 	suggestAlternative: "amenity=university";
 	fixAdd: "{0.key}=university";
@@ -290,7 +291,7 @@ relation[tag("power") = parent_tag("power")] ∈ *[power] {
 	fixAdd: "{2.key}={2.value}";
 }
 
-*[name =~ /^(?i)(AM(A|E)|(Posto|Unidade (Básica)?) de Saúde|UBS|PSF).*/][amenity = hospital] {
+*[name =~ /^(?i)(AM(A|E)|(Posto|Unidade (Básica)?) de Sa(u|ú)de|UBS|PSF).*/][amenity = hospital] {
 	throwWarning: tr("postos/unidades de saúde devem ser amenity=clinic");
 }
 
@@ -761,4 +762,9 @@ area[amenity=fuel][eval(areasize()) > 2500] {
 *["addr:housenumber" =~ /(?i)^s(\.|-| )?\/?n\.?º?$/][note] {
 	throwWarning: tr("não utilizar ''{0}'' para locais sem número", tag("addr:housenumber"));
 	suggestAlternative: "note";
+}
+
+/* http://overpass-turbo.eu/s/dm8 */
+*[source =~ /(?i)google/] {
+	throwError: tr("objeto contém Google como source");
 }
