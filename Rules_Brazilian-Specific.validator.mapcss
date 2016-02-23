@@ -559,9 +559,13 @@ way[highway][lanes = 1][!oneway?][!junction][!narrow] {
 	suggestAlternative: "description";
 }
 
-/* admin_level deve ficar na relação e não no nó do local */
-node[place][admin_level] {
-	throwWarning: tr("{0} deve fazer parte do limite administrativo e não do nó do local", "{1.key}");
+/* #80 */
+/* http://overpass-turbo.eu/s/ezr */
+node[admin_level],
+node[border_type],
+node[boundary],
+node[type = boundary] {
+	throwError: tr("nó não deve possuir {0}", "{0.tag}");
 }
 
 relation[boundary][type != boundary] {
