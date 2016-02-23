@@ -594,7 +594,7 @@ way[boundary=administrative][!admin_level]!.way_in_relation {
 /* bairros, cidades, etc, com ausência/incoerência de elementos que definem corretamente o limite administrativo */
 /* http://overpass-turbo.eu/s/eAk */
 way[place][place !~ /^(city_block|farm|hamlet|island|islet|isolated_dwelling|neighbourhood)$/][!admin_level][!boundary],
-relation[place][place !~ /^(city_block|farm|hamlet|island|islet|isolated_dwelling|neighbourhood)$/][!admin_level][!boundary][!type] {
+relation[place][place !~ /^(city_block|farm|hamlet|island|islet|isolated_dwelling|neighbourhood)$/][!admin_level][!boundary] {
 	throwWarning: tr("verificar: local com ausência/incoerência de limite administrativo");
 }
 
