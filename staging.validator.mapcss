@@ -1,7 +1,7 @@
 meta
 {
   title: "Staging rules Brazil";
-  version: "1.[[revision]]_[[date]]";
+  version: "2016-02-23";
   description: "Staging rules for Brazil. Messages are in Portuguese only.";
   author: "OpenStreetMap Brasil";
   watch-modified: true;
@@ -19,13 +19,13 @@ meta
 	throwWarning: tr("{0} deve estar associado a um local", "{0.key}");
 }
 
-*[name =~ /^[a-z ]+$/] {
+*[name =~ /^(?U)(\p{Lower}| )+$/] {
 	throwWarning: tr("verificar: {0} totalmente em minúsculo", "{0.key}");
 }
 
 /* áreas residenciais muito grandes que podem indicar uso incorreto como marcador de cidade */
 /* http://overpass-turbo.eu/s/9pM */
-area[landuse=residential][name !~ /(?i)(habitacional|condomínio|residencial)/][!barrier][eval(areasize()) > 200000] {
+area[landuse=residential][name !~ /(?i)(?u)(habitacional|condomínio|residencial)/][!barrier][eval(areasize()) > 200000] {
 	throwWarning: tr("verificar: área residencial muito grande");
 }
 

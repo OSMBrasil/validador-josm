@@ -33,20 +33,20 @@ way[highway][highway !~ /bridleway|bus_stop|cycleway|crossing|footway|give_way|m
 }
 
 /* possui nome de rua mas não tem tag de highway */
-*[!highway][route != road][type !~ /route|street/][name][name =~ /^(?i)(alameda|avenida|beco|estrada|ladeira|passarela|rodovia|rotatória|rua|travessa|trevo|viela|(anel|complexo|dispositivo) viário) .*/][name !~ /^(?i)estrada de ferro/] {
+*[!highway][route != road][type !~ /route|street/][name][name =~ /^(?i)(?u)(alameda|avenida|beco|estrada|ladeira|passarela|rodovia|rotatória|rua|travessa|trevo|viela|(anel|complexo|dispositivo) viário) .*/][name !~ /^(?i)estrada de ferro/] {
 	throwWarning: tr("objeto com nome de via mas sem tag de {0}", "{0.key}");
 }
 
 /* issue #53 */
 /* http://overpass-turbo.eu/s/c56 */
-way[highway = track][name][name =~ /^(?i)(alameda|avenida|beco|estrada|ladeira|rodovia|rotatória|rua|travessa|trevo|viela) .*/] {
+way[highway = track][name][name =~ /^(?i)(?u)(alameda|avenida|beco|estrada|ladeira|rodovia|rotatória|rua|travessa|trevo|viela) .*/] {
 	throwWarning: tr("não classificar via como {0}", "{0.tag}");
 	suggestAlternative: "highway=residential";
 	suggestAlternative: "highway=unclassified";
 }
 
 /* possível nome com _ ao invés de espaço */
-*[name =~ /^(?i)[a-z0-9]+_([a-z0-9]_?)+$/] {
+*[name =~ /^(?i)(?u)[a-z0-9]+_([a-z0-9]_?)+$/] {
 	throwWarning: tr("verificar: utilizar espaço ao invés de underscore");
 }
 
@@ -55,17 +55,17 @@ way[highway = track][name][name =~ /^(?i)(alameda|avenida|beco|estrada|ladeira|r
 	throwWarning: tr("palavra abreviada em {0}", "{0.key}");
 }
 
-way[highway][name =~ /^(?i)((via de )?(acesso|ligação)(( (a|à))? propriedade)?|entrada|entroncamento|rampa|retorno|rotat(ó|o)ria|r(ó|o)tula|sa(í|i)da|trevo|estrada( municipal| de terra)?|rua|rodovia|via)( (de acesso|sem nome|projetad(a|o)))?$/] {
+way[highway][name =~ /^(?i)(?u)((via de )?(acesso|ligação)(( (a|à))? propriedade)?|entrada|entroncamento|rampa|retorno|rotat(ó|o)ria|r(ó|o)tula|sa(í|i)da|trevo|estrada( municipal| de terra)?|rua|rodovia|via)( (de acesso|sem nome|projetad(a|o)))?$/] {
 	throwWarning: tr("{0} com nome supérfluo/incompleto", "{0.key}");
 	suggestAlternative: "destination";
 	suggestAlternative: "description";
 }
 
-*[leisure][name =~ /^(?i)(campo|quadra|est(á|a)dio|gin(á|a)sio)( de (futebol|esportes?))?$/] {
+*[leisure][name =~ /^(?i)(?u)(campo|quadra|est(á|a)dio|gin(á|a)sio)( de (futebol|esportes?))?$/] {
 	throwWarning: tr("nome supérfluo/incompleto de local de lazer");
 }
 
-*[name =~ /^(?i)((Posto|Unidade (Básica)?) de Sa(u|ú)de|UBS|PSF|hospital)$/] {
+*[name =~ /^(?i)(?u)((Posto|Unidade (Básica)?) de Sa(u|ú)de|UBS|PSF|hospital)$/] {
 	throwWarning: tr("nome supérfluo/incompleto de local de saúde");
 }
 
@@ -73,7 +73,7 @@ way[highway][name =~ /^(?i)((via de )?(acesso|ligação)(( (a|à))? propriedade)
 	throwWarning: tr("erro de ortografia em ''saúde''");
 }
 
-*[name =~ /^(?i)(aldeia|rodovi(á|a)ria|estacionamento|igreja|capela|cemit(é|e)rio|c(ó|o)rrego|fazenda|lago|lagoa|praça|parque|riacho|rio|vila)$/] {
+*[name =~ /^(?i)(?u)(aldeia|rodovi(á|a)ria|estacionamento|igreja|capela|cemit(é|e)rio|c(ó|o)rrego|fazenda|lago|lagoa|praça|parque|riacho|rio|vila)$/] {
 	throwWarning: tr("nome supérfluo/incompleto de local");
 }
 
@@ -205,7 +205,7 @@ area[place = suburb]["addr:suburb" = *name] {
 	fixRemove: "{1.key}";
 }
 
-*[name =~ /^(?i)(Faz\.|Fazenda|Sítio|Chácara)/][place][place !~ /city|farm|neighbourhood|suburb|town|village/] {
+*[name =~ /^(?i)(?u)(Faz\.|Fazenda|Sítio|Chácara)/][place][place !~ /city|farm|neighbourhood|suburb|town|village/] {
 	throwWarning: tr("objeto provavelmente deve ser {0}=farm", "{1.key}");
 	fixAdd: "place=farm";
 }
@@ -219,21 +219,21 @@ area[place = suburb]["addr:suburb" = *name] {
 }
 
 /* Faculdades, centros universitário e universidades devem ser todas amenity=university */
-*[amenity =~ /college|school/][name =~ /^(?i)(Centro Universitário|Faculdades?|FATEC|Instituto Federal)\b/] {
+*[amenity =~ /college|school/][name =~ /^(?i)(?u)(Centro Universitário|Faculdades?|FATEC|Instituto Federal)\b/] {
 	throwWarning: tr("estabelecimento de ensino classificado incorretamente");
 	suggestAlternative: "amenity=university";
 	fixAdd: "{0.key}=university";
 }
 
 /* Escolas técnicas/profissionalizantes devem ser amenity=college */
-*[amenity = school][name =~ /^(?i)(SENAC|SENAI|Serviço Nacional de Aprendizagem)/],
-*[amenity =~ /school|university/][name =~ /(?i)\b(Centro Paula Souza|Escola Técnica|ETEC)\b/] {
+*[amenity = school][name =~ /^(?i)(?u)(SENAC|SENAI|Serviço Nacional de Aprendizagem)/],
+*[amenity =~ /school|university/][name =~ /(?i)(?u)\b(Centro Paula Souza|Escola Técnica|ETEC)\b/] {
 	throwWarning: tr("estabelecimento de ensino classificado incorretamente");
 	suggestAlternative: "amenity=college";
 	fixAdd: "{0.key}=college";
 }
 
-*[amenity = school][name =~ /^(?i)(auto(-| )?( moto )?escola|centro de formação de condutores|cfc|moto escola)\b/] {
+*[amenity = school][name =~ /^(?i)(?u)(auto(-| )?( moto )?escola|centro de formação de condutores|cfc|moto escola)\b/] {
 	throwWarning: tr("autoescola classificada incorretamente");
 	suggestAlternative: "amenity=driving_school";
 	fixAdd: "{0.key}=driving_school";
@@ -281,8 +281,8 @@ relation[tag("power") = parent_tag("power")] ∈ *[power] {
 	  throwWarning: tr("{0} dentro de {1}", "amenity=university", "{0.tag}");
 }
 
-*[name =~ /^(?i)Subestação .*/][power][power != substation],
-*[name =~ /^(?i)Fórum .*/][amenity][amenity != courthouse],
+*[name =~ /^(?i)(?u)Subestação .*/][power][power != substation],
+*[name =~ /^(?i)(?u)Fórum .*/][amenity][amenity != courthouse],
 *[name =~ /^(?i)Hospital .*/][building][building != hospital],
 *[name =~ /^(?i)Universidade .*/][building][building != university],
 *[name =~ /^(?i)Escola .*/][building][building != school],
@@ -296,7 +296,7 @@ relation[tag("power") = parent_tag("power")] ∈ *[power] {
 	fixAdd: "{2.key}={2.value}";
 }
 
-*[name =~ /^(?i)(AM(A|E)|(Posto|Unidade (Básica)?) de Sa(u|ú)de|UBS|PSF).*/][amenity = hospital] {
+*[name =~ /^(?i)(?u)(AM(A|E)|(Posto|Unidade (Básica)?) de Sa(u|ú)de|UBS|PSF).*/][amenity = hospital] {
 	throwWarning: tr("postos/unidades de saúde devem ser amenity=clinic");
 }
 
@@ -364,8 +364,8 @@ relation[enforcement=maxweight][!maxweight] {
 }
 
 /* nomes e ruas escritos totalmente em maiúsculo */
-*[name =~ /^[A-Z0-9 ]*[A-Z]+[A-Z0-9 ]*$/],
-*["addr:street" =~ /^[A-Z0-9 ]*[A-Z]+[A-Z0-9 ]*$/] {
+*[name =~ /^(?U)(\p{Upper}| )+$/],
+*["addr:street" =~ /^(?U)(\p{Upper}| )+$/] {
 	throwWarning: tr("verificar: {0} totalmente em maiúsculo", "{0.key}");
 	suggestAlternative: "short_name";
 }
@@ -476,9 +476,8 @@ way[highway = motorway_junction] {
 }
 
 /* lugar possui nome que inicia com "Edifício" mas não possui tag de prédio */
-*[name =~ /^(?i)edifício.*/][!building] {
+*[name =~ /^(?i)(?u)edifício.*/][!building] {
 	throwWarning: tr("possível ausência de tag {0}", "{1.key}");
-	fixAdd: "building=yes";
 }
 
 way[highway][!surface][highway != bus_stop] {
@@ -514,8 +513,10 @@ way[highway][highway !~ /construction|give_way|motorway_junction|proposed|racewa
 	throwOther: tr("{0} sem tag de acessibilidade ({1})", "{0.key}", "{1.key}");
 }
 
-*[name =~ /^(?i)praça.*/][!leisure][landuse = grass] {
-	throwWarning: tr("possível definição errada de praça: {0}", "{2.tag}");
+/* http://overpass-turbo.eu/s/eAv */
+*[name =~ /^(?i)(?u)praça.*/][!leisure][landuse =~ /^(forest|grass|greenfield|meadow|orchard)$/],
+*[name =~ /^(?i)(?u)praça.*/][!leisure][natural =~ /^(grassland|heath|scrub|wood)$/ ] {
+	throwWarning: tr("possível definição incorreta para praça: ''{0}''", "{2.key}");
 	suggestAlternative: "leisure=park";
 }
 
