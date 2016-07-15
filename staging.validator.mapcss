@@ -1,7 +1,7 @@
 meta
 {
   title: "Staging rules Brazil";
-  version: "2016-02-23";
+  version: "2016-07-15";
   description: "Staging rules for Brazil. Messages are in Portuguese only.";
   author: "OpenStreetMap Brasil";
   watch-modified: true;
@@ -31,6 +31,13 @@ area[landuse=residential][name !~ /(?i)(?u)(habitacional|condomínio|residencial
 
 way[highway $= _link][eval(waylength()) > 250] {
 	throwWarning: tr("verificar: {0} com comprimento muito grande", tag("highway"));
+}
+
+way[highway][junction = roundabout][eval(waylength()) < 30]:closed {
+	throwWarning: tr("verificar: {0} com comprimento pequeno", "{1.tag}");
+	suggestAlternative: "highway=mini_roundabout";
+	suggestAlternative: "highway=turning_circle";
+	suggestAlternative: "highway=turning_loop";
 }
 
 /* --> issue #77 */

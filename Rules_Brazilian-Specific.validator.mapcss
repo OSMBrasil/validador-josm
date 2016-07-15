@@ -51,7 +51,7 @@ way[highway = track][name][name =~ /^(?i)(?u)(alameda|avenida|beco|estrada|ladei
 }
 
 /* palavras abreviadas */
-*[name =~ /(?i)(^|.* )(Cel|Cmte|Dª|Dr|Eng|Gov|Jr|Marg|Mun|p\/|Pde|Pe|Pst|Pref|Profa|Profª|Prof|s\/|Sr(a|ª)?|Sta|Sto|Ver)\.? .*/] {
+*[name =~ /(?i)(^|.* )(Cel|Cmte|Cond|Conj|Dª|Dr|Eng|Gov|Hab|Jr|Marg|Mun|p\/|Pde|Pe|Pst|Pref|Profa|Profª|Prof|s\/|Sr(a|ª)?|Sta|Sto|Ver)\.? .*/] {
 	throwWarning: tr("palavra abreviada em {0}", "{0.key}");
 }
 
