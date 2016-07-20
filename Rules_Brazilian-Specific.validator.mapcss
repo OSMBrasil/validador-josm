@@ -335,6 +335,12 @@ node:connection[highway =~ /^(give_way|stop)$/] {
 	throwWarning: tr("{0} não deve estar em cruzamentos", concat("highway=", tag("highway")));
 }
 
+node!:connection[highway = mini_roundabout] {
+	throwWarning: tr("verificar: {0} conectado apenas a uma via", "{1.tag}");
+	suggestAlternative: "highway=turning_circle";
+	suggestAlternative: "highway=turning_loop";
+}
+
 node!:connection:in-downloaded-area[highway = motorway_junction] {
 	throwWarning: tr("highway=motorway_junction deve ligar a saída com a rodovia");
 }
