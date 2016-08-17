@@ -1,7 +1,7 @@
 meta
 {
   title: "Brazilian-specific rules";
-  version: "2016-08-16";
+  version: "2016-08-17";
   description: "Community rules for the most common errors and problems found in Brazil. Messages are in Portuguese only.";
   icon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAYCAMAAACoeN87AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wUGFhITJtY6OQAAAfhQTFRFABJ5ABx8ABx9AB19AB1+AB5yAB58AB9yACByACB0ACB2ACN0ACN4ACOAACR1ACR4ACV1ACZ1ACZ2ACZ5ACd2ACiEAJc9AJg9AJk7AJk8AJo7AJs6ASh1ASh2ASh3ASh4Aih3Ail4Ayh5Ayl3Ayl4Ayp4BClzBCt4BCyIBJw5BSt5Bit0Bix6Bp05Byx1By16B504B505CC96CJ04CZ04CjB8CzB8CzF8DTJ9DTSKDjN+DzKDEqA2EzeBE6A2FDiFFjqCGj2EJKUyJU2HJaUyJ02JJ6YxKlGJK0+LLFOKMKgwMktfMliNMqgvNE1eOE9dOlFdP1FRQKwrQawrQa0rQq0rRGiXRlpVSFxUSFxVSVxVSW2dUGJYUmNZWHqbWHqhYn6pZbYjZrYjZ5WvZ7cja315bYiub5Sqcrogcrohc7ofdLofdZ6rd6GrfKaugb4dg6izg78diMAbisAai8AajcEaj8Eakb62lb+5nJYmnZktn5osoJstosvAo50rqKItr7+btcsRtswQuMwQucwQ0NMK0dMK0tQK09QK1dQK38gO38gP4MkO4NlK5tkG59kF69oE7NoE8tUB89wD9NcF9dgF9tgF99oD+NsD+d4B/d8A/t8A/98A/+AA/+EA/+IA/+MA/+QA/+UA/+YA/+cA/+gA/+kA////gExgxwAAAAFiS0dEp8C3KwMAAAGISURBVCjPY5AmCBhIVyJpZyeJV4mUeGhTU6i4FG4lUiYl/XPn9hebSOFSIuXbMW/hokUL57X7SmFXYlA4b0qVt4yMd9WUeYUGmEqkDIM753eHM/MLCfEzhXfP7ww2lEJVIuFSNnPepEAGVnYObkEhpsjp82aWuUggKZGSSmmbN3dOb3JebnqCs5KKAFvd/Lnz2lKkpGBKxNxaJs+dPXtharS7T1haQUW8Apf/ktmz505ucRODKNHMnjhrNhAs1ZMTEpJTN/LIKXdVWwYSmTUxSxOiJGMCWMkybTkRKy1FFUFOz9q4hWAlEzI1oRa5NIMsWhxgbyoi4OAoIMJn3TAPZFGzixjCuUmt8+bOr+fVt1Uw11IVcbCsXDB3XmsiwrkgTzuVzpw3PYLFTFlLx8JBI3bGvJmlThJoQacb1DG/J4qRR15BWDSma35HkK4UlgjInze12k9W1q9m2rx8AxzR6NUGicY2LymcicG4qG/u3L4iYyl8SSqksTEEX5ICJUwbG0nKkzcWAABUy60wquZO7gAAAABJRU5ErkJggg==";
   author: "OpenStreetMap Brasil";
@@ -61,19 +61,23 @@ way[highway][name =~ /^(?i)(?u)((via de )?(acesso|ligação)(( (a|à))? propried
 	suggestAlternative: "description";
 }
 
-*[leisure][name =~ /^(?i)(?u)(campo|quadra|est(á|a)dio|gin(á|a)sio)( de (futebol|esportes?))?$/] {
+/* http://overpass-turbo.eu/s/hTt */
+*[leisure][name =~ /^(?i)(?u)(campo|est(á|a)dio|gin(á|a)sio|quadra)( de (futebol|esportes?))?$/] {
 	throwWarning: tr("nome supérfluo/incompleto de local de lazer");
 }
 
+/* http://overpass-turbo.eu/s/hTu */
 *[name =~ /^(?i)(?u)((Posto|Unidade (Básica)?) de Sa(u|ú)de|UBS|PSF|hospital)$/] {
 	throwWarning: tr("nome supérfluo/incompleto de local de saúde");
 }
 
+/* http://overpass-turbo.eu/s/hTv */
 *[amenity =~ /^(clinic|doctors|hospital)$/][name =~ /(?i)\bsaude\b/] {
 	throwWarning: tr("erro de ortografia em ''saúde''");
 }
 
-*[name =~ /^(?i)(?u)(aldeia|rodovi(á|a)ria|estacionamento|igreja|capela|cemit(é|e)rio|c(ó|o)rrego|fazenda|floresta|lago|lagoa|mata|praça|parque|parquinho|posto( de gasolina)?|riacho|rio|vila)$/] {
+/* http://overpass-turbo.eu/s/hTw */
+*[name =~ /^(?i)(?u)(aldeia|capela|cemit(é|e)rio|c(ó|o)rrego|estacionamento|fazenda|floresta|igreja|lago|lagoa|mata( nativa)?|praça|parque|parquinho|posto( de gasolina)?|riacho|rio|rodovi(á|a)ria|vila)$/] {
 	throwWarning: tr("verificar: nome supérfluo/incompleto de local");
 }
 
@@ -127,9 +131,14 @@ way[name = *"addr:street"][highway],
 	throwWarning: tr("verificar: {0} e {1} são iguais", "{0.key}", "{0.value}");
 }
 
-*[name =~ /(?i)((sem (denomina(ç|c)(ã|a)o|nome|sa(i|í)da))|desconhecido|n(ã|a)o conhecido)/] {
+*[name =~ /(?i)(?u)((sem (denomina(ç|c)(ã|a)o|nome|sa(i|í)da))|desconhecido|n(ã|a)o conhecido)/] {
 	throwWarning: tr("objeto com nomenclatura incorreta");
 	suggestAlternative: "noname";
+}
+
+/* http://overpass-turbo.eu/s/hTx */
+node[maxheight][barrier != height_restrictor] {
+	throwWarning: tr("{0} não deve ser utilizado em nó", "{0.key}");
 }
 
 node[noname?] {
@@ -165,8 +174,8 @@ node[highway = motorway_junction][!name][!ref] {
 }
 
 /* é útil ter o destino das saídas de rodovias */
-way[highway = motorway_link][!destination] {
-	throwOther: tr("{0} sem tag {1}", "{0.value}", "{1.key}");
+way[highway $= _link][!destination] {
+	throwOther: tr("link sem tag {0}", "{1.key}");
 }
 
 *[place =~ /hamlet|isolated_dwelling|town|village/][population >= 100000] {
@@ -765,7 +774,7 @@ area[amenity=fuel][eval(areasize()) > 2500] {
 	suggestAlternative: "highway=services";
 }
 
-*[amenity=fuel][name =~ /(?i)\b(Ale|BR|Esso|Ipiranga|Petrobr(á|a)s|Shell|Texaco)\b/] {
+*[amenity=fuel][name =~ /(?i)(?u)\b(Ale|BR|Esso|Ipiranga|Petrobr(á|a)s|Shell|Texaco)\b/] {
 	throwWarning: tr("uso incorreto da bandeira do posto");
 	suggestAlternative: "brand";
 }
