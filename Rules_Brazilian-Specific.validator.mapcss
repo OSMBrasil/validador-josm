@@ -544,6 +544,14 @@ way[highway][lanes = 1][!oneway?][!junction][!narrow] {
 	suggestAlternative: "narrow=yes";
 }
 
+/* #86 ciclofaixas definidas de forma incorreta */
+/* http://overpass-turbo.eu/s/iqb */
+way[cycleway = lane]["cycleway:left" = lane],
+way[cycleway = lane]["cycleway:right" = lane] {
+	throwWarning: tr("uso incorreto de {0} com {1}", "{0.tag}", "{1.tag}");
+	suggestAlternative: "{1.tag}";
+}
+
 /* nomes com valores que provavelmente deveriam estar em alt_name, short_name, etc */
 *[name =~ /.*\(.*\).*/] {
 	throwWarning: tr("{0} com parênteses", "{0.key}");
