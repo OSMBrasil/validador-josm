@@ -397,8 +397,32 @@ relation[enforcement=maxweight][!maxweight] {
 	suggestAlternative: "short_name";
 }
 
-*["addr:postcode"]["addr:postcode" !~ /[0-9]{5}-[0-9]{3}/],
-*[postal_code][postal_code !~ /[0-9]{5}-[0-9]{3}/] {
+*["addr:postcode" =~ /^[0-9]{8}$/] {
+	throwWarning: tr("formato do CEP pode ser melhorado");
+	fixAdd: concat("addr:postcode=", substring(tag("addr:postcode"), 0, 5), "-", substring(tag("addr:postcode"), 5, 8));
+	group: tr("Brasil - Melhorias");
+}
+
+*[postal_code =~ /^[0-9]{8}$/] {
+	throwWarning: tr("formato do CEP pode ser melhorado");
+	fixAdd: concat("postal_code=", substring(tag("postal_code"), 0, 5), "-", substring(tag("postal_code"), 5, 8));
+	group: tr("Brasil - Melhorias");
+}
+
+*["addr:postcode" =~ /^[0-9]{5}( |\.)[0-9]{3}$/] {
+	throwWarning: tr("formato do CEP pode ser melhorado");
+	fixAdd: concat("addr:postcode=", replace(replace(tag("addr:postcode"), " ", "-"), ".", "-"));
+	group: tr("Brasil - Melhorias");
+}
+
+*["postal_code" =~ /^[0-9]{5}( |\.)[0-9]{3}$/] {
+	throwWarning: tr("formato do CEP pode ser melhorado");
+	fixAdd: concat("postal_code=", replace(replace(tag("postal_code"), " ", "-"), ".", "-"));
+	group: tr("Brasil - Melhorias");
+}
+
+*["addr:postcode"]["addr:postcode" !~ /^[0-9]{5}-[0-9]{3}$/],
+*[postal_code][postal_code !~ /^[0-9]{5}-[0-9]{3}$/] {
 	throwWarning: tr("{0} (CEP) em formato diferente de NNNNN-NNN", "{0.key}");
 }
 
