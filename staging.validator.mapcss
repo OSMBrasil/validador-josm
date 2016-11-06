@@ -1,7 +1,7 @@
 meta
 {
   title: "Staging rules Brazil";
-  version: "2016-07-15";
+  version: "2016-11-05";
   description: "Staging rules for Brazil. Messages are in Portuguese only.";
   author: "OpenStreetMap Brasil";
   watch-modified: true;
@@ -20,24 +20,28 @@ meta
 }
 
 *[name =~ /^(?U)(\p{Lower}| )+$/] {
-	throwWarning: tr("verificar: {0} totalmente em minúsculo", "{0.key}");
+	throwWarning: tr("{0} totalmente em minúsculo", "{0.key}");
+	group: tr("Brasil - Verificar");
 }
 
 /* áreas residenciais muito grandes que podem indicar uso incorreto como marcador de cidade */
 /* http://overpass-turbo.eu/s/9pM */
 area[landuse=residential][name !~ /(?i)(?u)(habitacional|condomínio|residencial)/][!barrier][eval(areasize()) > 200000] {
-	throwWarning: tr("verificar: área residencial muito grande");
+	throwWarning: tr("área residencial muito grande");
+	group: tr("Brasil - Verificar");
 }
 
 way[highway $= _link][eval(waylength()) > 250] {
-	throwWarning: tr("verificar: {0} com comprimento muito grande", tag("highway"));
+	throwWarning: tr("{0} com comprimento muito grande", tag("highway"));
+	group: tr("Brasil - Verificar");
 }
 
 way[highway][junction = roundabout][eval(waylength()) < 30]:closed {
-	throwWarning: tr("verificar: {0} com comprimento pequeno", "{1.tag}");
+	throwWarning: tr("{0} com comprimento pequeno", "{1.tag}");
 	suggestAlternative: "highway=mini_roundabout";
 	suggestAlternative: "highway=turning_circle";
 	suggestAlternative: "highway=turning_loop";
+	group: tr("Brasil - Verificar");
 }
 
 /* --> issue #77 */
