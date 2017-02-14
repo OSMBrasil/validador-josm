@@ -1,7 +1,7 @@
 meta
 {
   title: "Staging rules Brazil";
-  version: "2016-11-05";
+  version: "2017-02-14";
   description: "Staging rules for Brazil. Messages are in Portuguese only.";
   author: "OpenStreetMap Brasil";
   watch-modified: true;
@@ -63,4 +63,41 @@ way[highway] > node { set .is_in_highway; }
 
 area[!highway] > node.is_in_highway {
 	throwWarning: tr("área conectada na rua");
+}
+
+way[power = line][voltage < 50000] {
+	throwWarning: tr("{0} is too low for {1}", "{1.key}", "{0.tag}");
+	suggestAlternative: "power=minor_line";
+}
+
+way[power = minor_line][voltage >= 50000] {
+	throwWarning: tr("{0} is too high for {1}", "{1.key}", "{0.tag}");
+	suggestAlternative: "power=line";
+}
+
+node[power = tower] < way[power = cable] {
+	throwWarning: tr("{0} should not be used with power=tower", "{0.tag}");
+	suggestAlternative: "power=line";
+}
+
+node[power = pole] < way[power = cable] {
+	throwWarning: tr("{0} should not be used with power=pole", "{0.tag}");
+	suggestAlternative: "power=minor_line";
+}
+
+node[power = pole] < way[power = line] {
+	throwWarning: tr("{0} should not be used with power=pole", "{0.tag}");
+	suggestAlternative: "power=tower";
+	suggestAlternative: "power=minor_line";
+}
+
+way[power = line] > node[man_made = tower] {
+	throwWarning: tr("wrong usage of {0}", "{0.tag}");
+	suggestAlternative: "power=tower";
+}
+
+way[power = minor_line] > node[man_made = tower] {
+	throwWarning: tr("wrong usage of {0}", "{0.tag}");
+	suggestAlternative: "power=tower";
+	suggestAlternative: "power=pole";
 }

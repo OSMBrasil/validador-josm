@@ -1,7 +1,7 @@
 meta
 {
   title: "Brazilian-specific rules";
-  version: "2017-01-17";
+  version: "2017-02-14";
   description: "Community rules for the most common errors and problems found in Brazil. Messages are in Portuguese only.";
   icon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAYCAMAAACoeN87AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wUGFhITJtY6OQAAAfhQTFRFABJ5ABx8ABx9AB19AB1+AB5yAB58AB9yACByACB0ACB2ACN0ACN4ACOAACR1ACR4ACV1ACZ1ACZ2ACZ5ACd2ACiEAJc9AJg9AJk7AJk8AJo7AJs6ASh1ASh2ASh3ASh4Aih3Ail4Ayh5Ayl3Ayl4Ayp4BClzBCt4BCyIBJw5BSt5Bit0Bix6Bp05Byx1By16B504B505CC96CJ04CZ04CjB8CzB8CzF8DTJ9DTSKDjN+DzKDEqA2EzeBE6A2FDiFFjqCGj2EJKUyJU2HJaUyJ02JJ6YxKlGJK0+LLFOKMKgwMktfMliNMqgvNE1eOE9dOlFdP1FRQKwrQawrQa0rQq0rRGiXRlpVSFxUSFxVSVxVSW2dUGJYUmNZWHqbWHqhYn6pZbYjZrYjZ5WvZ7cja315bYiub5Sqcrogcrohc7ofdLofdZ6rd6GrfKaugb4dg6izg78diMAbisAai8AajcEaj8Eakb62lb+5nJYmnZktn5osoJstosvAo50rqKItr7+btcsRtswQuMwQucwQ0NMK0dMK0tQK09QK1dQK38gO38gP4MkO4NlK5tkG59kF69oE7NoE8tUB89wD9NcF9dgF9tgF99oD+NsD+d4B/d8A/t8A/98A/+AA/+EA/+IA/+MA/+QA/+UA/+YA/+cA/+gA/+kA////gExgxwAAAAFiS0dEp8C3KwMAAAGISURBVCjPY5AmCBhIVyJpZyeJV4mUeGhTU6i4FG4lUiYl/XPn9hebSOFSIuXbMW/hokUL57X7SmFXYlA4b0qVt4yMd9WUeYUGmEqkDIM753eHM/MLCfEzhXfP7ww2lEJVIuFSNnPepEAGVnYObkEhpsjp82aWuUggKZGSSmmbN3dOb3JebnqCs5KKAFvd/Lnz2lKkpGBKxNxaJs+dPXtharS7T1haQUW8Apf/ktmz505ucRODKNHMnjhrNhAs1ZMTEpJTN/LIKXdVWwYSmTUxSxOiJGMCWMkybTkRKy1FFUFOz9q4hWAlEzI1oRa5NIMsWhxgbyoi4OAoIMJn3TAPZFGzixjCuUmt8+bOr+fVt1Uw11IVcbCsXDB3XmsiwrkgTzuVzpw3PYLFTFlLx8JBI3bGvJmlThJoQacb1DG/J4qRR15BWDSma35HkK4UlgjInze12k9W1q9m2rx8AxzR6NUGicY2LymcicG4qG/u3L4iYyl8SSqksTEEX5ICJUwbG0nKkzcWAABUy60wquZO7gAAAABJRU5ErkJggg==";
   author: "OpenStreetMap Brasil";
@@ -75,11 +75,13 @@ way[highway][name =~ /^(?i)(?u)((via de )?(acesso|ligação)(( (a|à))? propried
 /* http://overpass-turbo.eu/s/hTv */
 *[amenity =~ /^(clinic|doctors|hospital)$/][name =~ /(?i)\bsaude\b/] {
 	throwWarning: tr("erro de ortografia em ''saúde''");
+	group: tr("Brasil - Verificar");
 }
 
 /* http://overpass-turbo.eu/s/jep */
 *[place = farm][name ^= "Sitio "] {
 	throwWarning: tr("faltando acento em ''Sítio''");
+	group: tr("Brasil - Verificar");
 }
 
 /* http://overpass-turbo.eu/s/hTw */
@@ -107,10 +109,17 @@ relation[type = route][highway] {
 
 way[highway][highway !~ /bus_stop|milestone|motorway_junction|traffic_signals/][ref][ref !~ /^(([A-Z]{2,3}-[0-9]{2,4}|SPM(-| )[0-9]{3} ?(D|E)?|SP(A|D|I)(-| )[0-9]{3}\/[0-9]{3}|[A-Z]{3}-[0-9]{3}\/[0-9]{3});?)+$/] {
 	throwWarning: tr("{0} fora do padrão ''sigla-numeração'' ou separador de múltiplos valores diferente de '';''", "{2.key}");
+	group: tr("Brasil - Verificar");
 }
 
 way[highway][!ref][name =~ /.*([A-Z]{2,3}-[0-9]{2,4}|SPM(-| )[0-9]{3} ?(D|E)?|SP(A|D|I)(-| )[0-9]{3}\/[0-9]{3}|[A-Z]{3}-[0-9]{3}\/[0-9]{3}).*/] {
 	throwWarning: tr("utilizar o código/sigla da rodovia também na tag {0}", "{1.key}");
+	group: tr("Brasil - Verificar");
+}
+
+way[highway][name =~ /Rodovia ([A-Z]{2,3}-[0-9]{2,4})/] {
+	throwWarning: tr("nome incorreto de rodovia; utilizar o nome oficial ou apenas ref");
+	group: tr("Brasil - Verificar");
 }
 
 /* nomes desnecessários */
@@ -230,6 +239,10 @@ area[place = suburb]["addr:suburb" = *name] {
 	group: tr("Brasil - Correções e melhorias");
 }
 
+*["addr:city" =~ /(,|( |-) ?[A-Z]{2})/] {
+	throwWarning: tr("{0} deve conter apenas o nome da cidade", "{0.key}");
+}
+
 *[name =~ /^(?i)(?u)(Faz\.|Fazenda|Sítio|Chácara)/][place][place !~ /city|farm|neighbourhood|suburb|town|village/] {
 	throwWarning: tr("objeto talvez deva ser {0}=farm", "{1.key}");
 	group: tr("Brasil - Verificar");
@@ -317,7 +330,7 @@ relation[tag("power") = parent_tag("power")] ∈ *[power] {
 
 *[amenity = university] ∈ *[amenity = college],
 *[amenity = university] ∈ *[amenity = school] {
-	  throwWarning: tr("{0} dentro de {1}", "amenity=university", "{0.tag}");
+	throwWarning: tr("{0} dentro de {1}", "amenity=university", "{0.tag}");
 }
 
 *[name =~ /^(?i)(?u)Subestação .*/][power][power != substation],
