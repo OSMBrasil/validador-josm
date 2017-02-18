@@ -1,7 +1,7 @@
 meta
 {
   title: "Staging rules Brazil";
-  version: "2017-02-14";
+  version: "2017-02-17";
   description: "Staging rules for Brazil. Messages are in Portuguese only.";
   author: "OpenStreetMap Brasil";
   watch-modified: true;
@@ -100,4 +100,25 @@ way[power = minor_line] > node[man_made = tower] {
 	throwWarning: tr("wrong usage of {0}", "{0.tag}");
 	suggestAlternative: "power=tower";
 	suggestAlternative: "power=pole";
+}
+
+/* Both should start with a uppercase letter */
+*[genus][genus !~ /^[A-Z][a-z]+$/],
+*[species][species !~ /^[A-Z][a-z]+ [a-z]+$/] {
+	throwWarning: tr("{0} written in an inappropriate way", "{0.key}");
+}
+
+/* "genus" should be the same as the first part of "species" */
+*[genus][species][tag(genus) != get(split(" ", tag(species)), 0)] {
+	throwWarning: tr("genus differs from species prefix");
+}
+
+*[genus][barrier != hedge][landuse !~ /^(forest|orchard|)$/][natural !~ /^(tree|tree_row|wetland|wood)$/],
+*[species][barrier != hedge][landuse !~ /^(forest|orchard|plant_nursery)$/][natural !~ /^(tree|tree_row|wetland|wood)$/] {
+	throwWarning: tr("{0} without a proper feature", "{0.key}");
+}
+
+/* "trees" is used as refinement for trees or plants in landuse=orchard */
+*[trees][landuse != orchard] {
+	throwWarning: tr("{0} should be used with landuse=orchard", "{0.key}");
 }
