@@ -24,7 +24,7 @@ meta
 	group: tr("Brasil - Verificar");
 }
 
-/* áreas residenciais muito grandes que podem indicar uso incorreto como marcador de cidade */
+/* áreas residenciais muito grandes que podem indicar uso incorreto como delimitador de cidade */
 /* http://overpass-turbo.eu/s/9pM */
 area[landuse=residential][name !~ /(?i)(?u)(habitacional|condomínio|residencial)/][!barrier][eval(areasize()) > 200000] {
 	throwWarning: tr("área residencial muito grande");
@@ -58,6 +58,13 @@ relation[admin_level = 10] >[role = admin_centre] node {
 	suggestAlternative: "label";
 }
 /* issue #77 <-- */
+
+*[amenity = bank][name =~ /(?i)(?u)\b(Banco do (Brasil|Nordeste)|Banrisul|BB|Bradesco|Caixa|CEF|Citibank|HSBC|Ita(u|ú)|Santander|Sicoob|Sicredi)\b/],
+*[atm][amenity != bank][name =~ /(?i)(?u)\b(Banco do (Brasil|Nordeste)|Banrisul|BB|Bradesco|Caixa|CEF|Citibank|HSBC|Ita(u|ú)|Santander|Sicoob|Sicredi)\b/] {
+	throwWarning: tr("uso incorreto da marca/nome para {0}", "{0.tag}");
+	suggestAlternative: "brand";
+	group: tr("Brasil - Verificar");
+}
 
 way[highway] > node { set .is_in_highway; }
 
