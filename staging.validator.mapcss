@@ -1,7 +1,7 @@
 meta
 {
   title: "Staging rules Brazil";
-  version: "2017-02-17";
+  version: "2017-02-21";
   description: "Staging rules for Brazil. Messages are in Portuguese only.";
   author: "OpenStreetMap Brasil";
   watch-modified: true;
@@ -59,8 +59,8 @@ relation[admin_level = 10] >[role = admin_centre] node {
 }
 /* issue #77 <-- */
 
-*[amenity = bank][name =~ /(?i)(?u)\b(Banco do (Brasil|Nordeste)|Banrisul|BB|Bradesco|Caixa|CEF|Citibank|HSBC|Ita(u|ú)|Santander|Sicoob|Sicredi)\b/],
-*[atm][amenity != bank][name =~ /(?i)(?u)\b(Banco do (Brasil|Nordeste)|Banrisul|BB|Bradesco|Caixa|CEF|Citibank|HSBC|Ita(u|ú)|Santander|Sicoob|Sicredi)\b/] {
+*[amenity = bank][name =~ /(?i)(?u)\b(Banco do (Brasil|Nordeste)|Banespa|Banrisul|BB|Bradesco|Caixa|CEF|Citibank|HSBC|Ita(u|ú)|Mercantil|Santander|Sicoob|Sicredi)\b/],
+*[atm][amenity != bank][name =~ /(?i)(?u)\b(Banco do (Brasil|Nordeste)|Banespa|Banrisul|BB|Bradesco|Caixa|CEF|Citibank|HSBC|Ita(u|ú)|Mercantil|Santander|Sicoob|Sicredi)\b/] {
 	throwWarning: tr("uso incorreto da marca/nome para {0}", "{0.tag}");
 	suggestAlternative: "brand";
 	group: tr("Brasil - Verificar");
