@@ -1,7 +1,7 @@
 meta
 {
   title: "Staging rules Brazil";
-  version: "2017-02-21";
+  version: "2017-02-23";
   description: "Staging rules for Brazil. Messages are in Portuguese only.";
   author: "OpenStreetMap Brasil";
   watch-modified: true;
@@ -70,6 +70,12 @@ way[highway] > node { set .is_in_highway; }
 
 area[!highway] > node.is_in_highway {
 	throwWarning: tr("área conectada na rua");
+}
+
+node[tag("name") = parent_tag("name")] ∈ area:closed[name],
+area[tag("name") = parent_tag("name")] ∈ area:closed[name] {
+	throwWarning: tr("objetos contidos e com o mesmo nome");
+	group: tr("Brasil - Verificar");
 }
 
 way[power = line][voltage < 50000] {
