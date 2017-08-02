@@ -1,8 +1,8 @@
 meta
 {
   title: "Staging rules Brazil";
-  version: "2017-03-21";
-  description: "Staging rules for Brazil. Messages are in Portuguese only.";
+  version: "2017-08-02";
+  description: "Staging rules for Brazil. It will eat your food. Messages are in Portuguese only.";
   author: "OpenStreetMap Brasil";
   watch-modified: true;
 }
@@ -44,8 +44,17 @@ way[highway][junction = roundabout][eval(waylength()) < 30]:closed {
 	group: tr("Brasil - Verificar");
 }
 
+/* rest_area com fuel dentro deve ser services */
+/* http://overpass-turbo.eu/s/qLZ */
+*[amenity = fuel] ∈ *[highway = rest_area] {
+	throwWarning: tr("{0} incorreto", "{0.tag}");
+	suggestAlternative: "highway=services";
+	group: tr("Brasil - Verificar");
+}
+
 /* --> issue #77 */
-area[admin_level =~ /^(8|9)$/][place] {
+area[admin_level =~ /^(8|9)$/][place],
+area[admin_level][population] {
 	throwError: tr("limite não deve possuir {0}", "{1.key}");
 }
 
