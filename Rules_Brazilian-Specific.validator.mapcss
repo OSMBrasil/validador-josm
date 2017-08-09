@@ -1,7 +1,7 @@
 meta
 {
   title: "Brazilian-specific rules";
-  version: "2017-08-07";
+  version: "2017-08-08";
   description: "Community rules for the most common errors and problems found in Brazil. Messages are in Portuguese only.";
   icon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAYCAMAAACoeN87AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wUGFhITJtY6OQAAAfhQTFRFABJ5ABx8ABx9AB19AB1+AB5yAB58AB9yACByACB0ACB2ACN0ACN4ACOAACR1ACR4ACV1ACZ1ACZ2ACZ5ACd2ACiEAJc9AJg9AJk7AJk8AJo7AJs6ASh1ASh2ASh3ASh4Aih3Ail4Ayh5Ayl3Ayl4Ayp4BClzBCt4BCyIBJw5BSt5Bit0Bix6Bp05Byx1By16B504B505CC96CJ04CZ04CjB8CzB8CzF8DTJ9DTSKDjN+DzKDEqA2EzeBE6A2FDiFFjqCGj2EJKUyJU2HJaUyJ02JJ6YxKlGJK0+LLFOKMKgwMktfMliNMqgvNE1eOE9dOlFdP1FRQKwrQawrQa0rQq0rRGiXRlpVSFxUSFxVSVxVSW2dUGJYUmNZWHqbWHqhYn6pZbYjZrYjZ5WvZ7cja315bYiub5Sqcrogcrohc7ofdLofdZ6rd6GrfKaugb4dg6izg78diMAbisAai8AajcEaj8Eakb62lb+5nJYmnZktn5osoJstosvAo50rqKItr7+btcsRtswQuMwQucwQ0NMK0dMK0tQK09QK1dQK38gO38gP4MkO4NlK5tkG59kF69oE7NoE8tUB89wD9NcF9dgF9tgF99oD+NsD+d4B/d8A/t8A/98A/+AA/+EA/+IA/+MA/+QA/+UA/+YA/+cA/+gA/+kA////gExgxwAAAAFiS0dEp8C3KwMAAAGISURBVCjPY5AmCBhIVyJpZyeJV4mUeGhTU6i4FG4lUiYl/XPn9hebSOFSIuXbMW/hokUL57X7SmFXYlA4b0qVt4yMd9WUeYUGmEqkDIM753eHM/MLCfEzhXfP7ww2lEJVIuFSNnPepEAGVnYObkEhpsjp82aWuUggKZGSSmmbN3dOb3JebnqCs5KKAFvd/Lnz2lKkpGBKxNxaJs+dPXtharS7T1haQUW8Apf/ktmz505ucRODKNHMnjhrNhAs1ZMTEpJTN/LIKXdVWwYSmTUxSxOiJGMCWMkybTkRKy1FFUFOz9q4hWAlEzI1oRa5NIMsWhxgbyoi4OAoIMJn3TAPZFGzixjCuUmt8+bOr+fVt1Uw11IVcbCsXDB3XmsiwrkgTzuVzpw3PYLFTFlLx8JBI3bGvJmlThJoQacb1DG/J4qRR15BWDSma35HkK4UlgjInze12k9W1q9m2rx8AxzR6NUGicY2LymcicG4qG/u3L4iYyl8SSqksTEEX5ICJUwbG0nKkzcWAABUy60wquZO7gAAAABJRU5ErkJggg==";
   author: "OpenStreetMap Brasil";
@@ -608,8 +608,8 @@ way[highway $= _link][!lanes] {
 }
 
 /* velocidade máxima apenas para grandes rodovias, unclassified e residential */
-way[highway =~ /motorway|trunk|primary|secondary|tertiary|unclassified|residential/][!maxspeed],
-way[highway $= _link][!maxspeed] {
+way[highway =~ /motorway|trunk|primary|secondary|tertiary|unclassified|residential/][!maxspeed][!"maxspeed:forward"][!"maxspeed:backward"],
+way[highway $= _link][!maxspeed][!"maxspeed:forward"][!"maxspeed:backward"] {
 	throwOther: tr("{0} sem velocidade máxima ({1}) definida", "{0.key}", "{1.key}");
 }
 
