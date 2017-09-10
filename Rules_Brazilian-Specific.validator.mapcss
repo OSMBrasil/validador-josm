@@ -945,7 +945,7 @@ area[amenity=fuel][eval(areasize()) > 2500] {
 	group: tr("Brasil - Verificar");
 }
 
-/* maps.me tem tradução errada, que faz as pessoas inseriem postos de combustível como charging_station */
+/* maps.me tem tradução errada, que faz as pessoas inserirem postos de combustível como charging_station */
 /* http://overpass-turbo.eu/s/rAF */
 *[amenity = charging_station] {
 	throwWarning: tr("possivelmente deve ser amenity=fuel");
