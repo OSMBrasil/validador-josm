@@ -161,9 +161,10 @@ way[name = *"addr:street"][highway],
 	suggestAlternative: "noname";
 }
 
-/* http://overpass-turbo.eu/s/hTx */
-node[maxheight][barrier != height_restrictor] {
-	throwWarning: tr("{0} não deve ser utilizado em nó", "{0.key}");
+/* https://overpass-turbo.eu/s/sIK */
+node[maxheight][barrier != height_restrictor][!traffic_sign],
+node[maxspeed][highway != speed_camera][!traffic_sign] {
+	throwWarning: tr("{0} não deve ser utilizado em nó; utilizar a restrição na via", "{0.key}");
 }
 
 node[noname?] {
