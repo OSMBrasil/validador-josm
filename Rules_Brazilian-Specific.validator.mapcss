@@ -86,8 +86,8 @@ way[highway][name =~ /^(?i)(?u)((via de )?(acesso|ligação)(( (a|à))? propried
 }
 
 /* http://overpass-turbo.eu/s/hTw */
-*[name =~ /^(?i)(?u)(aldeia|bosque|capela|cemit(é|e)rio|c(ó|o)rrego|escola|estacionamento|fazenda|floresta|hospital|igreja|lago|lagoa|mata( nativa)?|praça|parque|parquinho|posto( de gasolina)?|riacho|rio|rodovi(á|a)ria|vila)$/] {
-	throwWarning: tr("nome supérfluo/incompleto de local");
+*[name =~ /^(?i)(?u)(aldeia|borrach(aria|eiro)|bosque|capela|cemit(é|e)rio|c(ó|o)rrego|escola|estacionamento|fazenda|floresta|hospital|igreja|lago|lagoa|mata( nativa)?|praça|parque|parquinho|posto( de gasolina)?|riacho|rio|rodovi(á|a)ria|vila)$/] {
+	throwWarning: tr("local com nome supérfluo, incompleto ou descritivo");
 	group: tr("Brasil - Verificar");
 }
 
@@ -985,5 +985,18 @@ area[amenity=fuel][eval(areasize()) > 2500] {
 /* http://overpass-turbo.eu/s/rAF */
 *[amenity = charging_station] {
 	throwWarning: tr("possivelmente deve ser amenity=fuel");
+	group: tr("Brasil - Verificar");
+}
+
+/* https://overpass-turbo.eu/s/sIB */
+*[name =~ /(?i)^Borrach(aria|eiro)/][shop = tyres][!repair] {
+	throwWarning: tr("borracharia sem ''repair=yes''");
+	suggestAlternative: "repair=yes";
+	group: tr("Brasil - Verificar");
+}
+
+*[name =~ /(?i)^Borrach(aria|eiro)/][shop != tyres] {
+	throwWarning: tr("borracharia sem ''shop=tyres''");
+	suggestAlternative: "shop=tyres";
 	group: tr("Brasil - Verificar");
 }
