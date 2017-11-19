@@ -1,0 +1,611 @@
+meta
+{
+  title: "Experimental rules";
+  version: "2017-11-19";
+  description: "Don't use it. Messages are in Portuguese only.";
+  author: "OpenStreetMap Brasil";
+  watch-modified: true;
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) Um$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " 1");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) Dois$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " 2");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) Três$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " 3");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) Quatro$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " 4");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) Cinco$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " 5");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) Seis$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " 6");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) Sete$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " 7");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) Oito$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " 8");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) Nove$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " 9");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) Dez$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " 10");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) Onze$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " 11");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) Doze$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " 12");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) Treze$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " 13");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) Catorze$/],
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) Quatorze$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " 14");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) Quinze$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " 15");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) Dezesseis$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " 16");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) Dezessete$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " 17");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) Dezoito$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " 18");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) Dezenove$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " 19");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) Vinte$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " 20");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) Vinte e Um$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " 21");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) Vinte e Dois$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " 22");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) Vinte e Três$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " 23");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) Vinte e Quatro$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " 24");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) Vinte e Cinco$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " 25");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) Vinte e Seis$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " 26");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) Vinte e Sete$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " 27");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) Vinto e Oito$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " 28");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) Vinte e Nove$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " 29");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) Trinta$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " 30");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) Trinta e Um$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " 31");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) Trinta e Dois$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " 32");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) Trinta e Três$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " 33");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) Trinta e Quatro$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " 34");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) Trinta e Cinco$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " 35");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) Trinta e Seis$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " 36");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) Trinta e Sete$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " 37");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) Trinta e Oito$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " 38");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) Trinta e Nove$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " 39");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) Quarenta$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " 40");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) Quarenta e Um$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " 41");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) Quarenta e Dois$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " 42");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) Quarenta e Três$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " 43");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) Quarenta e Quatro$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " 44");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) Quarenta e Cinco$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " 45");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) Quarenta e Seis$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " 46");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) Quarenta e Sete$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " 47");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) Quarenta e Oito$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " 48");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) Quarenta e Nove$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " 49");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) Cinquenta$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " 50");
+	group: tr("Experimental");
+}
+
+/* ===================== */
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) 1$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " Um");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) 2$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " Dois");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) 3$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " Três");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) 4$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " Quatro");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) 5$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " Cinco");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) 6$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " Seis");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) 7$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " Sete");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) 8$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " Oito");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) 9$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " Nove");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) 10$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " Dez");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) 11$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " Onze");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) 12$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " Doze");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) 13$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " Treze");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) 14$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " Quatorze");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) 15$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " Quinze");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) 16$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " Dezesseis");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) 17$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " Dezessete");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) 18$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " Dezoito");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) 19$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " Dezenove");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) 20$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " Vinte");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) 21$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " Vinte e Um");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) 22$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " Vinte e Dois");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) 23$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " Vinte e Três");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) 24$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " Vinte e Quatro");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) 25$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " Vinte e Cinco");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) 26$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " Vinte e Seis");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) 27$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " Vinte e Sete");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) 28$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " Vinte e Oito");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) 29$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " Vinte e Nove");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) 30$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " Trinta");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) 31$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " Trinta e Um");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) 32$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " Trinta e Dois");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) 33$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " Trinta e Três");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) 34$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " Trinta e Quatro");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) 35$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " Trinta e Cinco");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) 36$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " Trinta e Seis");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) 37$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " Trinta e Sete");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) 38$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " Trinta e Oito");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) 39$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " Trinta e Nove");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) 40$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " Quarenta");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) 41$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " Quarenta e Um");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) 42$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " Quarenta e Dois");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) 43$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " Quarenta e Três");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) 44$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " Quarenta e Quatro");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) 45$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " Quarenta e Cinco");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) 46$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " Quarenta e Seis");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) 47$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " Quarenta e Sete");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) 48$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " Quarenta e Oito");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) 49$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " Quarenta e Nove");
+	group: tr("Experimental");
+}
+
+way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) 50$/] {
+	throwOther: tr("alternativa de nome de rua");
+	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " Cinquenta");
+	group: tr("Experimental");
+}
