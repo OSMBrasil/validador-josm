@@ -1,7 +1,7 @@
 meta
 {
   title: "Staging rules Brazil";
-  version: "2017-08-02";
+  version: "2017-12-10";
   description: "Staging rules for Brazil. It will eat your food. Messages are in Portuguese only.";
   author: "OpenStreetMap Brasil";
   watch-modified: true;
@@ -148,4 +148,9 @@ way[power = minor_line] > node[man_made = tower] {
 /* "trees" is used as refinement for trees or plants in landuse=orchard */
 *[trees][landuse != orchard] {
 	throwWarning: tr("{0} should be used with landuse=orchard", "{0.key}");
+}
+
+way[place = island]!:closed,
+way[place = islet]!:closed {
+	throwError: tr("áres da ilha não está fechada");
 }
