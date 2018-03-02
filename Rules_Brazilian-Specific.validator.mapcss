@@ -1,7 +1,7 @@
 meta
 {
   title: "Brazilian-specific rules";
-  version: "2017-12-06";
+  version: "2018-03-02";
   description: "Community rules for the most common errors and problems found in Brazil. Messages are in Portuguese only.";
   icon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAYCAMAAACoeN87AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3wUGFhITJtY6OQAAAfhQTFRFABJ5ABx8ABx9AB19AB1+AB5yAB58AB9yACByACB0ACB2ACN0ACN4ACOAACR1ACR4ACV1ACZ1ACZ2ACZ5ACd2ACiEAJc9AJg9AJk7AJk8AJo7AJs6ASh1ASh2ASh3ASh4Aih3Ail4Ayh5Ayl3Ayl4Ayp4BClzBCt4BCyIBJw5BSt5Bit0Bix6Bp05Byx1By16B504B505CC96CJ04CZ04CjB8CzB8CzF8DTJ9DTSKDjN+DzKDEqA2EzeBE6A2FDiFFjqCGj2EJKUyJU2HJaUyJ02JJ6YxKlGJK0+LLFOKMKgwMktfMliNMqgvNE1eOE9dOlFdP1FRQKwrQawrQa0rQq0rRGiXRlpVSFxUSFxVSVxVSW2dUGJYUmNZWHqbWHqhYn6pZbYjZrYjZ5WvZ7cja315bYiub5Sqcrogcrohc7ofdLofdZ6rd6GrfKaugb4dg6izg78diMAbisAai8AajcEaj8Eakb62lb+5nJYmnZktn5osoJstosvAo50rqKItr7+btcsRtswQuMwQucwQ0NMK0dMK0tQK09QK1dQK38gO38gP4MkO4NlK5tkG59kF69oE7NoE8tUB89wD9NcF9dgF9tgF99oD+NsD+d4B/d8A/t8A/98A/+AA/+EA/+IA/+MA/+QA/+UA/+YA/+cA/+gA/+kA////gExgxwAAAAFiS0dEp8C3KwMAAAGISURBVCjPY5AmCBhIVyJpZyeJV4mUeGhTU6i4FG4lUiYl/XPn9hebSOFSIuXbMW/hokUL57X7SmFXYlA4b0qVt4yMd9WUeYUGmEqkDIM753eHM/MLCfEzhXfP7ww2lEJVIuFSNnPepEAGVnYObkEhpsjp82aWuUggKZGSSmmbN3dOb3JebnqCs5KKAFvd/Lnz2lKkpGBKxNxaJs+dPXtharS7T1haQUW8Apf/ktmz505ucRODKNHMnjhrNhAs1ZMTEpJTN/LIKXdVWwYSmTUxSxOiJGMCWMkybTkRKy1FFUFOz9q4hWAlEzI1oRa5NIMsWhxgbyoi4OAoIMJn3TAPZFGzixjCuUmt8+bOr+fVt1Uw11IVcbCsXDB3XmsiwrkgTzuVzpw3PYLFTFlLx8JBI3bGvJmlThJoQacb1DG/J4qRR15BWDSma35HkK4UlgjInze12k9W1q9m2rx8AxzR6NUGicY2LymcicG4qG/u3L4iYyl8SSqksTEEX5ICJUwbG0nKkzcWAABUy60wquZO7gAAAABJRU5ErkJggg==";
   author: "OpenStreetMap Brasil";
@@ -11,97 +11,97 @@ meta
 }
 
 /* rodovia com identificador mas sem o nome real */
-way[name = *ref][highway] {
+way[name = *ref][highway][inside("BR")] {
 	throwWarning: tr("{0} e {1} são iguais; adicionar nome completo da rodovia", "{0.key}", "{0.value}");
 }
 
 /* issue #17 */
-way[highway][name =~ /\b[A-Z]{2,4} (- )?[0-9]{2,3}\b/],
-relation[highway][name =~ /\b[A-Z]{2,3} (- )?[0-9]{2,3}\b/] {
+way[highway][name =~ /\b[A-Z]{2,4} (- )?[0-9]{2,3}\b/][inside("BR")],
+relation[highway][name =~ /\b[A-Z]{2,3} (- )?[0-9]{2,3}\b/][inside("BR")] {
 	throwWarning: tr("rodovia com ref no nome");
 }
 
 /* nome de vias sem logradouro correto */
-way[highway=cycleway][name][name !~ /^(?i)ciclovia .*/],
-way[highway][highway !~ /bridleway|bus_stop|cycleway|crossing|footway|give_way|motorway_junction|path|raceway|rest_area|services|speed_camera|steps|stop/][name][name !~ /^(Aeroporto|Alameda|Área|Avenida|([1-9][0-9]?º )?Beco|Boulevard|Caminho|Campo|Chácara|Colônia|Condomínio|Conjunto|Contorno|Distrito|Elevado|Esplanada|Estação|Estrada|Favela|Fazenda|Feira|Jardim|Ladeira|Lago|Lagoa|Largo|Loteamento|Marginal|Morro|Núcleo|([1-9][0-9]?ª )?Paralela|Parque|Passagem|Passarela|Pátio|Ponte|Praça|Quadra|Recanto|Residencial|Rodoanel|Rodovia|Rotatória|Rua|Servidão|Setor|Sítio|([1-9][0-9]?ª )?Subida|([1-9][0-9]?ª )?Travessa|Trecho|Trevo|Túnel|Vale|Vereda|Via|Viadutos?|Viela|Vila|(Anel|Complexo|Dispositivo) (Rodo)?(V|v)iário) .*/] {
+way[highway=cycleway][name][name !~ /^(?i)ciclovia .*/][inside("BR")],
+way[highway][highway !~ /bridleway|bus_stop|cycleway|crossing|footway|give_way|motorway_junction|path|raceway|rest_area|services|speed_camera|steps|stop/][name][name !~ /^(Aeroporto|Alameda|Área|Avenida|([1-9][0-9]?º )?Beco|Boulevard|Caminho|Campo|Chácara|Colônia|Condomínio|Conjunto|Contorno|Distrito|Elevado|Esplanada|Estação|Estrada|Favela|Fazenda|Feira|Jardim|Ladeira|Lago|Lagoa|Largo|Loteamento|Marginal|Morro|Núcleo|([1-9][0-9]?ª )?Paralela|Parque|Passagem|Passarela|Pátio|Ponte|Praça|Quadra|Recanto|Residencial|Rodoanel|Rodovia|Rotatória|Rua|Servidão|Setor|Sítio|([1-9][0-9]?ª )?Subida|([1-9][0-9]?ª )?Travessa|Trecho|Trevo|Túnel|Vale|Vereda|Via|Viadutos?|Viela|Vila|(Anel|Complexo|Dispositivo) (Rodo)?(V|v)iário) .*/][inside("BR")] {
 	throwWarning: tr("{0} com logradouro ausente, errado ou abreviado", "{0.key}");
 }
 
 /* endereços sem logradouro correto */
-*["addr:street"]["addr:street" !~ /^(Aeroporto|Alameda|Área|Avenida|([1-9][0-9]?º )?Beco|Boulevard|Caminho|Campo|Chácara|Colônia|Condomínio|Conjunto|Contorno|Distrito|Elevado|Esplanada|Estação|Estrada|Favela|Fazenda|Feira|Jardim|Ladeira|Lago|Lagoa|Largo|Loteamento|Marginal|Morro|Núcleo|([1-9][0-9]?ª )?Paralela|Parque|Passagem|Passarela|Pátio|Ponte|Praça|Quadra|Recanto|Residencial|Rodovia|Rotatória|Rua|Servidão|Setor|Sítio|([1-9][0-9]?ª )?Subida|([1-9][0-9]?ª )?Travessa|Trecho|Trevo|Túnel|Vale|Vereda|Via|Viadutos?|Viela|Vila|(Anel|Complexo|Dispositivo) (Rodo)?(V|v)iário) .*/] {
+*["addr:street"]["addr:street" !~ /^(Aeroporto|Alameda|Área|Avenida|([1-9][0-9]?º )?Beco|Boulevard|Caminho|Campo|Chácara|Colônia|Condomínio|Conjunto|Contorno|Distrito|Elevado|Esplanada|Estação|Estrada|Favela|Fazenda|Feira|Jardim|Ladeira|Lago|Lagoa|Largo|Loteamento|Marginal|Morro|Núcleo|([1-9][0-9]?ª )?Paralela|Parque|Passagem|Passarela|Pátio|Ponte|Praça|Quadra|Recanto|Residencial|Rodovia|Rotatória|Rua|Servidão|Setor|Sítio|([1-9][0-9]?ª )?Subida|([1-9][0-9]?ª )?Travessa|Trecho|Trevo|Túnel|Vale|Vereda|Via|Viadutos?|Viela|Vila|(Anel|Complexo|Dispositivo) (Rodo)?(V|v)iário) .*/][inside("BR")] {
 	throwWarning: tr("{0} com logradouro ausente, errado ou abreviado", "{0.key}");
 }
 
 /* possui nome de rua mas não tem tag de highway */
-*[!highway][route != road][!public_transport][type !~ /route|street/][name][name =~ /^(?i)(?u)(alameda|avenida|beco|estrada|ladeira|passarela|rodovia|rotatória|rua|travessa|trevo|viela|(anel|complexo|dispositivo) viário) .*/][name !~ /^(?i)estrada de ferro/] {
+*[!highway][route != road][!public_transport][type !~ /route|street/][name][name =~ /^(?i)(?u)(alameda|avenida|beco|estrada|ladeira|passarela|rodovia|rotatória|rua|travessa|trevo|viela|(anel|complexo|dispositivo) viário) .*/][name !~ /^(?i)estrada de ferro/][inside("BR")] {
 	throwWarning: tr("objeto com nome de via mas sem tag de {0}", "{0.key}");
 	group: tr("Brasil - Verificar");
 }
 
 /* issue #53 */
 /* http://overpass-turbo.eu/s/c56 */
-way[highway = track][name][name =~ /^(?i)(?u)(alameda|avenida|beco|estrada|ladeira|rodovia|rotatória|rua|travessa|trevo|viela) .*/] {
+way[highway = track][name][name =~ /^(?i)(?u)(alameda|avenida|beco|estrada|ladeira|rodovia|rotatória|rua|travessa|trevo|viela) .*/][inside("BR")] {
 	throwWarning: tr("não classificar via como {0}", "{0.tag}");
 	suggestAlternative: "highway=residential";
 	suggestAlternative: "highway=unclassified";
 }
 
 /* possível nome com _ ao invés de espaço */
-*[name =~ /^(?i)(?u)[a-z0-9]+_([a-z0-9]_?)+$/] {
+*[name =~ /^(?i)(?u)[a-z0-9]+_([a-z0-9]_?)+$/][inside("BR")] {
 	throwWarning: tr("utilizar espaço ao invés de underscore");
 	group: tr("Brasil - Verificar");
 }
 
 /* palavras abreviadas */
-*[name =~ /(?i)(^|.* )(Cel|Cmte|Cond|Conj|Dª|Dr|Eng|Gov|Hab|Jd|Jr|Marg|Mun|p\/|Pde|Pe|Pq|Pst|Pref|Profa|Profª|Prof|Res|s\/|Sr(a|ª)?|Sta|Sto|Ver)\.? .*/] {
+*[name =~ /(?i)(^|.* )(Cel|Cmte|Cond|Conj|Dª|Dr|Eng|Gov|Hab|Jd|Jr|Marg|Mun|p\/|Pde|Pe|Pq|Pst|Pref|Profa|Profª|Prof|Res|s\/|Sr(a|ª)?|Sta|Sto|Ver)\.? .*/][inside("BR")] {
 	throwWarning: tr("palavra abreviada em {0}", "{0.key}");
 }
 
-way[highway][name =~ /^(?i)(?u)((via de )?(acesso|ligação)(( (a|à))? propriedade)?|entrada|entroncamento|rampa|retorno|rotat(ó|o)ria|r(ó|o)tula|sa(í|i)da|trevo|estrada( municipal| de terra)?|rua|rodovia|via)( (de acesso|sem nome|projetad(a|o)))?$/] {
+way[highway][name =~ /^(?i)(?u)((via de )?(acesso|ligação)(( (a|à))? propriedade)?|entrada|entroncamento|rampa|retorno|rotat(ó|o)ria|r(ó|o)tula|sa(í|i)da|trevo|estrada( municipal| de terra)?|rua|rodovia|via)( (de acesso|sem nome|projetad(a|o)))?$/][inside("BR")] {
 	throwWarning: tr("{0} com nome supérfluo/incompleto", "{0.key}");
 	suggestAlternative: "destination";
 	suggestAlternative: "description";
 }
 
 /* http://overpass-turbo.eu/s/hTt */
-*[leisure][name =~ /^(?i)(?u)(campo|est(á|a)dio|gin(á|a)sio|quadra)( de (futebol|esportes?))?$/] {
+*[leisure][name =~ /^(?i)(?u)(campo|est(á|a)dio|gin(á|a)sio|quadra)( de (futebol|esportes?))?$/][inside("BR")] {
 	throwWarning: tr("nome supérfluo/incompleto de local de lazer");
 }
 
 /* http://overpass-turbo.eu/s/hTu */
-*[name =~ /^(?i)(?u)((Posto|Unidade (Básica)?) de Sa(u|ú)de|UBS|PSF|hospital)$/] {
+*[name =~ /^(?i)(?u)((Posto|Unidade (Básica)?) de Sa(u|ú)de|UBS|PSF|hospital)$/][inside("BR")] {
 	throwWarning: tr("nome supérfluo/incompleto de local de saúde");
 }
 
 /* http://overpass-turbo.eu/s/hTv */
-*[amenity =~ /^(clinic|doctors|hospital)$/][name =~ /(?i)\bsaude\b/] {
+*[amenity =~ /^(clinic|doctors|hospital)$/][name =~ /(?i)\bsaude\b/][inside("BR")] {
 	throwWarning: tr("erro de ortografia em ''saúde''");
 	group: tr("Brasil - Verificar");
 }
 
 /* http://overpass-turbo.eu/s/jep */
-*[place = farm][name ^= "Sitio "] {
+*[place = farm][name ^= "Sitio "][inside("BR")] {
 	throwWarning: tr("faltando acento em ''Sítio''");
 	group: tr("Brasil - Verificar");
 }
 
 /* http://overpass-turbo.eu/s/hTw */
-*[name =~ /^(?i)(?u)(aldeia|borrach(aria|eiro)|bosque|capela|cemit(é|e)rio|c(ó|o)rrego|escola|estacionamento|fazenda|floresta|hospital|igreja|lago|lagoa|mata( nativa)?|praça|parque|parquinho|posto( de gasolina)?|riacho|rio|rodovi(á|a)ria|vila)$/] {
+*[name =~ /^(?i)(?u)(aldeia|borrach(aria|eiro)|bosque|capela|cemit(é|e)rio|c(ó|o)rrego|escola|estacionamento|fazenda|floresta|hospital|igreja|lago|lagoa|mata( nativa)?|praça|parque|parquinho|posto( de gasolina)?|riacho|rio|rodovi(á|a)ria|vila)$/][inside("BR")] {
 	throwWarning: tr("local com nome supérfluo, incompleto ou descritivo");
 	group: tr("Brasil - Verificar");
 }
 
-*[amenity = parking][name =~ /(?i)^Estacionamento /] {
+*[amenity = parking][name =~ /(?i)^Estacionamento /][inside("BR")] {
 	throwWarning: tr("possível nome descritivo do estacionamento");
 	suggestAlternative: "operator";
 	group: tr("Brasil - Verificar");
 }
 
-way[highway][type = route] {
+way[highway][type = route][inside("BR")] {
 	throwWarning: tr("{0} não deve possuir {1}", "{0.key}", "{1.tag}");
 }
 
-relation[type = route][highway] {
+relation[type = route][highway][inside("BR")] {
 	throwWarning: tr("relação não deve possuir {0}", "{1.key}");
 }
 
@@ -114,175 +114,175 @@ relation[type = route][highway] {
 		SP(A|D|I) NNN/NNN (específico de SP)
 */
 
-way[highway][highway !~ /bus_stop|milestone|motorway_junction|traffic_signals/][ref][ref !~ /^(([A-Z]{2,3}-[0-9]{2,4}|SPM(-| )[0-9]{3} ?(D|E)?|SP(A|D|I)(-| )[0-9]{3}\/[0-9]{3}|[A-Z]{3}-[0-9]{3}\/[0-9]{3});?)+$/] {
+way[highway][highway !~ /bus_stop|milestone|motorway_junction|traffic_signals/][ref][ref !~ /^(([A-Z]{2,3}-[0-9]{2,4}|SPM(-| )[0-9]{3} ?(D|E)?|SP(A|D|I)(-| )[0-9]{3}\/[0-9]{3}|[A-Z]{3}-[0-9]{3}\/[0-9]{3});?)+$/][inside("BR")] {
 	throwWarning: tr("{0} fora do padrão ''sigla-numeração'' ou separador de múltiplos valores diferente de '';''", "{2.key}");
 	group: tr("Brasil - Verificar");
 }
 
-way[highway][!ref][name =~ /.*([A-Z]{2,3}-[0-9]{2,4}|SPM(-| )[0-9]{3} ?(D|E)?|SP(A|D|I)(-| )[0-9]{3}\/[0-9]{3}|[A-Z]{3}-[0-9]{3}\/[0-9]{3}).*/] {
+way[highway][!ref][name =~ /.*([A-Z]{2,3}-[0-9]{2,4}|SPM(-| )[0-9]{3} ?(D|E)?|SP(A|D|I)(-| )[0-9]{3}\/[0-9]{3}|[A-Z]{3}-[0-9]{3}\/[0-9]{3}).*/][inside("BR")] {
 	throwWarning: tr("utilizar o código/sigla da rodovia também na tag {0}", "{1.key}");
 	group: tr("Brasil - Verificar");
 }
 
-way[highway][name =~ /Rodovia ([A-Z]{2,3}-[0-9]{2,4})/] {
+way[highway][name =~ /Rodovia ([A-Z]{2,3}-[0-9]{2,4})/][inside("BR")] {
 	throwWarning: tr("nome incorreto de rodovia; utilizar o nome oficial ou apenas ref");
 	group: tr("Brasil - Verificar");
 }
 
 /* nomes desnecessários */
-way[name = *"addr:street"][highway],
-*[designation = *"addr:housename"],
-*[ref = *designation],
-*[ref = *old_ref],
-*[name = *"addr:housename"],
-*[name = *designation],
-*[name = *alt_name],
-*[name = *int_name],
-*[name = *loc_name],
-*[name = *nat_name],
-*[name = *official_name],
-*[name = *old_name],
-*[name = *reg_name],
-*[name = *short_name],
-*[name = *sorting_name] {
+way[name = *"addr:street"][highway][inside("BR")],
+*[designation = *"addr:housename"][inside("BR")],
+*[ref = *designation][inside("BR")],
+*[ref = *old_ref][inside("BR")],
+*[name = *"addr:housename"][inside("BR")],
+*[name = *designation][inside("BR")],
+*[name = *alt_name][inside("BR")],
+*[name = *int_name][inside("BR")],
+*[name = *loc_name][inside("BR")],
+*[name = *nat_name][inside("BR")],
+*[name = *official_name][inside("BR")],
+*[name = *old_name][inside("BR")],
+*[name = *reg_name][inside("BR")],
+*[name = *short_name][inside("BR")],
+*[name = *sorting_name][inside("BR")] {
 	throwWarning: tr("{0} e {1} são iguais; remover chave {1} desnecessária", "{0.key}", "{0.value}");
 	fixRemove: "{0.value}";
 	group: tr("Brasil - Correções e melhorias");
 }
 
 /* source estranhamente igual o name */
-*[source = *name] {
+*[source = *name][inside("BR")] {
 	throwWarning: tr("{0} e {1} são iguais", "{0.key}", "{0.value}");
 	group: tr("Brasil - Verificar");
 }
 
-*[name =~ /(?i)(?u)((sem (denomina(ç|c)(ã|a)o|nome|sa(i|í)da))|desconhecido|n(ã|a)o conhecido)/] {
+*[name =~ /(?i)(?u)((sem (denomina(ç|c)(ã|a)o|nome|sa(i|í)da))|desconhecido|n(ã|a)o conhecido)/][inside("BR")] {
 	throwWarning: tr("objeto com nomenclatura incorreta");
 	suggestAlternative: "noname";
 }
 
 /* https://overpass-turbo.eu/s/sIK */
-node[maxheight][barrier != height_restrictor][!traffic_sign],
-node[maxspeed][highway != speed_camera][!traffic_sign] {
+node[maxheight][barrier != height_restrictor][!traffic_sign][inside("BR")],
+node[maxspeed][highway != speed_camera][!traffic_sign][inside("BR")] {
 	throwWarning: tr("{0} não deve ser utilizado em nó; utilizar a restrição na via", "{0.key}");
 }
 
-node[noname?] {
+node[noname?][inside("BR")] {
 	throwWarning: tr("uso suspeito de {0} em nó", "{0.key}");
 	group: tr("Brasil - Verificar");
 }
 
 /* designation é uma chave utilizada apenas no Reino Unido, sem uso no Brasil */
 /* http://overpass-turbo.eu/s/dlY */
-*[designation] {
+*[designation][inside("BR")] {
 	throwWarning: tr("{0} é uma chave utilizada apenas no Reino Unido", "{0.key}");
 	suggestAlternative: "description";
 	suggestAlternative: "name";
 }
 
 /* operador da rodovia; DER (Departamento de Estradas de Rodagem) ou concessionárias */
-way[highway =~ /^(trunk|motorway)$/][!operator] {
+way[highway =~ /^(trunk|motorway)$/][!operator][inside("BR")] {
 	throwWarning: tr("ausência de \"{0}\" na {1}", "{1.key}", "{0.key}");
 }
 
 /* provalvemente o tipo dessas vias não deve ser link */
-way[highway $= _link][name =~ /(Alameda|Avenida|Rua|Travessa|Viela) .*/] {
+way[highway $= _link][name =~ /(Alameda|Avenida|Rua|Travessa|Viela) .*/][inside("BR")] {
 	throwWarning: tr("{0} classificado incorretamente", tag("highway"));
 	group: tr("Brasil - Verificar");
 }
 
 /* provavelmente estas vias não possuem ref */
-way[highway][name =~ /(Alameda|Avenida|Rua|Travessa|Viela) .*/][ref] {
+way[highway][name =~ /(Alameda|Avenida|Rua|Travessa|Viela) .*/][ref][inside("BR")] {
 	throwWarning: tr("possível uso desnecessário/errado de ref em {0}={1}", "{0.key}", tag("highway"));
 	group: tr("Brasil - Verificar");
 }
 
 /* saídas de rodovias devem ter nome e/ou referência */
-node[highway = motorway_junction][!name][!ref] {
+node[highway = motorway_junction][!name][!ref][inside("BR")] {
 	throwWarning: tr("{0} sem pelo menos uma das tags: {1} ou {2}", "{0.value}", "{1.key}", "{2.key}");
 }
 
 /* é útil ter o destino das saídas de rodovias */
-way[highway $= _link][!destination] {
+way[highway $= _link][!destination][inside("BR")] {
 	throwOther: tr("link sem tag {0}", "{1.key}");
 }
 
-*[place =~ /hamlet|isolated_dwelling|town|village/][population >= 100000] {
+*[place =~ /hamlet|isolated_dwelling|town|village/][population >= 100000][inside("BR")] {
 	throwWarning: tr("local com 100.000 habitantes ou mais deve ser classificado como city");
 	fixAdd: "place=city";
 	group: tr("Brasil - Correções e melhorias");
 }
 
-*[place =~ /city|hamlet|isolated_dwelling|village/][population >= 10000][population < 100000] {
+*[place =~ /city|hamlet|isolated_dwelling|village/][population >= 10000][population < 100000][inside("BR")] {
 	throwWarning: tr("local com população entre 10.000 e 100.000 deve ser classificado como town");
 	fixAdd: "place=town";
 	group: tr("Brasil - Correções e melhorias");
 }
 
-*[place][place !~ /hamlet|island|isolated_dwelling|neighbourhood|suburb|village/][population < 10000] {
+*[place][place !~ /hamlet|island|isolated_dwelling|neighbourhood|suburb|village/][population < 10000][inside("BR")] {
 	throwWarning: tr("local com menos de 10.000 habitantes deve ser classificado como village");
 	fixAdd: "place=village";
 	group: tr("Brasil - Correções e melhorias");
 }
 
-*[place = city][!population],
-*[place = town][!population],
-*[place = village][!population] {
+*[place = city][!population][inside("BR")],
+*[place = town][!population][inside("BR")],
+*[place = village][!population][inside("BR")] {
 	throwWarning: tr("{0} sem tag de população (population)", "{0.value}");
 }
 
-*[place = city][!name],
-*[place = town][!name],
-*[place = village][!name] {
+*[place = city][!name][inside("BR")],
+*[place = town][!name][inside("BR")],
+*[place = village][!name][inside("BR")] {
 	throwWarning: tr("{0} sem nome", "{0.value}");
 }
 
 /* cidade não deve possuir addr:city, nem suburb deve possuir addr:suburb */
-node[place =~ /village|town|city/]["addr:city" = *name],
-area[place =~ /village|town|city/]["addr:city" = *name],
-node[place = suburb]["addr:suburb" = *name],
-area[place = suburb]["addr:suburb" = *name] {
+node[place =~ /village|town|city/]["addr:city" = *name][inside("BR")],
+area[place =~ /village|town|city/]["addr:city" = *name][inside("BR")],
+node[place = suburb]["addr:suburb" = *name][inside("BR")],
+area[place = suburb]["addr:suburb" = *name][inside("BR")] {
 	throwError: tr("não deve possuir {0}", "{1.key}");
 	fixRemove: "{1.key}";
 	group: tr("Brasil - Correções e melhorias");
 }
 
-*["addr:city" =~ /(,|( |-) ?[A-Z]{2})/] {
+*["addr:city" =~ /(,|( |-) ?[A-Z]{2})/][inside("BR")] {
 	throwWarning: tr("{0} deve conter apenas o nome da cidade", "{0.key}");
 }
 
-*[name =~ /^(?i)(?u)(Faz\.|Fazenda|Sítio|Chácara)/][place][place !~ /city|farm|neighbourhood|suburb|town|village/] {
+*[name =~ /^(?i)(?u)(Faz\.|Fazenda|Sítio|Chácara)/][place][place !~ /city|farm|neighbourhood|suburb|town|village/][inside("BR")] {
 	throwWarning: tr("objeto talvez deva ser {0}=farm", "{1.key}");
 	group: tr("Brasil - Verificar");
 }
 
-*[place][name =~ /^(?i)Bairro\b/][name !~ /^(?i)Bairro d(a|e|o)s?\b/] {
+*[place][name =~ /^(?i)Bairro\b/][name !~ /^(?i)Bairro d(a|e|o)s?\b/][inside("BR")] {
 	throwWarning: tr("objeto talvez não deva ter ''Bairro'' no nome");
 	group: tr("Brasil - Verificar");
 }
 
 /* áreas com nome de ilha mas sem place=island ou place=islet */
-area:closed[name =~ /^(?i)(Ilha|Ilhota|Ilhote)\b/][!shop][!amenity][!building][place != island][eval(areasize()) > 1000000] {
+area:closed[name =~ /^(?i)(Ilha|Ilhota|Ilhote)\b/][!shop][!amenity][!building][place != island][eval(areasize()) > 1000000][inside("BR")] {
 	throwWarning: tr("ausência de place=island");
 	group: tr("Brasil - Verificar");
 }
 
-area:closed[name =~ /^(?i)(Ilha|Ilhota|Ilhote)\b/][!shop][!amenity][!building][place != islet][eval(areasize()) <= 1000000] {
+area:closed[name =~ /^(?i)(Ilha|Ilhota|Ilhote)\b/][!shop][!amenity][!building][place != islet][eval(areasize()) <= 1000000][inside("BR")] {
 	throwWarning: tr("ausência de place=islet");
 	group: tr("Brasil - Verificar");
 }
 
-node[place =~ /^(island|islet)$/] {
+node[place =~ /^(island|islet)$/][inside("BR")] {
 	throwWarning: tr("representar a ilha, se possível, como uma área");
 	group: tr("Brasil - Verificar");
 }
 
-*[iata = "0"] {
+*[iata = "0"][inside("BR")] {
 	throwWarning: tr("{0} com valor = {1}", "{0.key}", "{0.value}");
 }
 
 /* Faculdades, centros universitário e universidades devem ser todas amenity=university */
-*[amenity =~ /college|school/][name =~ /^(?i)(?u)(Centro Universitário|Faculdades?|FATEC|Instituto Federal)\b/] {
+*[amenity =~ /college|school/][name =~ /^(?i)(?u)(Centro Universitário|Faculdades?|FATEC|Instituto Federal)\b/][inside("BR")] {
 	throwWarning: tr("estabelecimento de ensino classificado incorretamente");
 	suggestAlternative: "amenity=university";
 	fixAdd: "{0.key}=university";
@@ -290,125 +290,125 @@ node[place =~ /^(island|islet)$/] {
 }
 
 /* Escolas técnicas/profissionalizantes devem ser amenity=college */
-*[amenity = school][name =~ /^(?i)(?u)(SENAC|SENAI|Serviço Nacional de Aprendizagem)/],
-*[amenity =~ /school|university/][name =~ /(?i)(?u)\b(Centro Paula Souza|Escola Técnica|ETEC)\b/] {
+*[amenity = school][name =~ /^(?i)(?u)(SENAC|SENAI|Serviço Nacional de Aprendizagem)/][inside("BR")],
+*[amenity =~ /school|university/][name =~ /(?i)(?u)\b(Centro Paula Souza|Escola Técnica|ETEC)\b/][inside("BR")] {
 	throwWarning: tr("estabelecimento de ensino classificado incorretamente");
 	suggestAlternative: "amenity=college";
 	fixAdd: "{0.key}=college";
 	group: tr("Brasil - Correções e melhorias");
 }
 
-*[amenity = school][name =~ /^(?i)(?u)(auto(-| )?( moto )?escola|centro de formação de condutores|cfc|moto escola)\b/] {
+*[amenity = school][name =~ /^(?i)(?u)(auto(-| )?( moto )?escola|centro de formação de condutores|cfc|moto escola)\b/][inside("BR")] {
 	throwWarning: tr("autoescola classificada incorretamente");
 	suggestAlternative: "amenity=driving_school";
 	fixAdd: "{0.key}=driving_school";
 	group: tr("Brasil - Correções e melhorias");
 }
 
-*[amenity = school][name =~ /^(?i)creche\b/] {
+*[amenity = school][name =~ /^(?i)creche\b/][inside("BR")] {
 	throwWarning: tr("creche classificada incorretamente");
 	suggestAlternative: "amenity=kindergarten";
 	fixAdd: "{0.key}=kindergarten";
 	group: tr("Brasil - Correções e melhorias");
 }
 
-way[tag("amenity") = parent_tag("amenity")] ∈ *[amenity][amenity != parking],
-relation[tag("amenity") = parent_tag("amenity")] ∈ *[amenity][amenity != parking] {
+way[tag("amenity") = parent_tag("amenity")] ∈ *[amenity][amenity != parking][inside("BR")],
+relation[tag("amenity") = parent_tag("amenity")] ∈ *[amenity][amenity != parking][inside("BR")] {
 	throwWarning: tr("{0} dentro de {1}", concat("amenity=", tag("amenity")), concat("amenity=", tag("amenity")));
 }
 
-way[tag("leisure") = parent_tag("leisure")] ∈ *[leisure],
-relation[tag("leisure") = parent_tag("leisure")] ∈ *[leisure] {
+way[tag("leisure") = parent_tag("leisure")] ∈ *[leisure][inside("BR")],
+relation[tag("leisure") = parent_tag("leisure")] ∈ *[leisure][inside("BR")] {
 	throwWarning: tr("{0} dentro de {1}", concat("leisure=", tag("leisure")), concat("leisure=", tag("leisure")));
 }
 
-way[tag("tourism") = parent_tag("tourism")] ∈ *[tourism],
-relation[tag("tourism") = parent_tag("tourism")] ∈ *[tourism] {
+way[tag("tourism") = parent_tag("tourism")] ∈ *[tourism][inside("BR")],
+relation[tag("tourism") = parent_tag("tourism")] ∈ *[tourism][inside("BR")] {
 	throwWarning: tr("{0} dentro de {1}", concat("tourism=", tag("tourism")), concat("tourism=", tag("tourism")));
 }
 
-way[tag("shop") = parent_tag("shop")] ∈ *[shop],
-relation[tag("shop") = parent_tag("shop")] ∈ *[shop] {
+way[tag("shop") = parent_tag("shop")] ∈ *[shop][inside("BR")],
+relation[tag("shop") = parent_tag("shop")] ∈ *[shop][inside("BR")] {
 	throwWarning: tr("{0} dentro de {1}", concat("shop=", tag("shop")), concat("shop=", tag("shop")));
 }
 
-way[tag("power") = parent_tag("power")] ∈ *[power],
-relation[tag("power") = parent_tag("power")] ∈ *[power] {
+way[tag("power") = parent_tag("power")] ∈ *[power][inside("BR")],
+relation[tag("power") = parent_tag("power")] ∈ *[power][inside("BR")] {
 	throwWarning: tr("{0} dentro de {1}", concat("power=", tag("power")), concat("power=", tag("power")));
 }
 
-*[place = islet] ∈ *[place =~ /^(island|islet)$/],
-*[place = island] ∈ *[place =~ /^(island|islet)$/] {
+*[place = islet] ∈ *[place =~ /^(island|islet)$/][inside("BR")],
+*[place = island] ∈ *[place =~ /^(island|islet)$/][inside("BR")] {
 	throwWarning: tr("ilha dentro de ilha");
 }
 
-*[tag("aeroway") = parent_tag("aeroway")] ∈ *[aeroway] {
+*[tag("aeroway") = parent_tag("aeroway")] ∈ *[aeroway][inside("BR")] {
 	throwWarning: tr("{0} dentro de {1}", concat("aeroway=", tag("aeroway")), concat("aeroway=", tag("aeroway")));
 }
 
-*[amenity = university] ∈ *[amenity = college],
-*[amenity = university] ∈ *[amenity = school] {
+*[amenity = university] ∈ *[amenity = college][inside("BR")],
+*[amenity = university] ∈ *[amenity = school][inside("BR")] {
 	throwWarning: tr("{0} dentro de {1}", "amenity=university", "{0.tag}");
 }
 
-*[name =~ /^(?i)(?u)Subestação .*/][power][power != substation],
-*[name =~ /^(?i)(?u)Fórum .*/][amenity][amenity != courthouse],
-*[name =~ /^(?i)Hospital .*/][building][building != hospital],
-*[name =~ /^(?i)Universidade .*/][building][building != university],
-*[name =~ /^(?i)Escola .*/][building][building != school],
-*[name =~ /^(?i)Hotel .*/][building][building != hotel],
-*[name =~ /^(?i)Capela .*/][building][building != chapel],
-*[name =~ /^(?i)Igreja .*/][building][building != church],
-*[name =~ /^(?i)Catedral .*/][building][building != cathedral],
-*[name =~ /^(?i)Fazenda .*/][building][building != farm],
-*[name =~ /^(?i)Supermercado .*/][building][building != supermarket] {
+*[name =~ /^(?i)(?u)Subestação .*/][power][power != substation][inside("BR")],
+*[name =~ /^(?i)(?u)Fórum .*/][amenity][amenity != courthouse][inside("BR")],
+*[name =~ /^(?i)Hospital .*/][building][building != hospital][inside("BR")],
+*[name =~ /^(?i)Universidade .*/][building][building != university][inside("BR")],
+*[name =~ /^(?i)Escola .*/][building][building != school][inside("BR")],
+*[name =~ /^(?i)Hotel .*/][building][building != hotel][inside("BR")],
+*[name =~ /^(?i)Capela .*/][building][building != chapel][inside("BR")],
+*[name =~ /^(?i)Igreja .*/][building][building != church][inside("BR")],
+*[name =~ /^(?i)Catedral .*/][building][building != cathedral][inside("BR")],
+*[name =~ /^(?i)Fazenda .*/][building][building != farm][inside("BR")],
+*[name =~ /^(?i)Supermercado .*/][building][building != supermarket][inside("BR")] {
 	throwWarning: tr("{0} provavelmente deveria ser {1}", "{2.key}", "{2.value}");
 	fixAdd: "{2.key}={2.value}";
 	group: tr("Brasil - Correções e melhorias");
 }
 
-*[name =~ /^(?i)(?u)(AM(A|E)|(Posto|Unidade (Básica)?) de Sa(u|ú)de|UBS|PSF).*/][amenity = hospital] {
+*[name =~ /^(?i)(?u)(AM(A|E)|(Posto|Unidade (Básica)?) de Sa(u|ú)de|UBS|PSF).*/][amenity = hospital][inside("BR")] {
 	throwWarning: tr("postos/unidades de saúde devem ser amenity=clinic");
 }
 
-*[name =~ /^(?i)\bSAMU\b/][amenity =~ /clinic|doctors|hospital/] {
+*[name =~ /^(?i)\bSAMU\b/][amenity =~ /clinic|doctors|hospital/][inside("BR")] {
 	throwWarning: tr("SAMU classificado de forma errada");
 	suggestAlternative: "emergency=ambulance_station";
 }
 
-node:unconnected:in-downloaded-area[power = pole],
-node:unconnected:in-downloaded-area[power = tower],
-node:unconnected:in-downloaded-area[highway = milestone] {
+node:unconnected:in-downloaded-area[power = pole][inside("BR")],
+node:unconnected:in-downloaded-area[power = tower][inside("BR")],
+node:unconnected:in-downloaded-area[highway = milestone][inside("BR")] {
 	throwWarning: tr("{0} deve fazer parte de um caminho e não ficar solto", "{2.tag}");
 }
 
 relation > node { set .is_in_relation }
 
-node:unconnected:in-downloaded-area!.is_in_relation[highway = speed_camera] {
+node:unconnected:in-downloaded-area!.is_in_relation[highway = speed_camera][inside("BR")] {
 	throwWarning: tr("{0} deve fazer parte de um caminho e não ficar solto", "{3.tag}");
 }
 
-way[highway = give_way],
-way[highway = mini_roundabout],
-way[highway = stop],
-way[highway = turning_circle],
-relation[highway = give_way],
-relation[highway = mini_roundabout],
-relation[highway = stop],
-relation[highway = turning_circle] {
+way[highway = give_way][inside("BR")],
+way[highway = mini_roundabout][inside("BR")],
+way[highway = stop][inside("BR")],
+way[highway = turning_circle][inside("BR")],
+relation[highway = give_way][inside("BR")],
+relation[highway = mini_roundabout][inside("BR")],
+relation[highway = stop][inside("BR")],
+relation[highway = turning_circle][inside("BR")] {
 	throwWarning: tr("{0} deve ser utilizado apenas em nós", "{0.tag}");
 }
 
-node[highway =~ /^(give_way|mini_roundabout|stop|turning_circle)$/][name] {
+node[highway =~ /^(give_way|mini_roundabout|stop|turning_circle)$/][name][inside("BR")] {
 	throwWarning: tr("objeto não deve possuir {0}", "{1.key}");
 }
 
 /* --> issue #52 */
-node:connection[highway =~ /^(give_way|stop)$/] {
+node:connection[highway =~ /^(give_way|stop)$/][inside("BR")] {
 	throwWarning: tr("{0} não deve estar em cruzamentos", concat("highway=", tag("highway")));
 }
 
-node!:connection:in-downloaded-area[highway = mini_roundabout] {
+node!:connection:in-downloaded-area[highway = mini_roundabout][inside("BR")] {
 	throwWarning: tr("{0} conectado apenas a uma via", "{2.tag}");
 	suggestAlternative: "highway=turning_circle";
 	suggestAlternative: "highway=turning_loop";
@@ -417,7 +417,7 @@ node!:connection:in-downloaded-area[highway = mini_roundabout] {
 
 way[highway =~ /^(cycleway|footway|path|steps|track)$/] > node { set .not_on_road }
 
-node:connection:in-downloaded-area!.not_on_road[highway =~ /^(turning_circle|turning_loop)$/] {
+node:connection:in-downloaded-area!.not_on_road[highway =~ /^(turning_circle|turning_loop)$/][inside("BR")] {
 	throwWarning: tr("possível uso incorreto de highway={0}", tag(highway));
 	suggestAlternative: "highway=mini_roundabout";
 	group: tr("Brasil - Verificar");
@@ -428,78 +428,78 @@ way[highway] >[index = -1] node { set .last_highway_node }
 
 way[highway][oneway?] > node!.first_highway_node!.last_highway_node { set .middle_oneway }
 
-node!:connection:in-downloaded-area.middle_oneway[highway =~ /^(turning_circle|turning_loop)$/] {
+node!:connection:in-downloaded-area.middle_oneway[highway =~ /^(turning_circle|turning_loop)$/][inside("BR")] {
 	throwWarning: tr("highway={0} utilizado em via de mão única", tag(highway));
 	group: tr("Brasil - Verificar");
 }
 
-node!:connection:in-downloaded-area[highway = motorway_junction] {
+node!:connection:in-downloaded-area[highway = motorway_junction][inside("BR")] {
 	throwWarning: tr("highway=motorway_junction deve ligar a saída com a rodovia");
 }
 /* issue #52 <-- */
 
-node[highway=speed_camera][!maxspeed],
-relation[enforcement=maxspeed][!maxspeed],
-relation[enforcement=maxheight][!maxheight],
-relation[enforcement=maxweight][!maxweight] {
+node[highway=speed_camera][!maxspeed][inside("BR")],
+relation[enforcement=maxspeed][!maxspeed][inside("BR")],
+relation[enforcement=maxheight][!maxheight][inside("BR")],
+relation[enforcement=maxweight][!maxweight][inside("BR")] {
 	throwWarning: tr("adicionar {0} ao {1}", "{1.key}", "{0.tag}");
 }
 
-*[crossing][!highway][!railway] {
+*[crossing][!highway][!railway][inside("BR")] {
 	throwWarning: tr("{0} deve ser utilizado com {1}={0} ou {2}={0}", "{0.key}", "{1.key}", "{2.key}");
 }
 
-*[aeroway][designation =~ /^[A-Z]{4}$/][!icao],
-*[aeroway][ref =~ /^[A-Z]{4}$/][!icao] {
+*[aeroway][designation =~ /^[A-Z]{4}$/][!icao][inside("BR")],
+*[aeroway][ref =~ /^[A-Z]{4}$/][!icao][inside("BR")] {
 	throwWarning: tr("{0} provavelmente deve ser utilizado como {1}", "{1.key}", "{2.key}");
 	fixChangeKey: "{1.key} => {2.key}";
 	group: tr("Brasil - Correções e melhorias");
 }
 
-*[access = permissive] {
+*[access = permissive][inside("BR")] {
 	throwWarning: tr("{0} deve ser utilizado apenas em vias privadas com permissão de acesso e não em vias de acesso público", "{0.tag}");
 	group: tr("Brasil - Verificar");
 }
 
 /* nomes e ruas escritos totalmente em maiúsculo */
-*[name =~ /^(?U)(\p{Upper}| )+$/],
-*["addr:street" =~ /^(?U)(\p{Upper}| )+$/] {
+*[name =~ /^(?U)(\p{Upper}| )+$/][inside("BR")],
+*["addr:street" =~ /^(?U)(\p{Upper}| )+$/][inside("BR")] {
 	throwWarning: tr("{0} totalmente em maiúsculo; usar nome completo ou short_name se for sigla", "{0.key}");
 	group: tr("Brasil - Verificar");
 }
 
-*["addr:postcode" =~ /^[0-9]{8}$/] {
+*["addr:postcode" =~ /^[0-9]{8}$/][inside("BR")] {
 	throwWarning: tr("formato do CEP pode ser melhorado");
 	fixAdd: concat("addr:postcode=", substring(tag("addr:postcode"), 0, 5), "-", substring(tag("addr:postcode"), 5, 8));
 	group: tr("Brasil - Correções e melhorias");
 }
 
-*[postal_code =~ /^[0-9]{8}$/] {
+*[postal_code =~ /^[0-9]{8}$/][inside("BR")] {
 	throwWarning: tr("formato do CEP pode ser melhorado");
 	fixAdd: concat("postal_code=", substring(tag("postal_code"), 0, 5), "-", substring(tag("postal_code"), 5, 8));
 	group: tr("Brasil - Correções e melhorias");
 }
 
-*["addr:postcode" =~ /^[0-9]{5}( |\.)[0-9]{3}$/] {
+*["addr:postcode" =~ /^[0-9]{5}( |\.)[0-9]{3}$/][inside("BR")] {
 	throwWarning: tr("formato do CEP pode ser melhorado");
 	fixAdd: concat("addr:postcode=", replace(replace(tag("addr:postcode"), " ", "-"), ".", "-"));
 	group: tr("Brasil - Correções e melhorias");
 }
 
-*["postal_code" =~ /^[0-9]{5}( |\.)[0-9]{3}$/] {
+*["postal_code" =~ /^[0-9]{5}( |\.)[0-9]{3}$/][inside("BR")] {
 	throwWarning: tr("formato do CEP pode ser melhorado");
 	fixAdd: concat("postal_code=", replace(replace(tag("postal_code"), " ", "-"), ".", "-"));
 	group: tr("Brasil - Correções e melhorias");
 }
 
-*["addr:postcode"]["addr:postcode" !~ /^[0-9]{5}-[0-9]{3}$/],
-*[postal_code][postal_code !~ /^[0-9]{5}-[0-9]{3}$/] {
+*["addr:postcode"]["addr:postcode" !~ /^[0-9]{5}-[0-9]{3}$/][inside("BR")],
+*[postal_code][postal_code !~ /^[0-9]{5}-[0-9]{3}$/][inside("BR")] {
 	throwWarning: tr("{0} (CEP) em formato diferente de NNNNN-NNN", "{0.key}");
 	group: tr("Brasil - Verificar")
 }
 
-way[highway]["addr:postcode"][highway != services],
-area[place]["addr:postcode"] {
+way[highway]["addr:postcode"][highway != services][inside("BR")],
+area[place]["addr:postcode"][inside("BR")] {
 	throwWarning: tr("uso incorreto de {0}", "{1.key}", "{0.key}");
 	suggestAlternative: "postal_code";
 	fixChangeKey: "{1.key} => postal_code";
@@ -507,88 +507,88 @@ area[place]["addr:postcode"] {
 }
 
 /* vários valores para source devem estar na mesma chave, separados por ';' */
-*[alt_source][source] {
+*[alt_source][source][inside("BR")] {
 	throwWarning: tr("{0} deve estar incluído em {1}, separado por '';'' caso necessário", "{0.key}", "{1.key}");
 }
 
 /* landuse deve conter algum valor que não seja yes */
-*[landuse?] {
+*[landuse?][inside("BR")] {
 	throwWarning: tr("especificar valor correto para {0} ao invés de ''{1}''", "{0.key}", tag("landuse"));
 }
 
 /* deve-se utilizar official_name, alt_name ou name ao invés de long_name */
-*[long_name] {
+*[long_name][inside("BR")] {
 	throwWarning: tr("chave inválida: {0}", "{0.key}");
 	suggestAlternative: "official_name";
 	suggestAlternative: "alt_name";
 	suggestAlternative: "name";
 }
 
-*["building:levels" < 1] {
+*["building:levels" < 1][inside("BR")] {
 	throwWarning: tr("{0} com valor inválido", "{0.key}");
 	group: tr("Brasil - Verificar");
 }
 
 /* hires não deve existir mais no Brasil */
-*[hires?] {
+*[hires?][inside("BR")] {
 	throwWarning: tr("não se deve utilizar {0} para demarcar áreas de cobertura de imagem", "{0.key}");
 }
 
 /* é bom especificar o tipo de torre */
-node[man_made = tower][!"tower:type"] {
+node[man_made = tower][!"tower:type"][inside("BR")] {
 	throwOther: tr("ausência do tipo de torre ({0})", "{1.key}");
 }
 
 /* https://github.com/OSMBrasil/validador-josm/issues/54 */
 /* requer JOSM ≥ 7761 */
-*[tourism = motel][amenity != love_hotel],
-*[name =~ /(?i)\bmotel\b/][amenity != love_hotel] {
+*[tourism = motel][amenity != love_hotel][inside("BR")],
+*[name =~ /(?i)\bmotel\b/][amenity != love_hotel][inside("BR")] {
 	throwWarning: tr("ausência de tag ''{0}''", "{1.value}");
 	fixAdd: "{1.key}={1.value}";
 	group: tr("Brasil - Correções e melhorias");
 }
 
-*[amenity = love_hotel][tourism][tourism != motel] {
+*[amenity = love_hotel][tourism][tourism != motel][inside("BR")] {
 	throwWarning: tr("provavelmente deve ser ''{0}={1}''", "{2.key}", "{2.value}");
 	group: tr("Brasil - Verificar");
 }
 
-*[name =~ /(?i)^motel\b/][tourism != motel] {
+*[name =~ /(?i)^motel\b/][tourism != motel][inside("BR")] {
 	throwWarning: tr("motel classificado incorretamente");
 	suggestAlternative: "tourism=motel";
 	group: tr("Brasil - Verificar");
 }
 
-*[aeroway = aerodrome][!icao],
-*[aeroway = helipad][!icao] {
+*[aeroway = aerodrome][!icao][inside("BR")],
+*[aeroway = helipad][!icao][inside("BR")] {
 	throwOther: tr("{0} sem tag {1}", "{0.value}", "{1.key}");
 }
 
-*[aeroway = aerodrome][name =~ /(?i).*airport$/],
-*[aeroway = helipad][name =~ /(?i).*heliport$/] {
+*[aeroway = aerodrome][name =~ /(?i).*airport$/][inside("BR")],
+*[aeroway = helipad][name =~ /(?i).*heliport$/][inside("BR")] {
 	throwWarning: tr("{0} com nome em inglês", "{0.tag}");
 	group: tr("Brasil - Verificar");
 }
 
-*[aeroway = aerodrome][name =~ /(?i)^Aer(ódromo|oporto) de.*/],
-*[aeroway = helipad][name =~ /(?i)^Helipo(n|r)to.*/] {
+*[aeroway = aerodrome][name =~ /(?i)^Aer(ódromo|oporto) de.*/][inside("BR")],
+*[aeroway = helipad][name =~ /(?i)^Helipo(n|r)to.*/][inside("BR")] {
 	throwWarning: tr("conferir se existe nome oficial do {0}", "{0.value}");
 	group: tr("Brasil - Verificar");
 }
 
-*[aeroway = aerodrome][ref] {
+*[aeroway = aerodrome][ref][inside("BR")] {
 	throwWarning: tr("''{0}'' não faz sentido em aeroporto", "{1.key}");
 	group: tr("Brasil - Verificar");
 }
 
-node[surface][!traffic_calming] {
+node[surface][!traffic_calming][inside("BR")] {
 	throwWarning: tr("superfície ({0}) erroneamente definida no nó", "{0.key}");
 	fixRemove: "{0.key}";
 	group: tr("Brasil - Correções e melhorias");
 }
 
 /* issue #78 */
-way[waterway][tunnel = yes] {
+way[waterway][tunnel = yes][inside("BR")] {
 	throwWarning: tr("uso incorreto de {0}", "{1.tag}");
 	suggestAlternative: "tunnel=culvert";
 	fixAdd: "tunnel=culvert";
@@ -596,81 +596,81 @@ way[waterway][tunnel = yes] {
 }
 
 /* highway/waterway com layer negativo e sem túnel */
-way[highway][layer < 0][!tunnel],
-*[waterway][layer < 0][!tunnel] {
+way[highway][layer < 0][!tunnel][inside("BR")],
+*[waterway][layer < 0][!tunnel][inside("BR")] {
 	throwWarning: tr("{0} negativo de {1} com ausência de {2}", "{1.key}", "{0.key}", "{2.key}");
 	group: tr("Brasil - Verificar");
 }
 
 /* highway/waterway com layer positivo e sem ponte */
-way[highway][layer > 0][!bridge][highway != bus_stop],
-*[waterway][layer > 0][!bridge] {
+way[highway][layer > 0][!bridge][highway != bus_stop][inside("BR")],
+*[waterway][layer > 0][!bridge][inside("BR")] {
 	throwWarning: tr("{0} positivo de {1} com ausência de {2}", "{1.key}", "{0.key}", "{2.key}");
 	group: tr("Brasil - Verificar");
 }
 
 /* layer não faz sentido em outros objetos */
-*[layer][!building][!highway][man_made!=pipeline][!railway][!waterway] {
+*[layer][!building][!highway][man_made!=pipeline][!railway][!waterway][inside("BR")] {
 	throwWarning: tr("possível uso incorreto de {0} no objeto", "{0.key}");
 	group: tr("Brasil - Verificar");
 }
 
-way[highway = motorway_junction] {
+way[highway = motorway_junction][inside("BR")] {
 	throwError: tr("{0} deve ser utilizado apenas no nó de saída da rodovia", "{0.tag}");
 	suggestAlternative: "highway=motorway_link";
 }
 
 /* lugar possui nome que inicia com "Edifício" mas não possui tag de prédio */
-*[name =~ /^(?i)(?u)edifício.*/][!building] {
+*[name =~ /^(?i)(?u)edifício.*/][!building][inside("BR")] {
 	throwWarning: tr("possível ausência de tag {0}", "{1.key}");
 }
 
-way[highway][!surface][highway != bus_stop] {
+way[highway][!surface][highway != bus_stop][inside("BR")] {
 	throwOther: tr("{0} sem superfície ({1}) definida", "{0.key}", "{1.key}");
 }
 
 /* número de faixas apenas para rodovias maiores e links */
-way[highway =~ /motorway|trunk|primary|secondary|tertiary/][!lanes],
-way[highway $= _link][!lanes] {
+way[highway =~ /motorway|trunk|primary|secondary|tertiary/][!lanes][inside("BR")],
+way[highway $= _link][!lanes][inside("BR")] {
 	throwOther: tr("{0} sem número de faixas ({1}) definido", "{0.key}", "{1.key}");
 }
 
 /* velocidade máxima apenas para grandes rodovias, unclassified e residential */
-way[highway =~ /motorway|trunk|primary|secondary|tertiary|unclassified|residential/][!maxspeed][!"maxspeed:forward"][!"maxspeed:backward"],
-way[highway $= _link][!maxspeed][!"maxspeed:forward"][!"maxspeed:backward"] {
+way[highway =~ /motorway|trunk|primary|secondary|tertiary|unclassified|residential/][!maxspeed][!"maxspeed:forward"][!"maxspeed:backward"][inside("BR")],
+way[highway $= _link][!maxspeed][!"maxspeed:forward"][!"maxspeed:backward"][inside("BR")] {
 	throwOther: tr("{0} sem velocidade máxima ({1}) definida", "{0.key}", "{1.key}");
 }
 
-way[highway = service][!service] {
+way[highway = service][!service][inside("BR")] {
 	throwOther: tr("ausência do tipo de serviço ({0}) na {1}", "{1.key}", "{0.key}");
 }
 
-way[highway = track][!tracktype] {
+way[highway = track][!tracktype][inside("BR")] {
 	throwOther: tr("ausência do tipo de track ({0}) na {1}", "{1.key}", "{0.key}");
 }
 
-*[route = ferry][!duration] {
+*[route = ferry][!duration][inside("BR")] {
 	throwWarning: tr("ausência do tempo de duração ({0}) da balsa", "{1.key}");
 }
 
-way[highway][highway !~ /construction|give_way|motorway_junction|proposed|raceway|speed_camera|stop/][!wheelchair],
-*[building][!wheelchair] {
+way[highway][highway !~ /construction|give_way|motorway_junction|proposed|raceway|speed_camera|stop/][!wheelchair][inside("BR")],
+*[building][!wheelchair][inside("BR")] {
 	throwOther: tr("{0} sem tag de acessibilidade ({1})", "{0.key}", "{1.key}");
 }
 
 /* http://overpass-turbo.eu/s/eAv */
-*[name =~ /^(?i)(?u)praça.*/][!leisure][landuse =~ /^(forest|grass|greenfield|meadow|orchard)$/],
-*[name =~ /^(?i)(?u)praça.*/][!leisure][natural =~ /^(grassland|heath|scrub|wood)$/ ] {
+*[name =~ /^(?i)(?u)praça.*/][!leisure][landuse =~ /^(forest|grass|greenfield|meadow|orchard)$/][inside("BR")],
+*[name =~ /^(?i)(?u)praça.*/][!leisure][natural =~ /^(grassland|heath|scrub|wood)$/ ][inside("BR")] {
 	throwWarning: tr("possível definição incorreta para praça: ''{0}''", "{2.key}");
 	suggestAlternative: "leisure=park";
 }
 
-*[wikipedia][wikipedia !~ /^pt:/] {
+*[wikipedia][wikipedia !~ /^pt:/][inside("BR")] {
 	throwWarning: tr("utilizar prefixo em português (pt:) para {0}", "{0.key}");
 }
 
 /* rodovias de mão duplas mas apenas com 1 faixa estão provavelmente erradas */
-way[highway][lanes = 1][!oneway?][!junction][!narrow] {
+way[highway][lanes = 1][!oneway?][!junction][!narrow][inside("BR")] {
 	throwWarning: tr("{0} com {1}", "{0.key}", "{1.tag}");
 	suggestAlternative: "lanes=2";
 	suggestAlternative: "narrow=yes";
@@ -678,64 +678,64 @@ way[highway][lanes = 1][!oneway?][!junction][!narrow] {
 
 /* #86 ciclofaixas definidas de forma incorreta */
 /* http://overpass-turbo.eu/s/iqb */
-way[cycleway = lane]["cycleway:left" = lane],
-way[cycleway = lane]["cycleway:right" = lane] {
+way[cycleway = lane]["cycleway:left" = lane][inside("BR")],
+way[cycleway = lane]["cycleway:right" = lane][inside("BR")] {
 	throwWarning: tr("uso incorreto de {0} com {1}", "{0.tag}", "{1.tag}");
 	suggestAlternative: "{1.tag}";
 }
 
 /* nomes com valores que provavelmente deveriam estar em alt_name, short_name, etc */
-*[name =~ /.*\(.*\).*/] {
+*[name =~ /.*\(.*\).*/][inside("BR")] {
 	throwWarning: tr("{0} com parênteses. Usar short_name para siglas. Se necessário alt_name ou description para outros casos.", "{0.key}");
 	group: tr("Brasil - Verificar");
 }
 
-*[name =~ / - /] {
+*[name =~ / - /][inside("BR")] {
 	throwWarning: tr("{0} com traço. Usar short_name para siglas. Se necessário alt_name ou description para outros casos.", "{0.key}");
 	group: tr("Brasil - Verificar");
 }
 
-*[name =~ /, /] {
+*[name =~ /, /][inside("BR")] {
 	throwWarning: tr("{0} com vírgula. Usar short_name para siglas. Se necessário alt_name ou description para outros casos.", "{0.key}");
 	group: tr("Brasil - Verificar");
 }
 
-*[name =~ /: /] {
+*[name =~ /: /][inside("BR")] {
 	throwWarning: tr("{0} com dois pontos. Usar short_name para siglas. Se necessário alt_name ou description para outros casos.", "{0.key}");
 	group: tr("Brasil - Verificar");
 }
 
 /* objetos do tipo "Nome A ou Nome B" devem utilizar o segundo nome em alt_name (ou equivalente) */
 /* http://overpass-turbo.eu/s/eCp */
-*[name =~ / ou /] {
+*[name =~ / ou /][inside("BR")] {
 	throwWarning: tr("nome utilizado de forma incorreta");
 	suggestAlternative: "name e alt_name";
 }
 
 /* #80 */
 /* http://overpass-turbo.eu/s/j3u */
-node[admin_level][!capital],
-node[border_type],
-node[boundary],
-node[type = boundary] {
+node[admin_level][!capital][inside("BR")],
+node[border_type][inside("BR")],
+node[boundary][inside("BR")],
+node[type = boundary][inside("BR")] {
 	throwError: tr("nó não deve possuir {0}", "{0.tag}");
 }
 
-relation[boundary][type != boundary] {
+relation[boundary][type != boundary][inside("BR")] {
 	throwWarning: tr("{0} deve possuir ''type=boundary''", "{0.key}");
 }
 
-relation[type=boundary][!boundary] {
+relation[type=boundary][!boundary][inside("BR")] {
 	throwWarning: tr("{0} deve ser utilizado junto com {1}", "{0.tag}", "{1.key}");
 }
 
-relation[admin_level][boundary != administrative] {
+relation[admin_level][boundary != administrative][inside("BR")] {
 	throwError: tr("ausência de boundary=administrative");
 	fixAdd: "boundary=administrative";
 	group: tr("Brasil - Correções e melhorias");
 }
 
-relation[boundary=administrative][!admin_level] {
+relation[boundary=administrative][!admin_level][inside("BR")] {
 	throwError: tr("{0} deve possuir {1}", "{0.tag}", "{1.key}");
 }
 
@@ -747,8 +747,8 @@ way[boundary=administrative][!admin_level]!.way_in_relation {
 
 /* bairros, cidades, etc, com ausência/incoerência de elementos que definem corretamente o limite administrativo */
 /* http://overpass-turbo.eu/s/eAk */
-way[place][place !~ /^(city_block|farm|hamlet|island|islet|isolated_dwelling|neighbourhood|square)$/][!admin_level][!boundary],
-relation[place][place !~ /^(city_block|farm|hamlet|island|islet|isolated_dwelling|neighbourhood|square)$/][!admin_level][!boundary] {
+way[place][place !~ /^(city_block|farm|hamlet|island|islet|isolated_dwelling|neighbourhood|square)$/][!admin_level][!boundary][inside("BR")],
+relation[place][place !~ /^(city_block|farm|hamlet|island|islet|isolated_dwelling|neighbourhood|square)$/][!admin_level][!boundary][inside("BR")] {
 	throwWarning: tr("local com ausência/incoerência de limite administrativo");
 	group: tr("Brasil - Verificar");
 }
@@ -760,118 +760,118 @@ way[admin_level][boundary][boundary != administrative]!.way_in_relation {
 	group: tr("Brasil - Correções e melhorias");
 }
 
-relation[boundary=administrative][type=multipolygon] {
+relation[boundary=administrative][type=multipolygon][inside("BR")] {
 	throwError: tr("relação deve ser do tipo ''type=boundary''");
 	fixAdd: "type=boundary";
 	group: tr("Brasil - Correções e melhorias");
 }
 
-*[boundary=national_park][!name],
-*[boundary=protected_area][!name],
-*[leisure=nature_reserve][!name] {
+*[boundary=national_park][!name][inside("BR")],
+*[boundary=protected_area][!name][inside("BR")],
+*[leisure=nature_reserve][!name][inside("BR")] {
 	throwWarning: tr("{0} deve possuir {1}", "{0.tag}", "{1.key}");
 }
 
-*[boundary=protected_area][!protect_class] {
+*[boundary=protected_area][!protect_class][inside("BR")] {
 	throwWarning: tr("{0} deve possuir {1}", "{0.tag}", "{1.key}");
 }
 
-*[protect_class][protect_class !~ /^(1(a|b)?|[1-9][0-9]?)$/] {
+*[protect_class][protect_class !~ /^(1(a|b)?|[1-9][0-9]?)$/][inside("BR")] {
 	throwWarning: tr("valor incorreto para {0}", "{0.key}");
 }
 
-*[protect_class][boundary != protected_area] {
+*[protect_class][boundary != protected_area][inside("BR")] {
 	throwWarning: tr("ausência de boundary=protected_area");
 }
 
-area[boundary = protected_area][leisure = nature_reserve][name =~ /(?i)(?u)\bAPA\b|Área de Proteção Ambiental/] {
+area[boundary = protected_area][leisure = nature_reserve][name =~ /(?i)(?u)\bAPA\b|Área de Proteção Ambiental/][inside("BR")] {
 	throwWarning: tr("APA não deve possuir {0}", "{1.tag}");
 	fixRemove: "leisure";
 	group: tr("Brasil - Correções e melhorias");
 }
 
-area[boundary = protected_area][name =~ /(?i)\bAPA\b/] {
+area[boundary = protected_area][name =~ /(?i)\bAPA\b/][inside("BR")] {
 	throwWarning: tr("Utilizar o nome por extenso ao invés de ''APA''");
 	suggestAlternative: "short_name";
 	group: tr("Brasil - Verificar");
 }
 
-node[destination],
-relation[destination][type != waterway] {
+node[destination][inside("BR")],
+relation[destination][type != waterway][inside("BR")] {
 	throwWarning: tr("{0} deve ser usado apenas em ways", "{0.key}");
 }
 
 /* issue #10 */
 /* http://overpass-turbo.eu/s/c55 */
-node[exit_to] {
+node[exit_to][inside("BR")] {
 	throwWarning: tr("utilize ''destination'' no caminho de saída ao invés de ''exit_to''");
 }
 
 /* estabelecimentos sem horário de funcionamento */
-*[amenity][!opening_hours],
-*[shop][!opening_hours] {
+*[amenity][!opening_hours][inside("BR")],
+*[shop][!opening_hours][inside("BR")] {
 	throwOther: tr("{0} sem {1}", "{0.key}", "{1.key}");
 }
 
 /* número de saída de rodovia */
-node[highway = motorway_junction][ref][ref !~ /^[0-9]+( |-)*([A-Z])?$/] {
+node[highway = motorway_junction][ref][ref !~ /^[0-9]+( |-)*([A-Z])?$/][inside("BR")] {
 	throwWarning: tr("saída de rodovia ({0}) fora do padrão", "{1.key}");
 	group: tr("Brasil - Verificar");
 }
 
-node[highway = motorway_junction][name] {
+node[highway = motorway_junction][name][inside("BR")] {
 	throwWarning: tr("{0} geralmente não possui nome; use ''destination'' no caminho de saída", "{0.tag}");
 	group: tr("Brasil - Verificar");
 }
 
 /* junções (como rotatória) em um nó não fazem muito sentido */
 /* http://overpass-turbo.eu/s/hpf */
-node[junction] {
+node[junction][inside("BR")] {
 	throwWarning: tr("junção ({0}) em um nó", "{0.value}");
 	suggestAlternative: "highway=mini_roundabout";
 	suggestAlternative: "highway=turning_circle";
 	group: tr("Brasil - Verificar");
 }
 
-*[name =~ /.* D(a|e|o)s? .*/] {
+*[name =~ /.* D(a|e|o)s? .*/][inside("BR")] {
 	throwWarning: tr("''da'', ''de'' e ''do'' são minúsculos nos nomes em português");
 	group: tr("Brasil - Verificar");
 }
 
-*[name =~ /^[a-z].*/] {
+*[name =~ /^[a-z].*/][inside("BR")] {
 	throwWarning: tr("nome iniciando com letra minúscula");
 	group: tr("Brasil - Verificar");
 }
 
-*[alt_ref] {
+*[alt_ref][inside("BR")] {
 	throwWarning: tr("o conteúdo de {0} deve fazer parte de ref, separado por ;", "{0.key}");
 	suggestAlternative: "ref";
 }
 
 /* path deve utilizar trail_visibility e não tracktype */
-way[highway = path][tracktype] {
+way[highway = path][tracktype][inside("BR")] {
 	throwWarning: tr("uso incorreto de {0}", "{1.key}");
 	suggestAlternative: "trail_visibility";
 }
 
 /* tracktype é uma propriedade de tracks apenas */
-way[highway != track][tracktype] {
+way[highway != track][tracktype][inside("BR")] {
 	throwWarning: tr("utilizar {0} apenas em {1}={2}", "{1.key}", "{0.key}", "{0.value}");
 }
 
 /* utilizar ; como separador de valores em source */
-*[source =~ /.*,.*/],
-*["source:ref" =~ /.*,.*/],
-*["source:name" =~ /.*,.*/] {
+*[source =~ /.*,.*/][inside("BR")],
+*["source:ref" =~ /.*,.*/][inside("BR")],
+*["source:name" =~ /.*,.*/][inside("BR")] {
 	throwOther: tr("utilizar ; como separador de valores em {0}", "{0.key}");
 }
 
-*[surface][eval(number_of_tags()) = 1] {
+*[surface][eval(number_of_tags()) = 1][inside("BR")] {
 	throwWarning: tr("objeto incompleto: possui apenas {0}", "{0.key}");
 }
 
-*[name][surface][eval(number_of_tags()) = 2],
-*[name][website][eval(number_of_tags()) = 2] {
+*[name][surface][eval(number_of_tags()) = 2][inside("BR")],
+*[name][website][eval(number_of_tags()) = 2][inside("BR")] {
 	throwWarning: tr("objeto incompleto: possui apenas {0} e {1}", "{0.key}", "{1.key}");
 }
 
@@ -885,23 +885,23 @@ way[railway] > node.is_in_pipeline {
 
 /* vias com sigla de rodovia mas que usam classe menor que tertiary */
 /* http://overpass-turbo.eu/s/8rp */
-way[highway =~ /^(living_street|pedestrian|residential|road|service|track)$/][ref] {
+way[highway =~ /^(living_street|pedestrian|residential|road|service|track)$/][ref][inside("BR")] {
 	throwWarning: tr("a via deve ser ao menos tertiary");
 	group: tr("Brasil - Verificar");
 }
 
-area[natural = wetland][!wetland] {
+area[natural = wetland][!wetland][inside("BR")] {
 	throwWarning: tr("ausência de wetland=*");
 }
 
 /* --> #81 */
 /* http://overpass-turbo.eu/s/ezj */
-area[natural = beach][!surface] {
+area[natural = beach][!surface][inside("BR")] {
 	throwWarning: tr("''{0}'' sem ''{1}'' definida", "{0.tag}", "{1.key}");
 }
 
 /* http://overpass-turbo.eu/s/ezk */
-area[natural = beach][surface][surface !~ /^(fine_gravel|gravel|pebbles|pebblestone|sand|shells|shingle|stones)$/] {
+area[natural = beach][surface][surface !~ /^(fine_gravel|gravel|pebbles|pebblestone|sand|shells|shingle|stones)$/][inside("BR")] {
 	throwWarning: tr("{0} inapropriada para ''{1}''", "{1.key}", "{0.tag}");
 }
 /* #81 <-- */
@@ -914,14 +914,14 @@ way[highway][!bridge] > node!.is_first_in_bridge!.is_last_in_bridge.is_in_bridge
 }
 
 /* bridge e tunnel precisam de layer */
-way[bridge][!layer],
-way[tunnel][!layer] {
+way[bridge][!layer][inside("BR")],
+way[tunnel][!layer][inside("BR")] {
 	throwWarning: tr("{0} sem {1}", "{0.key}", "{1.key}");
 	group: tr("Brasil - Verificar");
 }
 
 /* quadra de tênis com surface=unpaved provavelmente deve ser surface=clay */
-*[leisure=pitch][sport=tennis][surface=unpaved] {
+*[leisure=pitch][sport=tennis][surface=unpaved][inside("BR")] {
 	throwWarning: tr("{0} com superfície incorreta", "{2.key}");
 	suggestAlternative: "surface=clay";
 	fixAdd: "surface=clay";
@@ -929,13 +929,13 @@ way[tunnel][!layer] {
 }
 
 /* postos de combustível com área muito grande provavelmente deveriam ser highway=services + amenity=fuel apenas na área com as bombas de combustível */
-area[amenity=fuel][eval(areasize()) > 2500] {
+area[amenity=fuel][eval(areasize()) > 2500][inside("BR")] {
 	throwWarning: tr("posto de combustível com área muito grande");
 	suggestAlternative: "highway=services";
 	group: tr("Brasil - Verificar");
 }
 
-*[amenity=fuel][name =~ /(?i)(?u)\b(Ale|BR|Esso|Ipiranga|Petrobr(á|a)s|Shell|Texaco)\b/] {
+*[amenity=fuel][name =~ /(?i)(?u)\b(Ale|BR|Esso|Ipiranga|Petrobr(á|a)s|Shell|Texaco)\b/][inside("BR")] {
 	throwWarning: tr("uso incorreto da bandeira do posto");
 	suggestAlternative: "brand";
 	group: tr("Brasil - Verificar");
@@ -943,13 +943,13 @@ area[amenity=fuel][eval(areasize()) > 2500] {
 
 /* chaves terminando em _1, _2, etc, como name_1 por exemplo */
 /* http://overpass-turbo.eu/s/cLQ */
-*[/_[0-9]$/][!"is_in:iso_3166_2"] {
+*[/_[0-9]$/][!"is_in:iso_3166_2"][inside("BR")] {
 	throwError: tr("chave inválida: {0}", "{0.key}");
 }
 
 /* uso incorreto de "S/N" para locais que não possuem número */
 /* http://overpass-turbo.eu/s/cLU */
-*["addr:housenumber" =~ /(?i)^s(\.|-| )?\/?n\.?º?$/][!note] {
+*["addr:housenumber" =~ /(?i)^s(\.|-| )?\/?n\.?º?$/][!note][inside("BR")] {
 	throwWarning: tr("não utilizar ''{0}'' para locais sem número", tag("addr:housenumber"));
 	fixAdd: "note=Local sem número";
 	fixRemove: "addr:housenumber";
@@ -958,19 +958,19 @@ area[amenity=fuel][eval(areasize()) > 2500] {
 }
 
 /* pra garantir que não vai trocar note existente */
-*["addr:housenumber" =~ /(?i)^s(\.|-| )?\/?n\.?º?$/][note] {
+*["addr:housenumber" =~ /(?i)^s(\.|-| )?\/?n\.?º?$/][note][inside("BR")] {
 	throwWarning: tr("não utilizar ''{0}'' para locais sem número", tag("addr:housenumber"));
 	suggestAlternative: "note";
 }
 
 /* http://overpass-turbo.eu/s/dm8 */
-*[source =~ /(?i)google/] {
+*[source =~ /(?i)google/][inside("BR")] {
 	throwError: tr("objeto contém Google como source");
 }
 
 /* Câmara de vereadores mapeadas incorretamente */
 /* http://overpass-turbo.eu/s/rAB */
-*[amenity = townhall][name =~ /^(?i)(?u)c(â|a)mara\b/] {
+*[amenity = townhall][name =~ /^(?i)(?u)c(â|a)mara\b/][inside("BR")] {
 	throwWarning: tr("câmara de vereadores mapeada incorretamente");
 	suggestAlternative: "office=government + government=legislative";
 	group: tr("Brasil - Verificar");
@@ -978,47 +978,47 @@ area[amenity=fuel][eval(areasize()) > 2500] {
 
 /* Câmara de vereadores mapeadas incompletamente */
 /* http://overpass-turbo.eu/s/rAz */
-*[office = government][government != legislative][name =~ /^(?i)(?u)c(â|a)mara\b/] {
+*[office = government][government != legislative][name =~ /^(?i)(?u)c(â|a)mara\b/][inside("BR")] {
 	throwWarning: tr("ausência de government=legislative");
 	group: tr("Brasil - Verificar");
 }
 
 /* Câmaras com erro de ortografia */
 /* http://overpass-turbo.eu/s/rAD */
-*[amenity = townhall][name =~ /^(?i)(?u)c((â|a)me|ama)ra\b/],
-*[office = government][name =~ /^(?i)(?u)c((â|a)me|ama)ra\b/] {
+*[amenity = townhall][name =~ /^(?i)(?u)c((â|a)me|ama)ra\b/][inside("BR")],
+*[office = government][name =~ /^(?i)(?u)c((â|a)me|ama)ra\b/][inside("BR")] {
 	throwWarning: tr("erro de ortografia em ''câmara''");
 	group: tr("Brasil - Verificar");
 }
 
 /* maps.me tem tradução errada, que faz as pessoas inserirem postos de combustível como charging_station */
 /* http://overpass-turbo.eu/s/rAF */
-*[amenity = charging_station] {
+*[amenity = charging_station][inside("BR")] {
 	throwWarning: tr("possivelmente deve ser amenity=fuel");
 	group: tr("Brasil - Verificar");
 }
 
 /* https://overpass-turbo.eu/s/sIB */
-*[name =~ /(?i)^Borrach(aria|eiro)/][shop = tyres][!repair] {
+*[name =~ /(?i)^Borrach(aria|eiro)/][shop = tyres][!repair][inside("BR")] {
 	throwWarning: tr("borracharia sem ''repair=yes''");
 	suggestAlternative: "repair=yes";
 	group: tr("Brasil - Verificar");
 }
 
-*[name =~ /(?i)^Borrach(aria|eiro)/][shop != tyres] {
+*[name =~ /(?i)^Borrach(aria|eiro)/][shop != tyres][inside("BR")] {
 	throwWarning: tr("borracharia sem ''shop=tyres''");
 	suggestAlternative: "shop=tyres";
 	group: tr("Brasil - Verificar");
 }
 
 /* https://overpass-turbo.eu/s/sZz */
-way[waterway =~ /^(river|stream)$/][name][name !~ /^(?U)(Água|Arroio|Cabeceira|Córrego|Furo|Grota|Igarapé|Lajeado|Paraná|Restinga|Riacho|Ribeirão|Rio|Sanga)\b/],
-way[waterway =~ /^(river|stream)$/][alt_name][alt_name !~ /^(?U)(Água|Arroio|Cabeceira|Córrego|Furo|Grota|Igarapé|Lajeado|Paraná|Restinga|Riacho|Ribeirão|Rio|Sanga)\b/] {
+way[waterway =~ /^(river|stream)$/][name][name !~ /^(?U)(Água|Arroio|Cabeceira|Córrego|Furo|Grota|Igarapé|Lajeado|Paraná|Restinga|Riacho|Ribeirão|Rio|Sanga)\b/][inside("BR")],
+way[waterway =~ /^(river|stream)$/][alt_name][alt_name !~ /^(?U)(Água|Arroio|Cabeceira|Córrego|Furo|Grota|Igarapé|Lajeado|Paraná|Restinga|Riacho|Ribeirão|Rio|Sanga)\b/][inside("BR")] {
 	throwWarning: tr("{0} com possível nome errado/incompleto", tag(waterway));
 	group: tr("Brasil - Verificar");
 }
 
-area[place = square][leisure != park] {
+area[place = square][leisure != park][inside("BR")] {
 	throwWarning: tr("{0} deve ser usado em praças pavimentadas (plaza)", "{0.tag}");
 	suggestAlternative: "leisure=park";
 	group: tr("Brasil - Verificar");
