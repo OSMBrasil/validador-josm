@@ -890,7 +890,7 @@ way[highway =~ /^(living_street|pedestrian|residential|road|service|track)$/][re
 	group: tr("Brasil - Verificar");
 }
 
-node[natural = peak][name =~ /(?i)[0-9] ?m?\b/][inside("BR")] {
+node[natural = peak][name =~ /(?i)\b[0-9]+ ?m?\b/][inside("BR")] {
 	throwWarning: tr("nome não deve conter a elevação do pico");
 	suggestAlternative: "ele";
 	group: tr("Brasil - Verificar");
