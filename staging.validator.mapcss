@@ -1,7 +1,7 @@
 meta
 {
   title: "Staging rules Brazil";
-  version: "2018-01-08";
+  version: "2018-06-15";
   description: "Staging rules for Brazil. It will eat your food. Messages are in Portuguese only.";
   author: "OpenStreetMap Brasil";
   watch-modified: true;
@@ -157,4 +157,18 @@ way[place = islet]!:closed {
 
 area[tag("landuse") = parent_tag("landuse")] ∈ area[landuse] {
 	throwWarning: tr("{0} dentro de {1}", concat("landuse=", tag("landuse")), concat("landuse=", tag("landuse")));
+}
+
+*["wikipedia:pt"][!wikipedia][!"wikipedia:en"] {
+	throwWarning: tr("wikipedia:pt sem wikipedia");
+	fixAdd: concat("wikipedia=pt:", tag("wikipedia:pt"));
+	fixRemove: "wikipedia:pt";
+}
+
+*["wikipedia:pt"][!wikipedia]["wikipedia:en"],
+*[wikipedia ^= "pt:"]["wikipedia:en"] {
+	throwWarning: tr("wikipedia:en desnecessário");
+	fixAdd: concat("wikipedia=pt:", tag("wikipedia:pt"));
+	fixRemove: "wikipedia:en";
+	fixRemove: "wikipedia:pt";
 }
