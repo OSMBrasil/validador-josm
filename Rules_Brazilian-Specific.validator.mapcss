@@ -997,6 +997,14 @@ area[amenity=fuel][eval(areasize()) > 2500][inside("BR")] {
 	group: tr("Brasil - Verificar");
 }
 
+/* prefeituras mapeadas incorretamente */
+/* https://overpass-turbo.eu/s/zGE */
+*[name =~ /(?i)^prefeitura\b/][amenity != townhall][inside("BR")] {
+	throwWarning: tr("prefeitura mapeada de forma incorreta");
+	suggestAlternative: "amenity=townhall";
+	group: tr("Brasil - Verificar");
+}
+
 /* maps.me tem tradução errada, que faz as pessoas inserirem postos de combustível como charging_station */
 /* http://overpass-turbo.eu/s/rAF */
 *[amenity = charging_station][inside("BR")] {
