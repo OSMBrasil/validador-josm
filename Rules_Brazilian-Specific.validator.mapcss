@@ -1054,3 +1054,23 @@ area[place = square][leisure != park][inside("BR")] {
 	suggestAlternative: "leisure=bandstand";
 	group: tr("Brasil - Verificar");
 }
+
+/* Alerta para CNPJ diferente de BRxxxxxxxxxxxxxx */
+*["ref:vatin"]["ref:vatin" !~ /^BR[0-9]{14}$/][inside("BR")]  {
+	throwWarning: tr("CNPJ diferente do formato BRxxxxxxxxxxxxxx");
+	group: tr("Brasil - Verificar");
+}
+
+/* Correção para CNPJ: xx.xxx.xxx/xxxx-xx => BRxxxxxxxxxxxxxx */
+*["ref:vatin" =~ /^[0-9]{2}\.[0-9]{3}\.[0-9]{3}\/[0-9]{4}-[0-9]{2}$/][inside("BR")] {
+	throwWarning: tr("formato do CNPJ pode ser melhorado em {0}", "{0.key}");
+	fixAdd: concat("ref:vatin=BR", replace(replace(replace(tag("ref:vatin"), "/", ""), ".", ""), "-", ""));
+	group: tr("Brasil - Correções e melhorias");
+}
+
+/* Correção para CNPJ: (br|bR|Br)xxxxxxxxxxxxxx => BRxxxxxxxxxxxxxx */
+*["ref:vatin" =~ /^(br|bR|Br)[0-9]{14}$/][inside("BR")]  {
+	throwWarning: tr("CNPJ deve iniciar maiúsculo: BRxxxxxxxxxxxxxx");
+	fixAdd: concat("ref:vatin=", upper(tag("ref:vatin")));
+	group: tr("Brasil - Correções e melhorias");
+}
