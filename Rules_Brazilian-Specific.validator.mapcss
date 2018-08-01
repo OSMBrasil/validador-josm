@@ -369,6 +369,8 @@ relation[tag("power") = parent_tag("power")] ∈ *[power][inside("BR")] {
 
 *[name =~ /^(?i)(?u)(AM(A|E)|(Posto|Unidade (Básica)?) de Sa(u|ú)de|UBS|PSF).*/][amenity = hospital][inside("BR")] {
 	throwWarning: tr("postos/unidades de saúde devem ser amenity=clinic");
+	fixAdd: "amenity=clinic";
+	group: tr("Brasil - Correções e melhorias");
 }
 
 *[name =~ /^(?i)\bSAMU\b/][amenity =~ /clinic|doctors|hospital/][inside("BR")] {
