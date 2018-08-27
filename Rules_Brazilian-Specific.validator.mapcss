@@ -629,7 +629,7 @@ way[highway][layer > 0][!bridge][highway != bus_stop][inside("BR")],
 }
 
 /* layer não faz sentido em outros objetos */
-*[layer][!building][!highway][man_made!=pipeline][!railway][!waterway][inside("BR")] {
+*[layer][!building][!highway][man_made != pipeline][!railway][!waterway][power != line][inside("BR")] {
 	throwWarning: tr("possível uso incorreto de {0} no objeto", "{0.key}");
 	group: tr("Brasil - Verificar");
 }
