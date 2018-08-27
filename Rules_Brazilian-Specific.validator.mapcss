@@ -1072,6 +1072,22 @@ area[place = square][leisure != park][inside("BR")] {
 	group: tr("Brasil - Verificar");
 }
 
+/* #106 */
+/* https://overpass-turbo.eu/s/BoW */
+*[leisure = recreation_ground][inside("BR")] {
+	throwWarning: tr("{0} impreciso", "{0.tag}");
+	suggestAlternative: "landuse=recreation_ground";
+	suggestAlternative: "leisure=park";
+	group: tr("Brasil - Verificar");
+}
+
+/* https://overpass-turbo.eu/s/BoY */
+*[leisure = recreation_ground][landuse = recreation_ground][inside("BR")] {
+	throwWarning: tr("{0} supérfluo", "{0.tag}");
+	fixRemove: "leisure";
+	group: tr("Brasil - Verificar");
+}
+
 /* Alerta para CNPJ diferente de BRxxxxxxxxxxxxxx */
 *["ref:vatin"]["ref:vatin" !~ /^BR[0-9]{14}$/][inside("BR")]  {
 	throwWarning: tr("CNPJ diferente do formato BRxxxxxxxxxxxxxx");
