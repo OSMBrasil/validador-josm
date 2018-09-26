@@ -1,12 +1,10 @@
-validador-josm
+Regras brasileiras de validação para o JOSM
 ==============
 
-Brazilian-specific validator rules for JOSM
+Conjunto de [regras de validação](https://josm.openstreetmap.de/wiki/Rules) para o [JOSM](https://josm.openstreetmap.de/), utilizando [MapCSS](https://josm.openstreetmap.de/wiki/Help/Styles/MapCSSImplementation)
 
 ### Como usar
 
-Abra o JOSM e pressione **F12** para abrir o diálogo de **Preferências**. Na seção de Validação, clique na aba **Regras de verificação tag** e clique no botão de **+** do lado direito. Dê um nome para as regras e cole a URL abaixo no campo URL. Clique em OK e depois em aceitar para gravar as configurações.
+Clicar no menu `Editar` → `Preferências` → `Validador de dados`, selecionar `Brazilian-specific rules` e ativar utilizando o botão `➡️`
 
-```
-https://raw.githubusercontent.com/OSMBrasil/validador-josm/master/Rules_Brazilian-Specific.validator.mapcss
-```
+![](https://user-images.githubusercontent.com/982338/46109034-dca76780-c1b5-11e8-8a2f-9569fd56842e.png)
