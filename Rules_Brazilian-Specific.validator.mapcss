@@ -668,7 +668,7 @@ way[highway][maxspeed][maxspeed !~ /^[0-9]+$/][inside("BR")] {
 
 /* https://overpass-turbo.eu/s/Cok */
 way[highway][maxspeed][maxspeed !~ /^[0-9]+0$/][inside("BR")] {
-	throwWarning: tr("velocidade deveria ser múltiplo de 10");
+	throwWarning: tr("velocidade máxima deveria ser múltiplo de 10");
 	group: tr("Brasil - Verificar");
 }
 
