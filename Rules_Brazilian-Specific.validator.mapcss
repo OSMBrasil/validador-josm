@@ -1125,8 +1125,8 @@ area:closed[building =~ /^(apartments|house|residential|dormitory|yes)$/][eval(a
 	group: tr("Brasil - Verificar");
 }
 
-*[phone][phone !~ /^0800/][phone !~ /^+55 /][inside("BR")],
-*["contact:phone"]["contact:phone" !~ /^0800/]["contact:phone" !~ /^+55 /][inside("BR")] {
+*[phone][phone !~ /^0800/][phone !~ /^+55/][inside("BR")],
+*["contact:phone"]["contact:phone" !~ /^0800/]["contact:phone" !~ /^+55/][inside("BR")] {
 	throwWarning: tr("{0} em formato diferente do internacional +55 XX YYYY-YYYY", "{0.key}");
 	group: tr("Brasil - Verificar");
 }
