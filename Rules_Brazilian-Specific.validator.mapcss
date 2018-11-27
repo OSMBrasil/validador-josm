@@ -983,6 +983,14 @@ area[amenity=fuel][eval(areasize()) > 2500][inside("BR")] {
 	group: tr("Brasil - Verificar");
 }
 
+/* https://overpass-turbo.eu/s/E4r */
+*[amenity = fuel][brand = BR][inside("BR")] {
+	throwWarning: tr("uso inconsistente de bandeira do posto");
+	suggestAlternative: "brand=Petrobras";
+	fixAdd: "brand=Petrobras";
+	group: tr("Brasil - Verificar");
+}
+
 /* chaves terminando em _1, _2, etc, como name_1 por exemplo */
 /* http://overpass-turbo.eu/s/cLQ */
 *[/_[0-9]$/][!"is_in:iso_3166_2"][inside("BR")] {
