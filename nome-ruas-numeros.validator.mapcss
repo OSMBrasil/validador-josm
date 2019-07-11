@@ -601,7 +601,7 @@ way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) Noventa e Nove$
 	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " 99");
 	group: tr("Experimental");
 }
-==========
+
 way[highway][!alt_name][name =~ /^(Rua|Alameda|Avenida|Travessa) Cem$/] {
 	throwOther: tr("alternativa de nome de rua");
 	fixAdd: concat("alt_name=", get(split(" ", tag(name)), 0), " 100");
